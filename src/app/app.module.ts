@@ -4,26 +4,37 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+//Firebase
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { environment } from '../environments/environment';
+import { FirebaseService } from './service/firebase.service';
+//Form
+import { FormsModule } from '@angular/forms';
+//Pages
 import { HomeComponent } from './components/home/home.component';
 import { UsComponent } from './components/us/us.component';
-
-import { FirebaseService } from './service/firebase.service';
+import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    UsComponent
+    UsComponent,
+    RegisterUserFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    FormsModule
   ],
   providers: [
-    FirebaseService
+    FirebaseService,
+    AngularFireDatabase,
   ],  
   bootstrap: [AppComponent]
 })
