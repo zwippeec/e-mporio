@@ -6,8 +6,10 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
-import { HomeComponent } from './home/home.component';
-import { UsComponent } from './us/us.component';
+import { HomeComponent } from './components/home/home.component';
+import { UsComponent } from './components/us/us.component';
+
+import { FirebaseService } from './service/firebase.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { UsComponent } from './us/us.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [
+    FirebaseService
+  ],  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
