@@ -1,0 +1,26 @@
+<div *ngIf="confirmCreate" class="alert alert-success" role="alert">
+    Registro correcto
+</div>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label>Nombres</label>
+      <input [(ngModel)]="user.name" name="name" type="text" class="form-control" placeholder="Nombres">
+    </div>
+
+    <div class="form-group col-md-6">
+      <label>Apellidos</label>
+      <input [(ngModel)]="user.lastname" name="lastname" type="text" class="form-control"  placeholder="Apellidos">
+    </div>
+  
+      <div class="form-group col-md-6">
+        <label >Email</label>
+        <input [(ngModel)]="user.mail" name="mail" type="email" class="form-control" placeholder="Email">
+      </div>
+      <div class="form-group col-md-6">
+        <label >Password</label>
+        <input [(ngModel)]="password" name="password" type="password" class="form-control" placeholder="Password">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="createUser()">Sign in</button>
+  </form>
