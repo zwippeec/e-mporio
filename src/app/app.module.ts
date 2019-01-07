@@ -10,13 +10,14 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { FirebaseService } from './service/firebase.service';
-//Form
+//Forms
 import { FormsModule } from '@angular/forms';
 //Pages
 import { HomeComponent } from './components/home/home.component';
 import { UsComponent } from './components/us/us.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
-
+//Cookies
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
   providers: [
     FirebaseService,
     AngularFireDatabase,
+    CookieService,
   ],  
   bootstrap: [AppComponent]
 })

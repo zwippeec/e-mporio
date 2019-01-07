@@ -46,13 +46,14 @@
             <img src="https://openclipart.org/image/2400px/svg_to_png/247324/abstract-user-flat-1.png" width="30" height="30" alt="Usuario" title="Usuario"/>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/newUser">Registrarse</a>
-            <a class="dropdown-item" href="#">Mi perfil</a>
-            <a class="dropdown-item" href="#">Sugeridos</a>
-            <a class="dropdown-item" href="#">Lista de deseos</a>
-            <a class="dropdown-item" href="#">Compras</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Salir</a>
+            <a *ngIf="!isUserAuth"class="dropdown-item" href="/newUser">Registrarse</a>
+            <a *ngIf="!isUserAuth"class="dropdown-item" href="/login">Iniciar Sesión</a>
+            <a *ngIf="isUserAuth" class="dropdown-item" href="#">Mi perfil</a>
+            <a *ngIf="isUserAuth" class="dropdown-item" href="#">Sugeridos</a>
+            <a *ngIf="isUserAuth" class="dropdown-item" href="#">Lista de deseos</a>
+            <a *ngIf="isUserAuth" class="dropdown-item" href="#">Compras</a>
+            <div *ngIf="isUserAuth" class="dropdown-divider"></div>
+            <a *ngIf="isUserAuth" class="dropdown-item" (click)="logout()">Salir</a>
           </div>
         </li>
         <li class="nav-item">

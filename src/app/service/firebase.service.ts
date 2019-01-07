@@ -17,4 +17,8 @@ export class FirebaseService {
     })
     .catch(e=>console.log('Error: ', e ))
   }
+
+  logout(){
+    this.afAuth.auth.signOut();
+  }
 }
