@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
     .then(ok=>{
       this.mail=null;
       this.password=null;
-      this.cookieService.set( 'userLogged', 'true' );
+      this.cookieService.set( 'userLogged', ''+ok.user.uid );
+      console.log(this.cookieService.get('userLogged'))
       this.reloadPage()
     })
     .catch(e=>console.log('Error: ',e));

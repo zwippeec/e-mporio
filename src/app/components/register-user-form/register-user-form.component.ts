@@ -27,7 +27,6 @@ export class RegisterUserFormComponent implements OnInit {
       this.confirmCreate=true;
       this.user={};
       this.password=null;
-      this.cookieService.set( 'userLogged', 'true' );
       this.reloadPage()
     })
     .catch(e=>console.log('Error: ',e));

@@ -5,12 +5,14 @@ import { HomeComponent } from './components/home/home.component';
 import { UsComponent } from './components/us/us.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 import { LoginComponent } from './components/login/login.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'us', component:UsComponent},
   {path:'newUser', component:RegisterUserFormComponent},
   {path:'login', component:LoginComponent},
+  {path:'profile', component:UserProfileComponent},
   {path:'**', pathMatch:'full', redirectTo:'home'},
 ];
 
