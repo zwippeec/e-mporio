@@ -19,6 +19,10 @@ export class FirebaseService {
   }
 
   logout(){
-    this.afAuth.auth.signOut();
+    return this.afAuth.auth.signOut();
+  }
+
+  login(mail,password){
+    return this.afAuth.auth.signInWithEmailAndPassword(mail,password)
   }
 }

@@ -4,11 +4,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { UsComponent } from './components/us/us.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
   {path:'us', component:UsComponent},
   {path:'newUser', component:RegisterUserFormComponent},
+  {path:'login', component:LoginComponent},
   {path:'**', pathMatch:'full', redirectTo:'home'},
 ];
 
