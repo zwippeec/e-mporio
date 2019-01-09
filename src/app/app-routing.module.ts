@@ -6,6 +6,8 @@ import { UsComponent } from './components/us/us.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ProductComponent } from './components/product/product.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -13,6 +15,8 @@ const routes: Routes = [
   {path:'newUser', component:RegisterUserFormComponent},
   {path:'login', component:LoginComponent},
   {path:'profile', component:UserProfileComponent},
+  {path:'products', component:ProductComponent},
+  {path:'products/:id', component:ProductDetailComponent},
   {path:'**', pathMatch:'full', redirectTo:'home'},
 ];
 

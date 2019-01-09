@@ -1,0 +1,16 @@
+<div class="container pt-4 pb-4">
+  <div class="row">
+    <div *ngFor="let product of productsData" class="col-4">
+      <div class="card bg-dark text-white">
+        <img src="https://www.decantalo.com/146988-thickbox_default/el-coto-rosado.jpg" class="card-img" alt="...">
+        <div class="card-body">
+          <h6 class="card-title ">{{product.name}}</h6>
+          <p class="card-text"><span>Origen:</span> {{product.country}} - {{product.region}}</p>
+          <p class="card-text"><span>Cosecha/Año:</span> {{product.year}}</p>
+        </div>
+      </div>
+      <a class="btn btn-success btn-add">Agregar</a>
+        <a [routerLink]="['/products',product.code]" class="btn btn-warning btn-detail">Ver</a>
+    </div>
+  </div>
+</div>

@@ -35,4 +35,12 @@ export class FirebaseService {
   updateProfile(newUserData,uid){
     return this.afDb.object('user/'+uid).update(newUserData);
   }
+
+  getAllProducts(){
+    return this.afDb.list('products').valueChanges();
+  }
+
+  getProducByCode(code){
+    return this.afDb.list('products/', ref => ref.orderByChild("code").equalTo(code)).valueChanges();
+  }
 }

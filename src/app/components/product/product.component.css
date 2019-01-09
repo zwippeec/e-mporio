@@ -1,0 +1,22 @@
+.btn-detail{
+    position: absolute;
+    bottom: 160px;
+    width: 15%;
+    right: 45px;
+}
+
+.btn-add{
+    position: absolute;
+    bottom: 40px;
+    right: 35px;
+}
+
+@media screen and (min-width: 750px){
+    .btn-detail{    
+        position: absolute;
+    }
+
+    .btn-detail{
+        position: absolute;
+    }
+}
