@@ -31,4 +31,8 @@ export class FirebaseService {
   getDataByUser(uid){
     return this.afDb.object('user/'+uid).valueChanges();
   }
+
+  updateProfile(newUserData,uid){
+    return this.afDb.object('user/'+uid).update(newUserData);
+  }
 }

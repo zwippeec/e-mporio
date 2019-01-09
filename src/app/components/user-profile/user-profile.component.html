@@ -1,12 +1,18 @@
 <div class="container p-5">
   <div class="row">
-    <div class="col-3">
+    <div class="col-3 text-center">
       <img src="https://openclipart.org/image/2400px/svg_to_png/247324/abstract-user-flat-1.png" alt="..." width="200" height="200">
+      <div class="pt-3">
+        <button *ngIf="!isEditing" type="button" class="btn btn-info" (click)="editProfile()">Editar</button>
+        <button *ngIf="isEditing" type="button" class="btn btn-warning" (click)="saveNewData()">Guardar</button>
+      </div>
     </div>
     <div class="col">
       <div class="card-body">
-        <h4 class="card-title">Nombres:</h4> <p>{{userData.name}} {{userData.lastname}}</p>
-        <h4 class="card-text">Correo:</h4> <p>{{userData.mail}}</p>
+        <h4 class="card-title">Nombres:</h4> <p *ngIf="!isEditing">{{userData.name}} {{userData.lastname}}</p>
+        <input *ngIf="isEditing" [(ngModel)]="newUserData.name" name="name" type="text" value="{{newUserData.name}}">
+        <input *ngIf="isEditing" [(ngModel)]="newUserData.lastname" name="lastname" type="text" value="{{newUserData.lastname}}">
+        <h4 class="card-text">Correo:</h4> <p *ngIf="!isEditing">{{userData.mail}}</p>
       </div>
     </div>
   </div>
