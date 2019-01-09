@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'profile', component:UserProfileComponent},
   {path:'products', component:ProductComponent},
   {path:'products/:id', component:ProductDetailComponent},
+  {path:'cart', component:ShoppingCartComponent},
   {path:'**', pathMatch:'full', redirectTo:'home'},
 ];
 

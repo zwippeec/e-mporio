@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../service/firebase.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-product',
@@ -9,11 +10,18 @@ import { FirebaseService } from '../../service/firebase.service';
 export class ProductComponent implements OnInit {
 
   productsData:any;
-  constructor(public fireSrv: FirebaseService) { 
+  isUserAuth:boolean=false;
+  
+  constructor(public fireSrv: FirebaseService,private cookieService: CookieService) { 
     this.allProducts();
   }
 
   ngOnInit() {
+    if(this.cookieService.check('userLogged')){
+      this.isUserAuth = true;
+    }else{
+      this.isUserAuth = false;
+    }
   }
 
   allProducts(){

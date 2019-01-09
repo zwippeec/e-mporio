@@ -9,8 +9,9 @@
           <p class="card-text"><span>Cosecha/Año:</span> {{product.year}}</p>
         </div>
       </div>
-      <a class="btn btn-success btn-add">Agregar</a>
-        <a [routerLink]="['/products',product.code]" class="btn btn-warning btn-detail">Ver</a>
+      <a *ngIf="isUserAuth" class="btn btn-success btn-add">Comprar</a>
+      <a *ngIf="isUserAuth" class="btn btn-info btn-wishes-List">Lista de deseos</a>
+      <a [routerLink]="['/products',product.code]" class="btn btn-warning btn-detail">Ver</a>
     </div>
   </div>
 </div>
