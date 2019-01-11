@@ -17,7 +17,8 @@ export class ProductComponent implements OnInit {
   wishesListSelect:any=null;
   productId:any;
   saveOnWishesList:boolean=false;
-  
+  errorAuth:boolean=false;
+
   constructor(public fireSrv: FirebaseService,private cookieService: CookieService,private modalService: NgbModal ) { 
     this.allProducts();
     
@@ -26,15 +27,19 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     if(this.cookieService.check('userLogged')){
       this.isUserAuth = true;
-      this.fireSrv.getWishesList(this.cookieService.get('userLogged')).subscribe(wishes=>{
-        this.wishesList=[];
-        for(let i = 0; i < Object.keys(wishes).length; i++){
-          this.wishesList.push(Object.keys(wishes)[i]);
-        }
-      });
+      this.getWishesList();
     }else{
       this.isUserAuth = false;
     }
+  }
+
+  getWishesList(){
+    this.fireSrv.getWishesList(this.cookieService.get('userLogged')).subscribe(wishes=>{
+      this.wishesList=[];
+      for(let i = 0; i < Object.keys(wishes).length; i++){
+        this.wishesList.push(Object.keys(wishes)[i]);
+      }
+    });
   }
 
   allProducts(){
@@ -44,16 +49,21 @@ export class ProductComponent implements OnInit {
   }
 
   addWishesList(){
-    if(this.wishesListSelect!=null){
-      this.nameList=this.wishesListSelect;
-    }
-    this.fireSrv.addItemWishesList(this.cookieService.get('userLogged'),this.productId,this.nameList).then(resOk=>{
-      this.nameList=null;
-      this.productId=null;
-      this.saveOnWishesList=true;
-      this.wishesListSelect=null;
+    if(this.isUserAuth){
+      if(this.wishesListSelect!=null){
+        this.nameList=this.wishesListSelect;
+      }
+      this.fireSrv.addItemWishesList(this.cookieService.get('userLogged'),this.productId,this.nameList).then(resOk=>{
+        this.nameList=null;
+        this.productId=null;
+        this.saveOnWishesList=true;
+        this.wishesListSelect=null;
+        this.closeModal();
+      });
+    }else{
+      this.errorAuth=true;
       this.closeModal();
-    });
+    }
   }
 
   removeWishesList(codeId){
@@ -61,6 +71,7 @@ export class ProductComponent implements OnInit {
   }
   
   openModal(content, idP) {
+    this.errorAuth=false;
     this.saveOnWishesList=false;
     this.productId=idP;
     this.modalService.open(content, { windowClass: 'dark-modal' });
@@ -68,5 +79,6 @@ export class ProductComponent implements OnInit {
 
   closeModal(){
     this.modalService.dismissAll();
+    this.getWishesList();
   }
 }
