@@ -7,13 +7,13 @@
 
 .btn-add{
     position: absolute;
-    bottom: 55px;
+    bottom: 35px;
     right: 35px;
 }
 
 .btn-wishes-List{
     position: absolute;
-    bottom: 10px;
+    top: 10px;
     right: 35px;
 }
 @media screen and (min-width: 750px){

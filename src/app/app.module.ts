@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+//Bootstrap
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 //Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -22,6 +24,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { ProductComponent } from './components/product/product.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { WishesListComponent } from './components/wishes-list/wishes-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     UserProfileComponent,
     ProductComponent,
     ProductDetailComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    WishesListComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     FirebaseService,

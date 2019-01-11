@@ -1,6 +1,13 @@
+<div *ngIf="saveOnWishesList" class="alert alert-success" role="alert">
+  Item guardado correctamente.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
 <div class="container pt-4 pb-4">
   <div class="row">
-    <div *ngFor="let product of productsData" class="col-4">
+    <div *ngFor="let product of productsData; let i = index" class="col-4">
       <div class="card bg-dark text-white">
         <img src="https://www.decantalo.com/146988-thickbox_default/el-coto-rosado.jpg" class="card-img" alt="...">
         <div class="card-body">
@@ -9,9 +16,31 @@
           <p class="card-text"><span>Cosecha/Año:</span> {{product.year}}</p>
         </div>
       </div>
-      <a *ngIf="isUserAuth" class="btn btn-success btn-add">Comprar</a>
-      <a *ngIf="isUserAuth" class="btn btn-info btn-wishes-List">Lista de deseos</a>
+      <a class="btn btn-success btn-add">Comprar</a>
+      <button class="btn btn-wishes-List" (click)="openModal(content,product.idP)"><img src="https://image.flaticon.com/icons/svg/35/35590.svg" alt="" width="40" height="40"></button>
       <a [routerLink]="['/products',product.code]" class="btn btn-warning btn-detail">Ver</a>
     </div>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <input [(ngModel)]="nameList" name="nameList" type="text" class="form-control" id="recipient-name" placeholder="Mi lista">
+  </div>
+  <div *ngIf="isUserAuth" class="text-center">
+    <label>Mis listas</label>
+  </div>
+  <div *ngFor="let item of wishesList">
+    <input [(ngModel)]="wishesListSelect" name="wishesListSelect" type="radio" value="{{item}}"> {{item}} 
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss()">Cerrar</button>
+    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addWishesList()">Guardar</button>
+  </div>
+</ng-template>
