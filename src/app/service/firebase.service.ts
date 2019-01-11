@@ -11,6 +11,7 @@ export class FirebaseService {
 
   constructor(public afDb:AngularFireDatabase, public afAuth:AngularFireAuth , private cookieService:CookieService) { }
 
+  //Login and register
   createNewUser(mail,pass,data){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,pass)
     .then(userOk=>{
@@ -27,7 +28,7 @@ export class FirebaseService {
   login(mail,password){
     return this.afAuth.auth.signInWithEmailAndPassword(mail,password)
   }
-
+  //User
   getDataByUser(uid){
     return this.afDb.object('user/'+uid).valueChanges();
   }
@@ -35,12 +36,29 @@ export class FirebaseService {
   updateProfile(newUserData,uid){
     return this.afDb.object('user/'+uid).update(newUserData);
   }
-
+  //Products
   getAllProducts(){
     return this.afDb.list('products').valueChanges();
   }
 
   getProducByCode(code){
     return this.afDb.list('products/', ref => ref.orderByChild("code").equalTo(code)).valueChanges();
+  }
+
+  //Wishes list
+  addItemWishesList(uid,pid,name){
+    if(name==null){
+      name='Mi lista';
+    }
+    console.log('2',uid,pid,name)
+    return this.afDb.object('user/'+uid+'/wishesList/'+name+'/'+pid).set(true);
+  }
+
+  getWishesList(uid){
+    return this.afDb.object('user/'+uid+'/wishesList/').valueChanges();
+  }
+
+  removeItemWishesList(uid,pid,name){
+    return this.afDb.list('user/'+uid+'/wishesList/'+name+'/'+pid).remove();
   }
 }
