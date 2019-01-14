@@ -44,13 +44,16 @@ export class FirebaseService {
   getProducByCode(code){
     return this.afDb.list('products/', ref => ref.orderByChild("code").equalTo(code)).valueChanges();
   }
+  
+  getProducById(Pid){
+    return this.afDb.object('products/'+Pid).valueChanges();
+  }
 
   //Wishes list
   addItemWishesList(uid,pid,name){
     if(name==null){
       name='Mi lista';
     }
-    console.log('2',uid,pid,name)
     return this.afDb.object('user/'+uid+'/wishesList/'+name+'/'+pid).set(true);
   }
 
@@ -60,5 +63,27 @@ export class FirebaseService {
 
   removeItemWishesList(uid,pid,name){
     return this.afDb.list('user/'+uid+'/wishesList/'+name+'/'+pid).remove();
+  }
+
+  //Dinamic Pages TEST
+
+  getHomePage(){
+    return this.afDb.list('Pages/Home', ref=>ref.orderByChild('orden')).valueChanges();
+  }
+
+  getPaidPromotion(limit){
+    return this.afDb.list('PromocionPagada', ref=>ref.limitToFirst(limit)).valueChanges();
+  }
+
+  getDataBoard(limit){
+    return this.afDb.list('Tablero', ref=>ref.limitToFirst(limit)).valueChanges();
+  }
+
+  getPromotion(limit){
+    return this.afDb.list('Promociones', ref=>ref.limitToFirst(limit)).valueChanges();
+  }
+
+  getSuggestion(limit){
+    return this.afDb.list('Sugerencias', ref=>ref.limitToFirst(limit)).valueChanges();
   }
 }
