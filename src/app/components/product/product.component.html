@@ -23,7 +23,7 @@
           <p class="card-text"><span>Cosecha/Año:</span> {{product.year}}</p>
         </div>
       </div>
-      <a class="btn btn-success btn-add">Comprar</a>
+      <a class="btn btn-success btn-add" (click)="addCart(product.idP)">Comprar</a>
       <button class="btn btn-wishes-List" (click)="openModal(content,product.idP)"><img src="https://image.flaticon.com/icons/svg/35/35590.svg" alt="" width="40" height="40"></button>
       <a [routerLink]="['/products',product.code]" class="btn btn-warning btn-detail">Ver</a>
     </div>
