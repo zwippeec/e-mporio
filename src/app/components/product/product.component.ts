@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../service/firebase.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModal,ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { toInteger } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-product',
@@ -80,5 +81,25 @@ export class ProductComponent implements OnInit {
   closeModal(){
     this.modalService.dismissAll();
     this.getWishesList();
+  }
+
+  addCart(Pid){
+    let items:any=[];//array to first object
+    let _tmpList:any=[];//temporal array to list cart
+    //Condition if exits listCart or create new list
+    if(localStorage.getItem('listCart')!=null){
+      _tmpList=JSON.parse(localStorage.getItem('listCart'));//get list cart
+      //Condition to add item or increase quantity on item
+      if(_tmpList.map(item=>item.id).indexOf(Pid)!=-1){
+        _tmpList[_tmpList.map(item=>item.id).indexOf(Pid)].quantity+=1;//increase quantity on item 
+      }else{
+        _tmpList.push({id:Pid,quantity:1})//add item on list if no exist
+      }
+      localStorage.removeItem('listCart');//remove old list
+      localStorage.setItem('listCart',JSON.stringify(_tmpList))//create new list
+    }else{
+      items.push({id:Pid,quantity:1});//first item on list
+      localStorage.setItem('listCart',JSON.stringify(items))//create list
+    }
   }
 }
