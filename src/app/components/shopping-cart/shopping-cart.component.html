@@ -1,63 +1,46 @@
-<div *ngFor="let elemento of listaElementos" >
-  <div *ngIf="elemento.tipoElemento==='div' && elemento.nombreSeccion=='Tablero'">
-    <!--begin div-->
-    <div class="container p-4">
-      <div class="row text-center"> <!--First row-->
-        <div *ngFor="let tablero of listaTablero" class="col" [ngClass]="elemento.columnas==3 ? 'col-4':'col-3'">
-          <img *ngIf="tablero.imageUrl" src="{{tablero.imageUrl}}" alt="" height="300" width="300">
-          <H3 *ngIf="tablero.title">{{tablero.title}}</H3>
-          <p *ngIf="tablero.text">{{tablero.text}}</p>
-        </div>
-      </div>
+<div class="container">
+  <table class="table table-warning table-hover ">
+    <thead class="thead-dark">
+      <tr class="text-center">
+        <th scope="col-4">Producto/Item</th>
+        <th scope="col-1">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col-1">Total/Uni.</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="listCart.length>0; else noneList">
+      <tr *ngFor="let item of listCart" >
+        <th scope="row">{{item.data.name}}</th>
+        <td class="text-center">{{item.data.cost}}</td>
+        <td class="text-center">{{item.quantity}}</td>
+        <td class="text-center"> $ {{item.totalUni}}</td>
+      </tr>
+      <tr>
+        <td class="col-10 text-right font-weight-bold">Total a pagar:</td>
+        <td class="col-2"></td>
+        <td class="col-2"></td>
+        <td class="col text-center">$ {{totalPay}}</td>
+      </tr>
+    </tbody>
+    <ng-template #noneList>
+      <tbody *ngIf="listCart.length==0">
+        <tr>
+          <td class="text-center font-weight-bold col-12">El carrito se encuentra vacío.</td>
+        </tr>
+      </tbody>
+    </ng-template>
+  </table>
+
+  <!--Buttons-->
+  <div class="row">
+    <div class="col">
+      <a *ngIf="listCart.length>0" class="btn btn-warning ml-4" href="/products" >Seguir comprando</a>
+      <a *ngIf="listCart.length==0" class="btn btn-info ml-4" href="/products" >Ir a comprar</a>
     </div>
-    <!--end div section-->
-  </div>
-  <div *ngIf="elemento.tipoElemento==='div' && elemento.nombreSeccion=='Sugerencias'">
-    <!--begin div-->
-    <div class="container p-4">
-      <div class="row text-center">
-        <div *ngFor="let itemPromo of listaSugerencias" class="col" [ngClass]="[elemento.columnas==1 ? 'col-12' : '', elemento.columnas==2 ? 'col-6' : '', elemento.columnas==3 ? 'col-4' : '', elemento.columnas==4 ? 'col-3' : '', elemento.columnas==6 ? 'col-2' : ''] ">
-          <img src="{{itemPromo.imageUrl}}" alt="" height="300" width="100%">
-        </div>
-      </div>
+    <div *ngIf="totalPay>0" class="col text-right">
+      <button *ngIf="listCart.length>0" type="button" class="btn btn-danger mr-3" (click)="clearData()">Cancelar</button>
+      <button *ngIf="listCart.length>0" type="button" class="btn btn-success mr-4" (click)="goToPay()">Pagar</button>
     </div>
-    <!--end div section-->
-  </div>
-  <div *ngIf="elemento.tipoElemento==='div' && elemento.nombreSeccion=='Promociones'">
-    <!--begin div-->
-    <div class="container p-4">
-      <div class="row text-center">
-        <div *ngFor="let itemPromo of listaPromociones" class="col" [ngClass]="[elemento.columnas==1 ? 'col-12' : '', elemento.columnas==2 ? 'col-6' : '', elemento.columnas==3 ? 'col-4' : '', elemento.columnas==4 ? 'col-3' : '', elemento.columnas==6 ? 'col-2' : ''] ">
-          <img src="{{itemPromo.imageUrl}}" alt="" height="300" width="100%">
-          <button type="button" class="btn btn-success btn-temporal-promotion">Agregar</button>
-          <img src="https://gifimage.net/wp-content/uploads/2017/08/reloj-gif-2.gif" class="img-temporal-promotion" alt="" height="40" width="40">
-        </div>
-      </div>
-    </div>
-    <!--end div section-->
-  </div>
-  <div *ngIf="elemento.tipoElemento==='slide'">
-    <!-- Slide 1 Sugerencia Pago-->
-    <div class="p-3">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li *ngFor="let item of elemento.data; let i = index" data-target="#carouselExampleIndicators" data-slide-to="i" class="active"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div *ngFor="let item of elemento.data; let i = index" class="carousel-item" [ngClass]="i==0 ? 'active':''">
-            <img src="{{item.imageUrl}}" class="d-block w-100" alt="..." height="400" width="100%">         
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-    <!--end Slide -->
   </div>
 </div>
+

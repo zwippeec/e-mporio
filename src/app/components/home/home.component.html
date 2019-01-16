@@ -1,116 +1,66 @@
-<div>
-  <!-- Slide 1 Sugerencia Pago-->
-
-  <div class="p-3">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="https://static.betazeta.com/www.sabrosia.com/up/2016/02/vino1-960x623.jpg" class="d-block w-100" alt="..." height="400" width="100%">
-            </div>
-            <div class="carousel-item">
-                <img src="http://www.vinoslaencomienda.com/_media/img/medium/orissontumbado.png" class="d-block w-100" alt="..." height="400" width="100%">
-            </div>
-            <div class="carousel-item">
-                <img src="http://shop.popthewine.com/WebRoot/StoreES2/Shops/ec1523/558F/4481/A0A2/B384/F41E/0A02/1022/B8E1/calx_de_matamangos_botella_vino.jpg" class="d-block w-100" alt="..." height="400" width="100%">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-  </div>
-
-    <!-- Tablero -->
-
+<!--Dinamic Home-->
+<!--Begin-->
+<div *ngFor="let elemento of listaElementos" >
+  <div *ngIf="elemento.tipoElemento==='div' && elemento.nombreSeccion=='Tablero'">
+    <!--begin div-->
     <div class="container p-4">
-        <div class="row text-center"> <!--First row-->
-          <div class="col border border-dark border-right-0 border-bottom-0"><!--First Column-->
-            <img src="https://banner2.kisspng.com/20180711/loz/kisspng-red-wine-wine-glass-dessert-wine-bottle-braso-5b460ba89d0aa3.2782529815313171606433.jpg" alt="" height="300" width="300">
-          </div>
-    
-          <div class="col border border-dark border-right-0 border-bottom-0"><!--Second Column-->
-            <p>
-                Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.Lorem Ipsum ha sido el texto de relleno 
-                estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó 
-                una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino 
-                que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original.
-            </p>
-          </div>
-    
-          <div class="col border border-dark border-bottom-0"><!--Third Column-->
-            <h1>SUGERENCIAS</h1>
-          </div>
+      <div class="row text-center"> <!--First row-->
+        <div *ngFor="let tablero of listaTablero" class="col" [ngClass]="elemento.columnas==3 ? 'col-4':'col-3'">
+          <img *ngIf="tablero.imageUrl" src="{{tablero.imageUrl}}" alt="" height="300" width="300">
+          <H3 *ngIf="tablero.title">{{tablero.title}}</H3>
+          <p *ngIf="tablero.text">{{tablero.text}}</p>
         </div>
-    
-        <div class="row text-center"> <!--Second row-->
-          <div class="col border border-dark border-right-0 border-bottom-0"><!--First Column-->
-            <H3>¿Por qué vino?</H3>
-            <p>
-                Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.Lorem Ipsum ha sido el texto de relleno 
-                estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó 
-                una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.
-            </p>
-          </div>
-    
-          <div class="col border border-dark border-right-0 border-bottom-0"><!--Second Column-->
-    5
-          </div>
-    
-          <div class="col border border-dark border-bottom-0"><!--Third Column-->
-            <img src="https://mejorconsalud.com/wp-content/uploads/2015/01/Copa-de-vino.jpeg" alt="" height="300" width="300">
-          </div>
-        </div>
-    
-        <div class="row text-center"> <!--Third row-->
-          <div class="col border border-dark border-right-0"><!--First Column-->
-            <h1>SUGERENCIAS</h1>
-          </div>
-    
-          <div class="col border border-dark border-right-0"><!--Second Column-->
-            <img src="https://banner2.kisspng.com/20180711/loz/kisspng-red-wine-wine-glass-dessert-wine-bottle-braso-5b460ba89d0aa3.2782529815313171606433.jpg" alt="" height="300" width="300">
-          </div>
-    
-          <div class="col border border-dark"><!--Third Column-->
-            <p>
-                Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.Lorem Ipsum ha sido el texto de relleno 
-                estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó 
-                una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino 
-                que tambien ingresó como texto de relleno en documentos electrónicos, quedando esencialmente igual al original.
-            </p>
-          </div>
-        </div>
+      </div>
     </div>
-    
-    <!-- Sugerencias/Promociones -->
-
+    <!--end div section-->
+  </div>
+  <div *ngIf="elemento.tipoElemento==='div' && elemento.nombreSeccion=='Sugerencias'">
+    <!--begin div-->
     <div class="container p-4">
       <div class="row text-center">
-        <div class="col border border-dark border-right-0 pt-2 pb-2">
-          <img src="https://www.elcomercio.com/files/article_main/uploads/2014/12/26/549e1be13429b.jpg" alt="" height="300" width="100%">
-          <button type="button" class="btn btn-success btn-temporal-promotion">Agregar</button>
-          <img src="https://gifimage.net/wp-content/uploads/2017/08/reloj-gif-2.gif" class="img-temporal-promotion" alt="" height="40" width="40">
+        <div *ngFor="let itemPromo of listaSugerencias" class="col" [ngClass]="[elemento.columnas==1 ? 'col-12' : '', elemento.columnas==2 ? 'col-6' : '', elemento.columnas==3 ? 'col-4' : '', elemento.columnas==4 ? 'col-3' : '', elemento.columnas==6 ? 'col-2' : ''] ">
+          <img src="{{itemPromo.imageUrl}}" alt="" height="300" width="100%">
         </div>
-        <div class="col border border-dark border-right-0 pt-2 pb-2">
-          <img src="https://www.elcomercio.com/files/article_main/uploads/2014/12/26/549e1be13429b.jpg" alt="" height="300" width="100%">
-          <button type="button" class="btn btn-success btn-temporal-promotion">Agregar</button>
-          <img src="https://gifimage.net/wp-content/uploads/2017/08/reloj-gif-2.gif" class="img-temporal-promotion" alt="" height="40" width="40">
-        </div>
-        <div class="col border border-dark pt-2 pb-2">
-          <img src="https://www.elcomercio.com/files/article_main/uploads/2014/12/26/549e1be13429b.jpg" alt="" height="300" width="100%">
+      </div>
+    </div>
+    <!--end div section-->
+  </div>
+  <div *ngIf="elemento.tipoElemento==='div' && elemento.nombreSeccion=='Promociones'">
+    <!--begin div-->
+    <div class="container p-4">
+      <div class="row text-center">
+        <div *ngFor="let itemPromo of listaPromociones" class="col" [ngClass]="[elemento.columnas==1 ? 'col-12' : '', elemento.columnas==2 ? 'col-6' : '', elemento.columnas==3 ? 'col-4' : '', elemento.columnas==4 ? 'col-3' : '', elemento.columnas==6 ? 'col-2' : ''] ">
+          <img src="{{itemPromo.imageUrl}}" alt="" height="300" width="100%">
           <button type="button" class="btn btn-success btn-temporal-promotion">Agregar</button>
           <img src="https://gifimage.net/wp-content/uploads/2017/08/reloj-gif-2.gif" class="img-temporal-promotion" alt="" height="40" width="40">
         </div>
       </div>
     </div>
-    <!-- Sugerencia 2-->
+    <!--end div section-->
+  </div>
+  <div *ngIf="elemento.tipoElemento==='slide'">
+    <!-- Slide 1 Sugerencia Pago-->
+    <div class="p-3">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li *ngFor="let item of elemento.data; let i = index" data-target="#carouselExampleIndicators" data-slide-to="i" class="active"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div *ngFor="let item of elemento.data; let i = index" class="carousel-item" [ngClass]="i==0 ? 'active':''">
+            <img src="{{item.imageUrl}}" class="d-block w-100" alt="..." height="400" width="100%">         
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+    <!--end Slide -->
+  </div>
 </div>
+<!--End-->
