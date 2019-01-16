@@ -10,12 +10,15 @@ import { FirebaseService } from './service/firebase.service';
 export class AppComponent {
   title = 'e-mporio';
   isUserAuth:boolean=false;
-
+  countTotalItems:any=0;
   constructor(private cookieService: CookieService, private fireSrv:FirebaseService) { }
 
   ngOnInit() {
     if(this.cookieService.check('userLogged')){
       this.isUserAuth = true;
+      if(localStorage.getItem('listCart')){
+        this.countTotalItems=JSON.parse(localStorage.getItem('listCart')).length;
+      }
     }else{
       this.isUserAuth = false;
     }

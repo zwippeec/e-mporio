@@ -86,4 +86,9 @@ export class FirebaseService {
   getSuggestion(limit){
     return this.afDb.list('Sugerencias', ref=>ref.limitToFirst(limit)).valueChanges();
   }
+  
+  //pay method
+  payOrder(uid,data){
+    return this.afDb.list('binnacle/'+uid).push(data);
+  }
 }
