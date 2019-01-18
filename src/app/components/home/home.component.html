@@ -1,35 +1,35 @@
 <!--Dinamic Home-->
 <!--Begin-->
-<div *ngFor="let elemento of listaElementos" >
-  <div *ngIf="elemento.tipoElemento==='div' && elemento.nombreSeccion=='Tablero'">
+<div *ngFor="let element of elementList" >
+  <div *ngIf="element.elementType==='Div' && element.sectionName=='Tablero'">
     <!--begin div-->
     <div class="container p-4">
       <div class="row text-center"> <!--First row-->
-        <div *ngFor="let tablero of listaTablero" class="col" [ngClass]="elemento.columnas==3 ? 'col-4':'col-3'">
-          <img *ngIf="tablero.imageUrl" src="{{tablero.imageUrl}}" alt="" height="300" width="300">
-          <H3 *ngIf="tablero.title">{{tablero.title}}</H3>
-          <p *ngIf="tablero.text">{{tablero.text}}</p>
+        <div *ngFor="let board of boardList" class="col" [ngClass]="[element.columns==1 ? 'col-12' : '', element.columns==2 ? 'col-6' : '', element.columns==3 ? 'col-4' : '', element.columns==4 ? 'col-3' : '', element.columns==6 ? 'col-2' : ''] ">
+          <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" height="300" width="300">
+          <H3 *ngIf="board.title">{{board.title}}</H3>
+          <p *ngIf="board.text">{{board.text}}</p>
         </div>
       </div>
     </div>
     <!--end div section-->
   </div>
-  <div *ngIf="elemento.tipoElemento==='div' && elemento.nombreSeccion=='Sugerencias'">
+  <div *ngIf="element.elementType==='Div' && element.sectionName=='Sugerencias'" >
     <!--begin div-->
     <div class="container p-4">
       <div class="row text-center">
-        <div *ngFor="let itemPromo of listaSugerencias" class="col" [ngClass]="[elemento.columnas==1 ? 'col-12' : '', elemento.columnas==2 ? 'col-6' : '', elemento.columnas==3 ? 'col-4' : '', elemento.columnas==4 ? 'col-3' : '', elemento.columnas==6 ? 'col-2' : ''] ">
-          <img src="{{itemPromo.imageUrl}}" alt="" height="300" width="100%">
+        <div *ngFor="let itemPromo of suggestionList" class="col" [ngClass]="[element.columns==1 ? 'col-12' : '', element.columns==2 ? 'col-6' : '', element.columns==3 ? 'col-4' : '', element.columns==4 ? 'col-3' : '', element.columns==6 ? 'col-2' : ''] ">
+          <img src="{{itemPromo.imageUrl}}" alt="{{itemPromo.name}}" height="300" width="100%">
         </div>
       </div>
     </div>
     <!--end div section-->
   </div>
-  <div *ngIf="elemento.tipoElemento==='div' && elemento.nombreSeccion=='Promociones'">
+  <div *ngIf="element.elementType==='Div' && element.sectionName=='Promociones'">
     <!--begin div-->
     <div class="container p-4">
       <div class="row text-center">
-        <div *ngFor="let itemPromo of listaPromociones" class="col" [ngClass]="[elemento.columnas==1 ? 'col-12' : '', elemento.columnas==2 ? 'col-6' : '', elemento.columnas==3 ? 'col-4' : '', elemento.columnas==4 ? 'col-3' : '', elemento.columnas==6 ? 'col-2' : ''] ">
+        <div *ngFor="let itemPromo of promotionList" class="col" [ngClass]="[element.columns==1 ? 'col-12' : '', element.columns==2 ? 'col-6' : '', element.columns==3 ? 'col-4' : '', element.columns==4 ? 'col-3' : '', element.columns==6 ? 'col-2' : ''] ">
           <img src="{{itemPromo.imageUrl}}" alt="" height="300" width="100%">
           <button type="button" class="btn btn-success btn-temporal-promotion">Agregar</button>
           <img src="https://gifimage.net/wp-content/uploads/2017/08/reloj-gif-2.gif" class="img-temporal-promotion" alt="" height="40" width="40">
@@ -38,15 +38,15 @@
     </div>
     <!--end div section-->
   </div>
-  <div *ngIf="elemento.tipoElemento==='slide'">
+  <div *ngIf="element.elementType==='Slide'">
     <!-- Slide 1 Sugerencia Pago-->
     <div class="p-3">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-          <li *ngFor="let item of elemento.data; let i = index" data-target="#carouselExampleIndicators" data-slide-to="i" class="active"></li>
+          <li *ngFor="let item of element.data; let i = index" data-target="#carouselExampleIndicators" data-slide-to="i" class="active"></li>
         </ol>
         <div class="carousel-inner">
-          <div *ngFor="let item of elemento.data; let i = index" class="carousel-item" [ngClass]="i==0 ? 'active':''">
+          <div *ngFor="let item of element.data; let i = index" class="carousel-item" [ngClass]="i==0 ? 'active':''">
             <img src="{{item.imageUrl}}" class="d-block w-100" alt="..." height="400" width="100%">         
           </div>
         </div>

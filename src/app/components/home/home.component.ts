@@ -8,33 +8,33 @@ import { FirebaseService } from '../../service/firebase.service';
 })
 export class HomeComponent implements OnInit {
 
-  listaElementos:any;
-  listaTablero:any;
-  listaPromociones:any;
-  listaSugerencias:any;
+  elementList:any;
+  boardList:any;
+  promotionList:any;
+  suggestionList:any;
 
   constructor( public fireSrv:FirebaseService) { 
     this.fireSrv.getHomePage().subscribe(resp=>{
-      this.listaElementos=resp;
+      this.elementList=resp;
       for(let i = 0; i<resp.length; i++){
-        if(resp[i]['tipoElemento']==="slide" && resp[i]['nombreSeccion']==="PromoPaga"){
-          this.fireSrv.getPaidPromotion(resp[i]['numElementos']).subscribe(dataPaidPromotion=>{
-            this.listaElementos[i]['data']=dataPaidPromotion;
+        if(resp[i]['elementType']==="Slide" && resp[i]['sectionName']==="PromoPaga"){
+          this.fireSrv.getPaidPromotion(resp[i]['numsElements']).subscribe(dataPaidPromotion=>{
+            this.elementList[i]['data']=dataPaidPromotion;
           })
         }
-        if(resp[i]['tipoElemento']==="div" && resp[i]['nombreSeccion']==="Tablero"){
-          this.fireSrv.getDataBoard(resp[i]['numElementos']).subscribe(dataBoard=>{
-            this.listaTablero=dataBoard;
+        if(resp[i]['elementType']==="Div" && resp[i]['sectionName']==="Tablero"){
+          this.fireSrv.getDataBoard(resp[i]['numsElements']).subscribe(dataBoard=>{
+            this.boardList=dataBoard;
           })
         }
-        if(resp[i]['tipoElemento']==="div" && resp[i]['nombreSeccion']==="Promociones"){
-          this.fireSrv.getPromotion(resp[i]['numElementos']).subscribe(dataPromotion=>{
-            this.listaPromociones=dataPromotion;
+        if(resp[i]['elementType']==="Div" && resp[i]['sectionName']==="Promociones"){
+          this.fireSrv.getPromotion(resp[i]['numsElements']).subscribe(dataPromotion=>{
+            this.promotionList=dataPromotion;
           })
         }
-        if(resp[i]['tipoElemento']==="div" && resp[i]['nombreSeccion']==="Sugerencias"){
-          this.fireSrv.getSuggestion(resp[i]['numElementos']).subscribe(dataSuggestion=>{
-            this.listaSugerencias=dataSuggestion;
+        if(resp[i]['elementType']==="Div" && resp[i]['sectionName']==="Sugerencias"){
+          this.fireSrv.getSuggestion(resp[i]['numsElements']).subscribe(dataSuggestion=>{
+            this.suggestionList=dataSuggestion;
           })
         }
       }

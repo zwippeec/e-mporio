@@ -68,11 +68,11 @@ export class FirebaseService {
   //Dinamic Pages TEST
 
   getHomePage(){
-    return this.afDb.list('Pages/Home', ref=>ref.orderByChild('orden')).valueChanges();
+    return this.afDb.list('Pages/Home', ref=>ref.orderByChild('order')).valueChanges();
   }
 
   getPaidPromotion(limit){
-    return this.afDb.list('PromocionPagada', ref=>ref.limitToFirst(limit)).valueChanges();
+    return this.afDb.list('paidPromotion', ref=>ref.limitToFirst(limit).orderByChild('status').equalTo("active")).valueChanges();
   }
 
   getDataBoard(limit){
@@ -80,11 +80,11 @@ export class FirebaseService {
   }
 
   getPromotion(limit){
-    return this.afDb.list('Promociones', ref=>ref.limitToFirst(limit)).valueChanges();
+    return this.afDb.list('promotion', ref=>ref.limitToFirst(limit)).valueChanges();
   }
 
   getSuggestion(limit){
-    return this.afDb.list('Sugerencias', ref=>ref.limitToFirst(limit)).valueChanges();
+    return this.afDb.list('products', ref=>ref.limitToFirst(limit)).valueChanges();
   }
   
   //pay method
