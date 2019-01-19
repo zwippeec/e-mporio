@@ -10,3 +10,11 @@
     top: 10px;
     left: 20px;
 }
+
+.bg-body{
+    background-color: #0D0D0D;
+}
+
+.bg-item{
+    background-color: #fff
+}

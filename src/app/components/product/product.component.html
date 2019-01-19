@@ -12,23 +12,161 @@
   </button>
 </div>
 
-<div class="container pt-4 pb-4">
-  <div class="row">
-    <div *ngFor="let product of productsData; let i = index" class="col-4">
-      <div class="card bg-dark text-white">
-        <img src="https://www.decantalo.com/146988-thickbox_default/el-coto-rosado.jpg" class="card-img" alt="...">
-        <div class="card-body">
-          <h6 class="card-title ">{{product.name}}</h6>
-          <p class="card-text"><span>Origen:</span> {{product.country}} - {{product.region}}</p>
-          <p class="card-text"><span>Cosecha/Año:</span> {{product.year}}</p>
+<div class="bg-body">
+  <div class="container pt-4 pb-4">
+    <!--begin Submenu-->
+    <div class="row products-menu text-center">
+        <div class="col-1"></div>
+        <div class="col-1">
+          <ul class="navbar-nav ">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Tinto
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/newUser">Registrarse</a>
+                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
+              </div>
+            </li>  
+          </ul>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1">
+          <ul class="navbar-nav ">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                País
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/newUser">Registrarse</a>
+                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
+              </div>
+            </li>  
+          </ul>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1">
+          <ul class="navbar-nav ">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Región
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/newUser">Registrarse</a>
+                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
+              </div>
+            </li>  
+          </ul>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1">
+          <ul class="navbar-nav ">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Uva
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/newUser">Registrarse</a>
+                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
+              </div>
+            </li>  
+          </ul>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-1">
+          <ul class="navbar-nav ">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Bodega
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/newUser">Registrarse</a>
+                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
+              </div>
+            </li>  
+          </ul>
         </div>
       </div>
-      <a class="btn btn-success btn-add" (click)="addCart(product.idP)">Comprar</a>
-      <button class="btn btn-wishes-List" (click)="openModal(content,product.idP)"><img src="https://image.flaticon.com/icons/svg/35/35590.svg" alt="" width="40" height="40"></button>
-      <a [routerLink]="['/products',product.code]" class="btn btn-warning btn-detail">Ver</a>
+    <div class="col-1"></div>
+    <div class="col-1">
+    </div>
+    <div class="row products-menu text-center pt-4"><!--Second row-->
+      <div class="col-2"></div>
+      <div class="col-1">
+        <ul class="navbar-nav ">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              País
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/newUser">Registrarse</a>
+              <a class="dropdown-item" href="/login">Iniciar Sesión</a>
+            </div>
+          </li>  
+        </ul>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-1">
+        <ul class="navbar-nav ">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Región
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/newUser">Registrarse</a>
+              <a class="dropdown-item" href="/login">Iniciar Sesión</a>
+            </div>
+        </li>  
+        </ul>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-1">
+        <ul class="navbar-nav ">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Uva
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/newUser">Registrarse</a>
+              <a class="dropdown-item" href="/login">Iniciar Sesión</a>
+            </div>
+          </li>  
+        </ul>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-1">
+        <ul class="navbar-nav ">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Bodega
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/newUser">Registrarse</a>
+              <a class="dropdown-item" href="/login">Iniciar Sesión</a>
+            </div>
+          </li>  
+        </ul>
+      </div>
+    </div>
+    <!--end Submenu-->
+    <div class="row pt-4">
+      <div *ngFor="let product of productsData; let i = index" class="col-4 pl-0 pr-2">
+        <div class="card bg-dark text-white">
+          <img src="https://www.decantalo.com/146988-thickbox_default/el-coto-rosado.jpg" class="card-img" alt="...">
+          <div class="card-body">
+            <h6 class="card-title ">{{product.name}}</h6>
+            <p class="card-text"><span>Origen:</span> {{product.country}} - {{product.region}}</p>
+            <p class="card-text"><span>Cosecha/Año:</span> {{product.year}}</p>
+          </div>
+        </div>
+        <a class="btn btn-success btn-add" (click)="addCart(product.idP)">Comprar</a>
+        <button class="btn btn-wishes-List" (click)="openModal(content,product.idP)"><img src="https://image.flaticon.com/icons/svg/35/35590.svg" alt="" width="40" height="40"></button>
+        <a [routerLink]="['/products',product.code]" class="btn btn-warning btn-detail">Ver</a>
+      </div>
     </div>
   </div>
 </div>
+
 
 <ng-template #content let-modal>
   <div class="modal-header">

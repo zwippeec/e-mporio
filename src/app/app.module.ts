@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+//Autocomplete
+import {NgAutoCompleteModule} from "ng-auto-complete";
 //Bootstrap
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 //Firebase
@@ -46,7 +48,8 @@ import { WishesListComponent } from './components/wishes-list/wishes-list.compon
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    NgAutoCompleteModule
   ],
   providers: [
     FirebaseService,

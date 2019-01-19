@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+
 import { CookieService } from 'ngx-cookie-service';
 import { FirebaseService } from './service/firebase.service';
+import {Component, ViewChild} from "@angular/core";
+import {CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutoCompleteComponent} from "ng-auto-complete";
 
 @Component({
   selector: 'app-root',
@@ -8,12 +10,27 @@ import { FirebaseService } from './service/firebase.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild(NgAutoCompleteComponent) public autocompleter: NgAutoCompleteComponent;
+
   title = 'e-mporio';
   isUserAuth:boolean=false;
   countTotalItems:any=0;
+  public group = [];
+
   constructor(private cookieService: CookieService, private fireSrv:FirebaseService) { }
 
   ngOnInit() {
+    this.fireSrv.getAllProducts().subscribe(productsData=>{
+      this.group = [
+        CreateNewAutocompleteGroup(
+            'Buscar...',
+            'autocompleter',
+            productsData,
+            {titleKey: 'name', childrenKey: null}
+        ),
+      ];
+    });
+    
     if(this.cookieService.check('userLogged')){
       this.isUserAuth = true;
       if(localStorage.getItem('listCart')){
@@ -29,5 +46,9 @@ export class AppComponent {
     this.isUserAuth=false;  
     this.fireSrv.logout();
     window.location.reload();
+  }
+
+  Selected(item: SelectedAutocompleteItem) {
+    console.log(item.item.original.idP);
   }
 }
