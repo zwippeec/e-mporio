@@ -10,7 +10,7 @@ import { FirebaseService } from '../../service/firebase.service';
 export class ProductDetailComponent implements OnInit {
 
   product:any=null;
-
+  
   constructor(private _router: Router, private _activeRouter: ActivatedRoute, public fireSrv:FirebaseService) {
   }
 

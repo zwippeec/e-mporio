@@ -1,0 +1,27 @@
+.bg-menu{
+    background-color: #333333;
+}
+.navbar-dark .navbar-nav .nav-link{
+    color: rgba(255, 255, 255);
+}
+
+.bg-footer{
+    background-color: #333333
+}
+.bg-footer1{
+    background-color: #222222;
+    width: 101%;
+}
+.text-footer{
+    color: #fff
+}
+
+.footer-container{
+    padding-left: 150px;
+}
+.border-footer {
+    border: 1px solid #FBD12C!important;
+    border-left: 0!important;
+    border-top: 0!important;
+    border-bottom: 0!important;
+}
