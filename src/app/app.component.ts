@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { FirebaseService } from './service/firebase.service';
 import {Component, ViewChild} from "@angular/core";
 import {CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutoCompleteComponent} from "ng-auto-complete";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
   countTotalItems:any=0;
   public group = [];
 
-  constructor(private cookieService: CookieService, private fireSrv:FirebaseService) { }
+  constructor(private cookieService: CookieService, private fireSrv:FirebaseService,private _router: Router) { }
 
   ngOnInit() {
     this.fireSrv.getAllProducts().subscribe(productsData=>{
@@ -49,6 +50,7 @@ export class AppComponent {
   }
 
   Selected(item: SelectedAutocompleteItem) {
-    console.log(item.item.original.idP);
+    window.location.reload()
+    this._router.navigate(['/products',item.item.original.code]);
   }
 }
