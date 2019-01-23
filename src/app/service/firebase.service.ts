@@ -84,7 +84,7 @@ export class FirebaseService {
   }
 
   getSuggestion(limit){
-    return this.afDb.list('products', ref=>ref.limitToFirst(limit)).valueChanges();
+    return this.afDb.list('products', ref=>ref.limitToFirst(limit).orderByChild('monthSuggestion').equalTo(true)).valueChanges();
   }
   
   //pay method

@@ -44,6 +44,7 @@ export class ProductComponent implements OnInit {
 
   allProducts(){
     this.fireSrv.getAllProducts().subscribe(productsData=>{
+      console.log(productsData)
       this.productsData=productsData;
     });
   }
@@ -82,22 +83,22 @@ export class ProductComponent implements OnInit {
     this.getWishesList();
   }
 
-  addCart(Pid){
+  addCart(Pid,typeData){
     let items:any=[];//array to first object
     let _tmpList:any=[];//temporal array to list cart
     //Condition if exits listCart or create new list
     if(localStorage.getItem('listCart')!=null){
       _tmpList=JSON.parse(localStorage.getItem('listCart'));//get list cart
       //Condition to add item or increase quantity on item
-      if(_tmpList.map(item=>item.id).indexOf(Pid)!=-1){
-        _tmpList[_tmpList.map(item=>item.id).indexOf(Pid)].quantity+=1;//increase quantity on item 
+      if(_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)!=-1){
+        _tmpList[_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)].quantity+=1;//increase quantity on item 
       }else{
-        _tmpList.push({id:Pid,quantity:1})//add item on list if no exist
-      }
+        _tmpList.push({id:Pid,quantity:1,type:typeData})//add item on list if no exist
+      } 
       localStorage.removeItem('listCart');//remove old list
       localStorage.setItem('listCart',JSON.stringify(_tmpList))//create new list
     }else{
-      items.push({id:Pid,quantity:1});//first item on list
+      items.push({id:Pid,quantity:1,type:typeData});//first item on list
       localStorage.setItem('listCart',JSON.stringify(items))//create list
     }
   }
