@@ -12,9 +12,58 @@
 }
 
 .bg-body{
+    background: #fff;
+}
+
+.bg-items{
     background-color: #0D0D0D;
+}
+
+.bg-tablero{
+    background-image: url("../../../assets/fondo-tablero.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 .bg-item{
     background-color: #fff
+}
+
+.title-text{
+    color: #000;
+    font-size: 15px;
+    height: 45px;
+}
+.title-text1{
+    color: #000;
+    font-size: 12px;
+}
+.subtitle-text{
+    color: #999999;
+    font-size: 12px;
+}
+
+hr {
+    border: 1px solid #fbd12c;
+    margin-bottom: 0px !important;
+}
+
+p{
+    margin: 0;
+}
+
+.input-quantity{
+    width: 50px !important;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    height: 38px;
+    width: 55.17px;
+}
+
+.img-add-cart{
+    border-radius: 7px;
+}
+
+.btn-round{
+    border-radius: 7px;
 }

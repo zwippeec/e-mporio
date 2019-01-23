@@ -1,44 +1,154 @@
 <!--Dinamic Home-->
 <!--Begin-->
 <div class="bg-body" *ngFor="let element of elementList" >
-  <div *ngIf="element.elementType==='Div' && element.sectionName=='Tablero'">
+  <div class="bg-tablero mt-1" *ngIf="element.elementType==='Div' && element.sectionName=='Tablero'">
     <!--begin div-->
     <div>
       <div class="row text-center " style="width: 101%;"> <!--First row-->
-        <div *ngFor="let board of boardList" class="col" [ngClass]="[element.columns==1 ? 'col-12' : '', element.columns==2 ? 'col-6' : '', element.columns==3 ? 'col-4' : '', element.columns==4 ? 'col-3' : '', element.columns==6 ? 'col-2' : ''] ">
-          <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" height="300" width="300">
-          <H3 *ngIf="board.title">{{board.title}}</H3>
-          <p *ngIf="board.text">{{board.text}}</p>
+        <!--First column-->
+        <div *ngFor="let board of boardList | slice:0:1" class="col-6 pt-4 pb-4">
+          <div class="row">
+            <div class="col-12 text-right pr-2">
+              <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" height="70" width="85%">
+            </div>
+            <div class="col-2"></div>
+            <div *ngFor="let board of boardList | slice:1:3" class="col-5 text-right pt-2 pl-0 pr-2" >  
+              <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" width="100%" height="200">
+              <h3 *ngIf="board.title">{{board.title}}</h3>
+              <p *ngIf="board.text">{{board.text}}</p>
+            </div>
+            <div class="col-2"></div>
+            <div *ngFor="let board of boardList | slice:3:5" class="col-5 text-right pt-2 pl-0 pr-2" >  
+              <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" width="100%" height="200">
+              <h3 *ngIf="board.title">{{board.title}}</h3>
+              <p *ngIf="board.text">{{board.text}}</p>
+            </div>
+          </div>
+        </div>
+        <!--End First column-->
+        <!--Second column-->
+        <div  class="col-6 pt-3 pb-4">
+          <div class="row">
+            <div *ngFor="let board of boardList | slice:5:6" class="col-4 text-left pt-2 pl-1 pr-0" >  
+              <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" width="100%" height="278">
+              <h3 *ngIf="board.title">{{board.title}}</h3>
+              <p *ngIf="board.text">{{board.text}}</p>
+            </div>
+            <div *ngFor="let board of boardList | slice:6:7" class="col-6 text-left pt-2 pl-0 pr-0" >  
+              <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" width="100%" height="278">
+              <h3 *ngIf="board.title">{{board.title}}</h3>
+              <p *ngIf="board.text">{{board.text}}</p>
+            </div>
+            <div class="col-2"></div>
+            <div *ngFor="let board of boardList | slice:7:9" class="col text-left pt-2 pl-1 pr-1" >  
+              <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" width="100%" height="200">
+              <h3 *ngIf="board.title">{{board.title}}</h3>
+              <p *ngIf="board.text">{{board.text}}</p>
+            </div>
+            <div class="col-2"></div>
+          </div>
         </div>
       </div>
     </div>
     <!--end div section-->
   </div>
-  <div *ngIf="element.elementType==='Div' && element.sectionName=='Sugerencias'" >
+  <div class="bg-items mt-1 pt-1" *ngIf="element.elementType==='Div' && element.sectionName=='Sugerencias'" >
     <!--begin div-->
-    <div class="container">
+    <div class="pt-2 pb-3">
       <div class="row text-center " style="width: 101%;">
-        <div *ngFor="let itemPromo of suggestionList" class="col bg-item" [ngClass]="[element.columns==1 ? 'col-12' : '', element.columns==2 ? 'col-6' : '', element.columns==3 ? 'col-4' : '', element.columns==4 ? 'col-3' : '', element.columns==6 ? 'col-2' : ''] ">
-          <img src="{{itemPromo.imageUrl}}" alt="{{itemPromo.name}}" height="300" width="100%">
+        <div class="col-1"></div>
+        <div *ngFor="let itemPromo of suggestionList" class="col bg-item ml-2" >
+          <!--Card promotion-->
+          <div class="row " >
+            <div class="col text-right pt-3">
+              <button class="btn btn-warning">Timer</button>
+            </div>
+          </div>
+          <div class="row pt-3">
+              <div class="col-5 pt-4">
+                  <img src="{{itemPromo.imageUrl}}" alt="{{itemPromo.name}}" height="220" width="130">
+              </div>
+              <div class="col text-left">
+                <p class="title-text font-weight-bold">{{itemPromo.name}}</p>
+                <p class="subtitle-text space">{{itemPromo.region}}</p>
+                <hr>
+                <p class="title-text1 font-weight-bold">Bodega:</p>
+                <p class="subtitle-text space">{{itemPromo.cellar}}</p>
+                <p class="title-text1 font-weight-bold">Región:</p>
+                <p class="subtitle-text space">{{itemPromo.region}}</p>
+                <p class="title-text1 font-weight-bold">Año:</p>
+                <p class="subtitle-text space">{{itemPromo.year}}</p>
+                <p class="title-text1 font-weight-bold">Etiqueta:</p>
+                <p class="subtitle-text space">{{itemPromo.label}}</p>
+                <p class="title-text1 font-weight-bold">Color:</p>
+                <p class="subtitle-text space">{{itemPromo.windKind}}</p>
+              </div>
+          </div>
+          <div class="row mb-2 text-right pt-2">
+            <div class="col-md-7 col-sm-4"></div>
+            <div class="col-md-2 col-sm-4">
+              <input type="number" class="input-quantity mr-1" min="0" max="999" >
+            </div>
+            <div class="col-md-1 col-sm-4">
+              <a (click)="addCart(itemPromo.idP,'products')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+            </div>
+          </div>
+          <!--End Card promotion-->
         </div>
+        <div class="col-1"></div>
       </div>
     </div>
     <!--end div section-->
   </div>
-  <div *ngIf="element.elementType==='Div' && element.sectionName=='Promociones'">
+  <div class="bg-items pt-1" *ngIf="element.elementType==='Div' && element.sectionName=='Promociones'">
     <!--begin div-->
-    <div class="container p-3">
-      <div class="row text-center" style="width: 101%;">
-        <div *ngFor="let itemPromo of promotionList" class="col bg-item" [ngClass]="[element.columns==1 ? 'col-12' : '', element.columns==2 ? 'col-6' : '', element.columns==3 ? 'col-4' : '', element.columns==4 ? 'col-3' : '', element.columns==6 ? 'col-2' : ''] ">
-          <img src="{{itemPromo.imageUrl}}" alt="" height="300" width="100%">
-          <button type="button" class="btn btn-success btn-temporal-promotion">Agregar</button>
-          <img src="https://gifimage.net/wp-content/uploads/2017/08/reloj-gif-2.gif" class="img-temporal-promotion" alt="" height="40" width="40">
+    <div class="pt-2 pb-3">
+        <div class="row text-center " style="width: 101%;">
+          <div class="col-1"></div>
+          <div *ngFor="let itemPromo of promotionList" class="col bg-item ml-2" >
+            <!--Card promotion-->
+            <div class="row " >
+              <div class="col text-right pt-3">
+                <div *ngIf="itemPromo.time!=null && itemPromo.time!='00:00:00' ;else Expired" class="btn btn-warning">   
+                  <span>{{itemPromo.time}}</span>
+                </div>
+                <ng-template #Expired>
+                  <div class="btn btn-warning">   
+                    <span>Expired</span>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-5 pt-4">
+                    <img src="{{itemPromo.imageUrl}}" alt="{{itemPromo.title}}" height="220" width="130">
+                </div>
+                <div class="col text-left">
+                  <p class="title-text font-weight-bold">{{itemPromo.title}}</p>
+                  <hr>
+                  <p class="title-text1 font-weight-bold">Detalle:</p>
+                  <p class="subtitle-text space">{{itemPromo.detail}}</p>
+                  <p class="subtitle-text space">{{itemPromo.startDate}}</p>
+                  <p class="subtitle-text space">{{itemPromo.endDate}}</p>
+                </div>
+            </div>
+            <div *ngIf="itemPromo.time!='00:00:00'" class="row mb-2 text-right pt-2">
+                <div class="col-md-7 col-sm-4"></div>
+                <div class="col-md-2 col-sm-4">
+                  <input type="number" class="input-quantity mr-1" min="0" max="999" >
+                </div>
+                <div class="col-md-1 col-sm-4">
+                  <a (click)="addCart(itemPromo.promoid,'promotion')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+                </div>
+              </div>
+            <!--End Card promotion-->
+          </div>
+          <div class="col-1"></div>
         </div>
       </div>
-    </div>
-    <!--end div section-->
+      <!--end div section-->
   </div>
-  <div *ngIf="element.elementType==='Slide'">
+  <div class="bg-items mt-1 pt-1" *ngIf="element.elementType==='Slide'">
     <!-- Slide 1 Sugerencia Pago-->
     <div>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

@@ -15,151 +15,216 @@
 <div class="bg-body">
   <div class="container pt-4 pb-4">
     <!--begin Submenu-->
-    <div class="row products-menu text-center">
-        <div class="col-1"></div>
-        <div class="col-1">
-          <ul class="navbar-nav ">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Tinto
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/newUser">Registrarse</a>
-                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
-              </div>
-            </li>  
-          </ul>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-1">
-          <ul class="navbar-nav ">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                País
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/newUser">Registrarse</a>
-                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
-              </div>
-            </li>  
-          </ul>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-1">
-          <ul class="navbar-nav ">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Región
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/newUser">Registrarse</a>
-                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
-              </div>
-            </li>  
-          </ul>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-1">
-          <ul class="navbar-nav ">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Uva
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/newUser">Registrarse</a>
-                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
-              </div>
-            </li>  
-          </ul>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-1">
-          <ul class="navbar-nav ">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Bodega
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/newUser">Registrarse</a>
-                <a class="dropdown-item" href="/login">Iniciar Sesión</a>
-              </div>
-            </li>  
-          </ul>
-        </div>
+    <div class="row products-menu text-center"><!--First row-->
+      <div class="col-1"></div>
+      <div class="col">
+        <select class="form-control" id="sel1" name="sellist1">
+          <option class="font-weight-bold">Tipo de Vino</option>
+          <option value="Tinto">Tinto</option>
+          <option value="Blanco">Blanco</option>
+          <option value="Rosado">Rosado</option>
+          <option value="Espumante">Espumante</option>
+        </select>
       </div>
-    <div class="col-1"></div>
-    <div class="col-1">
+      <div class="col">
+        <select class="form-control" id="sel1" name="sellist1">
+          <option class="font-weight-bold">País</option>
+          <option value="Chile">Chile</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Italia">Italia</option>
+          <option value="España">España</option>
+          <option value="Francia">Francia</option>
+          <option value="Alemania">Alemania</option>
+          <option value="Australia">Australia</option>
+          <option value="Estados Unidos">Estados Unidos</option>
+        </select>
+      </div>
+      <div class="col">
+        <select class="form-control" id="sel1" name="sellist1">
+          <option class="font-weight-bold">Región</option>
+          <option value="Valdepañas">Valdepañas</option>
+          <option value="Rioja">Rioja</option>
+          <option value="Mendoza">Mendoza</option>
+          <option value="Maipo">Maipo</option>
+          <option value="Rapel">Rapel</option>
+          <option value="Maule">Maule</option>
+          <option value="Valle Central">Valle Central</option>
+          <option value="Peumo">Peumo</option>
+          <option value="Colchagua">Colchagua</option>
+          <option value="Brodeaux">Brodeaux</option>
+          <option value="Montalcino La Toscana">Montalcino La Toscana</option>
+          <option value="Tierra de Castilla">Tierra de Castilla</option>
+          <option value="Buin">Buin</option>
+          <option value="Ciudad Real">Ciudad Real</option>
+          <option value="Toscana">Toscana</option>
+          <option value="Casa Blanca">Casa Blanca</option>
+          <option value="Bingen">Bingen</option>
+          <option value="Reggia Emilia">Reggia Emilia</option>
+          <option value="Vilobi del Penedes">Vilobi del Penedes</option>
+          <option value="Wiesbaden">Wiesbaden</option>
+          <option value="Cusano Milanino">Cusano Milanino</option>
+          <option value="Sant Sadurini de Anoia">Sant Sadurini de Anoia</option>
+          <option value="Champagne Areims">Champagne Areims</option>
+          <option value="Champagne Aepernay">Champagne Aepernay</option>
+          <option value="Rivera del Duero">Rivera del Duero</option>
+          <option value="Puente Alto">Puente Alto</option>
+          <option value="Cachapoal">Cachapoal</option>
+        </select>
+      </div>
+      <div class="col">
+        <select class="form-control" id="sel1" name="sellist1">
+          <option class="font-weight-bold">Uva</option>
+          <option value="Carmenere">Carmenere</option>
+          <option value="Cabernet Sauvignon">Cabernet Sauvignon</option>
+          <option value="Malvec">Malvec</option>
+          <option value="Cabernet Franc">Cabernet Franc</option>
+          <option value="Merlot">Merlot</option>
+          <option value="Merlot y Cabernet Sauvignon">Merlot y Cabernet Sauvignon</option>
+          <option value="Sauvignon Blanc">Sauvignon Blanc</option>
+          <option value="Chardonnay">Chardonnay</option>
+          <option value="Brut">Brut</option>
+          <option value="Brut Rose">Brut Rose</option>
+          <option value="Moscato">Moscato</option>
+          <option value="Sauvignon">Sauvignon</option>
+          <option value="Pinot Grigio">Pinot Grigio</option>
+          <option value="Shiraz">Shiraz</option>
+          <option value="Petite Sirah">Petite Sirah</option>
+          <option value="Syrah">Syrah</option>
+          <option value="Rioja">Rioja</option>
+          <option value="Blend">Blend</option>
+          <option value="Vino tinto">Vino tinto</option>
+          <option value="Vino blanco">Vino blanco</option>
+          <option value="Chianti">Chianti</option>
+          <option value="Tempranillo">Tempranillo</option>
+          <option value="Tempranillo Garnacha">Tempranillo Garnacha</option>
+          <option value="Torrontes">Torrontes</option>
+          <option value="Sauvignon Blanc Semillon">Sauvignon Blanc Semillon</option>
+          <option value="Lieblich">Lieblich</option>
+          <option value="Rose">Rose</option>
+          <option value="Lambrusco Bianco">Lambrusco Bianco</option>
+          <option value="Viognier">Viognier</option>
+          <option value="Lambrusco Roso">Lambrusco Roso</option>
+          <option value="Demisec">Demisec</option>
+          <option value="Rose Brut">Rose Brut</option>
+          <option value="Demisec Normal">Demisec Normal</option>
+          <option value="Brut Normal">Brut Normal</option>
+          <option value="Lambrusco Rosato">Lambrusco Rosato</option>
+        </select>
+      </div>
+      <div class="col">
+        <select class="form-control" id="sel1" name="sellist1">
+          <option class="font-weight-bold">Bodega</option>
+          <option value="Albali">Albali</option>
+          <option value="El Coto">El Coto</option>
+          <option value="Rutini">Rutini</option>
+          <option value="Viña Maipo">Viña Maipo</option>
+          <option value="Emiliana">Emiliana</option>
+          <option value="Concha y Toro">Concha y Toro</option>
+          <option value="Casa Silva">Casa Silva</option>
+          <option value="San Felipe">San Felipe</option>
+          <option value="Premiere">Premiere</option>
+          <option value="San Gimignano">San Gimignano</option>
+          <option value="Château Bellevue La Randée">Château Bellevue La Randée</option>
+          <option value="Ramón Bilbao">Ramón Bilbao</option>
+          <option value="Banfi">Banfi</option>
+          <option value="Bodegas Máximo">Bodegas Máximo</option>
+          <option value="Carmen">Carmen</option>
+          <option value="Palo Alto">Palo Alto</option>
+          <option value="Luca">Luca</option>
+          <option value="Beronia">Beronia</option>
+          <option value="Placido">Placido</option>
+          <option value="Viña Lanzar">Viña Lanzar</option>
+          <option value="Feliz Solis">Feliz Solis</option>
+          <option value="Medici Ermete">Medici Ermete</option>
+          <option value="Augustus Lieblich">Augustus Lieblich</option>
+          <option value="Barricas del Plata">Barricas del Plata</option>
+          <option value="Bodegas Muga">Bodegas Muga</option>
+          <option value="Dom Potier">Dom Potier</option>
+          <option value="Ballformosa">Ballformosa</option>
+          <option value="Sperone">Sperone</option>
+          <option value="Henkell">Henkell</option>
+          <option value="Vilarnau">Vilarnau</option>
+          <option value="Carmelo Rodero">Carmelo Rodero</option>
+          <option value="Coto de Rioja">Coto de Rioja</option>
+          <option value="Calvet">Calvet</option>
+          <option value="El Enemigo">El Enemigo</option>
+          <option value="G.H. Mumm">G.H. Mumm</option>
+          <option value="Veuve Du Vernay">Veuve Du Vernay</option>
+          <option value="Perrier Jouet">Perrier Jouet</option>
+        </select>
+      </div>
+      <div class="col-1"></div>
     </div>
-    <div class="row products-menu text-center pt-4"><!--Second row-->
+
+    <div class="row products-menu text-center"><!--Second row-->
       <div class="col-2"></div>
-      <div class="col-1">
-        <ul class="navbar-nav ">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              País
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/newUser">Registrarse</a>
-              <a class="dropdown-item" href="/login">Iniciar Sesión</a>
-            </div>
-          </li>  
-        </ul>
+      <div class="col">
+        <select class="form-control" id="sel1" name="sellist1">
+          <option class="font-weight-bold">Estilo</option>
+          <option value="Armoniosos">Armoniosos</option>
+          <option value="Aterciopelados">Aterciopelados</option>
+          <option value="Barrica">Barrica</option>
+          <option value="Complejo">Complejo</option>
+          <option value="De guarda">De guarda</option>
+          <option value="Elegante">Elegante</option>
+          <option value="Estructurados">Estructurados</option>
+          <option value="Fresco">Fresco</option>
+          <option value="Frutales">Frutales</option>
+          <option value="Fuertes">Fuertes</option>
+          <option value="Ligero">Ligero</option>
+          <option value="Mineral">Mineral</option>
+        </select>
       </div>
-      <div class="col-1"></div>
-      <div class="col-1">
-        <ul class="navbar-nav ">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Región
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/newUser">Registrarse</a>
-              <a class="dropdown-item" href="/login">Iniciar Sesión</a>
-            </div>
-        </li>  
-        </ul>
+      <div class="col">
+        <select class="form-control" id="sel1" name="sellist1">
+            <option class="font-weight-bold">Estado de Ánimo</option>
+            <option value="Alegre">Alegre</option>
+            <option value="Bajativo">Bajativo</option>
+            <option value="Celebración">Celebración</option>
+            <option value="Cita romántica">Cita romántica</option>
+            <option value="Con amigas">Con amigas</option>
+            <option value="Con amigos">Con amigos</option>
+            <option value="Noche tranquila">Noche tranquila</option>
+            <option value="Reunión de trabajo">Reunión de trabajo</option>
+            <option value="Triste/Melancólico">Triste/Melancólico</option>
+        </select>
       </div>
-      <div class="col-1"></div>
-      <div class="col-1">
-        <ul class="navbar-nav ">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Uva
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/newUser">Registrarse</a>
-              <a class="dropdown-item" href="/login">Iniciar Sesión</a>
-            </div>
-          </li>  
-        </ul>
+      <div class="col">
+        <select class="form-control" id="sel1" name="sellist1">
+          <option class="font-weight-bold">Comida</option>
+          <option value="Aves">Aves</option>
+          <option value="Carne de caza">Carne de caza</option>
+          <option value="Carnes rojas">Carnes rojas</option>
+          <option value="Chocolates">Chocolates</option>
+          <option value="Curados">Curados</option>
+          <option value="Pescado y Mariscos">Pescado y Mariscos</option>
+          <option value="Quesos">Quesos</option>
+        </select>
       </div>
-      <div class="col-1"></div>
-      <div class="col-1">
-        <ul class="navbar-nav ">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle btn-gray" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Bodega
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/newUser">Registrarse</a>
-              <a class="dropdown-item" href="/login">Iniciar Sesión</a>
-            </div>
-          </li>  
-        </ul>
+      <div class="col">
+        <select class="form-control" id="sel1" name="sellist1">
+          <option class="font-weight-bold">Rango de Precio</option>
+          <option value="Promocionales">Promocionales</option>
+          <option value="20"> < 20</option>
+          <option value="40"> < 40 </option>
+          <option value="80"> < 80 </option>
+          <option value="Premium">Premium </option>
+        </select>
       </div>
+      <div class="col-2"></div>
     </div>
     <!--end Submenu-->
     <div class="row pt-4">
       <div *ngFor="let product of productsData; let i = index" class="col-4 pl-0 pr-2">
         <div class="card bg-dark text-white">
-          <img src="https://www.decantalo.com/146988-thickbox_default/el-coto-rosado.jpg" class="card-img" alt="...">
+          <img src="{{product.imageUrl}}" class="card-img" alt="{{product.name}}" width="30" height="250">
           <div class="card-body">
             <h6 class="card-title ">{{product.name}}</h6>
             <p class="card-text"><span>Origen:</span> {{product.country}} - {{product.region}}</p>
             <p class="card-text"><span>Cosecha/Año:</span> {{product.year}}</p>
           </div>
         </div>
-        <a class="btn btn-success btn-add" (click)="addCart(product.idP)">Comprar</a>
+        <a class="btn btn-success btn-add" (click)="addCart(product.idP,'products')">Comprar</a>
         <button class="btn btn-wishes-List" (click)="openModal(content,product.idP)"><img src="https://image.flaticon.com/icons/svg/35/35590.svg" alt="" width="40" height="40"></button>
         <a [routerLink]="['/products',product.code]" class="btn btn-warning btn-detail">Ver</a>
       </div>
