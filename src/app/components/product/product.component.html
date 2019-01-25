@@ -1,11 +1,11 @@
-<div *ngIf="saveOnWishesList" class="alert alert-success" role="alert">
+<div *ngIf="saveOnWishesList" class="alert alert-success mb-0" role="alert">
   Item guardado correctamente.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 
-<div *ngIf="errorAuth" class="alert alert-danger" role="alert">
+<div *ngIf="errorAuth" class="alert alert-danger mb-0" role="alert">
   Inicia sesión para crear tus listas de deseos.
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -15,10 +15,10 @@
 <div class="bg-body">
   <div class="container pt-4 pb-4">
     <!--begin Submenu-->
-    <div class="row products-menu text-center"><!--First row-->
+    <div class="row products-menu text-center pt-3"><!--First row-->
       <div class="col-1"></div>
       <div class="col">
-        <select class="form-control" id="sel1" name="sellist1">
+        <select class="form-control bg-select" [(ngModel)]="windFilter" (change)="filter()" id="sel1" name="sellist1">
           <option class="font-weight-bold">Tipo de Vino</option>
           <option value="Tinto">Tinto</option>
           <option value="Blanco">Blanco</option>
@@ -27,7 +27,7 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control" id="sel1" name="sellist1">
+        <select class="form-control bg-select" [(ngModel)]="countryFilter" (change)="filter()" id="sel1" name="sellist1">
           <option class="font-weight-bold">País</option>
           <option value="Chile">Chile</option>
           <option value="Argentina">Argentina</option>
@@ -40,7 +40,7 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control" id="sel1" name="sellist1">
+        <select class="form-control bg-select" [(ngModel)]="regionFilter" (change)="filter()" id="sel1" name="sellist1">
           <option class="font-weight-bold">Región</option>
           <option value="Valdepañas">Valdepañas</option>
           <option value="Rioja">Rioja</option>
@@ -72,7 +72,7 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control" id="sel1" name="sellist1">
+        <select class="form-control bg-select" [(ngModel)]="grapeFilter" (change)="filter()" id="sel1" name="sellist1">
           <option class="font-weight-bold">Uva</option>
           <option value="Carmenere">Carmenere</option>
           <option value="Cabernet Sauvignon">Cabernet Sauvignon</option>
@@ -112,7 +112,7 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control" id="sel1" name="sellist1">
+        <select class="form-control bg-select" [(ngModel)]="cellerFilter" (change)="filter()" id="sel1" name="sellist1">
           <option class="font-weight-bold">Bodega</option>
           <option value="Albali">Albali</option>
           <option value="El Coto">El Coto</option>
@@ -156,10 +156,10 @@
       <div class="col-1"></div>
     </div>
 
-    <div class="row products-menu text-center"><!--Second row-->
+    <div class="row products-menu text-center pt-3 pb-3"><!--Second row-->
       <div class="col-2"></div>
       <div class="col">
-        <select class="form-control" id="sel1" name="sellist1">
+        <select class="form-control bg-select" [(ngModel)]="styleFilter" (change)="filter()" id="sel1" name="sellist1">
           <option class="font-weight-bold">Estilo</option>
           <option value="Armoniosos">Armoniosos</option>
           <option value="Aterciopelados">Aterciopelados</option>
@@ -176,7 +176,7 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control" id="sel1" name="sellist1">
+        <select class="form-control bg-select" [(ngModel)]="moodFilter" (change)="filter()" id="sel1" name="sellist1">
             <option class="font-weight-bold">Estado de Ánimo</option>
             <option value="Alegre">Alegre</option>
             <option value="Bajativo">Bajativo</option>
@@ -190,7 +190,7 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control" id="sel1" name="sellist1">
+        <select class="form-control bg-select" [(ngModel)]="foodFilter" (change)="filter()" id="sel1" name="sellist1">
           <option class="font-weight-bold">Comida</option>
           <option value="Aves">Aves</option>
           <option value="Carne de caza">Carne de caza</option>
@@ -202,7 +202,7 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control" id="sel1" name="sellist1">
+        <select class="form-control bg-select" [(ngModel)]="priceFilter" (change)="filter()" id="sel1" name="sellist1">
           <option class="font-weight-bold">Rango de Precio</option>
           <option value="Promocionales">Promocionales</option>
           <option value="20"> < 20</option>
@@ -214,25 +214,50 @@
       <div class="col-2"></div>
     </div>
     <!--end Submenu-->
-    <div class="row pt-4">
-      <div *ngFor="let product of productsData; let i = index" class="col-4 pl-0 pr-2">
-        <div class="card bg-dark text-white">
-          <img src="{{product.imageUrl}}" class="card-img" alt="{{product.name}}" width="30" height="250">
-          <div class="card-body">
-            <h6 class="card-title ">{{product.name}}</h6>
-            <p class="card-text"><span>Origen:</span> {{product.country}} - {{product.region}}</p>
-            <p class="card-text"><span>Cosecha/Año:</span> {{product.year}}</p>
+    <div class="row pt-4 ">
+      <!--begin div-->
+      <div *ngFor="let product of productsData " class="pt-2 pb-3 text-left col-4 pl-0 pr-2" style="width: 101%;">
+        <div class=" bg-item " >
+          <!--Card Product-->
+          <div class="row pt-3">
+            <div class="col-5 pt-4">
+              <img src="{{product.imageUrl}}" alt="{{product.name}}" height="220" width="130">
+            </div>
+            <div class="col text-left">
+              <p [routerLink]="['/products',product.code]" class="title-text font-weight-bold">{{product.name}}</p>
+              <p class="subtitle-text space">{{product.region}}</p>
+              <hr>
+              <p class="title-text1 font-weight-bold">Bodega:</p>
+              <p class="subtitle-text space">{{product.cellar}}</p>
+              <p class="title-text1 font-weight-bold">Región:</p>
+              <p class="subtitle-text space">{{product.region}}</p>
+              <p class="title-text1 font-weight-bold">Año:</p>
+              <p class="subtitle-text space">{{product.year}}</p>
+              <p class="title-text1 font-weight-bold">Etiqueta:</p>
+              <p class="subtitle-text space">{{product.label}}</p>
+              <p class="title-text1 font-weight-bold">Color:</p>
+              <p class="subtitle-text space">{{product.windKind}}</p>
+              <!--button class="btn btn-wishes-List" (click)="openModal(content,product.idP)"><img src="https://image.flaticon.com/icons/svg/35/35590.svg" alt="" width="30" height="30"></button>
+              <button class="btn btn-wishes-List" (click)="openModal(content,product.idP)"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Gold_Star.svg" alt="" width="30" height="30"></button-->
+            </div>
           </div>
+          <div *ngIf="product.time!='00:00:00'" class="row mb-2 text-right pt-2 pb-3">
+            <div class="col-md-7 col-sm-4">
+            </div>
+            <div class="col-md-2 col-sm-4">
+              <input type="number" class="input-quantity mr-1" min="0" max="999" >
+            </div>
+            <div class="col-md-1 col-sm-4">
+              <a (click)="addCart(product.idP,'products')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+            </div>
+          </div>
+          <!--End Card Product-->
         </div>
-        <a class="btn btn-success btn-add" (click)="addCart(product.idP,'products')">Comprar</a>
-        <button class="btn btn-wishes-List" (click)="openModal(content,product.idP)"><img src="https://image.flaticon.com/icons/svg/35/35590.svg" alt="" width="40" height="40"></button>
-        <a [routerLink]="['/products',product.code]" class="btn btn-warning btn-detail">Ver</a>
       </div>
+      <!--end div section-->
     </div>
   </div>
 </div>
-
-
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Modal title</h4>
