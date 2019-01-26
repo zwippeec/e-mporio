@@ -94,3 +94,13 @@ p{
     border: none;
     color: #fff;
 }
+
+.no-element-show{
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    max-width: 100%;
+    width: 30%;
+    margin-right: 35%;
+    margin-left: 35%;
+}

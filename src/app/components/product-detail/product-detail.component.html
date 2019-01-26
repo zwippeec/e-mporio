@@ -1,31 +1,119 @@
-<div class="container pt-4 pb-4">
-  <div class="row">
-    <div  class="col-4">
-      <img src="https://www.decantalo.com/146988-thickbox_default/el-coto-rosado.jpg" class="card-img" alt="...">
+<div class="pt-0 pb-1 bg-body">
+  <div class="row ml-0 mr-0" style="width: 100%">
+    <div  class="col-2 text-center">
+      <img src="{{product.imageUrl}}" class="card-img" alt="{{product.name}}" height="350">
     </div>
-    <div class="col text-center">
+    <div class="col text-left">
       <div class="row pt-5">
         <div class="col">
-          <h5 *ngIf="product!=null" class="card-title">{{product.name}}</h5>
-        </div>
-      </div>
-      <div class="row pt-3">
-        <div class="col">
-            <p *ngIf="product!=null" class="card-text"><span class="font-weight-bold">Tipo de Vino:</span> {{product.windKind}}</p>
-            <p *ngIf="product!=null" class="card-text"><span class="font-weight-bold">Variedad:</span> {{product.variety}}</p>
-            <p *ngIf="product!=null" class="card-text"><span class="font-weight-bold">Etiqueta:</span> {{product.label}}</p>
-        </div>
-        <div class="col">
-            <p *ngIf="product!=null" class="card-text"><span class="font-weight-bold">Origen:</span> {{product.country}} - {{product.region}}</p>
-            <p *ngIf="product!=null" class="card-text"><span class="font-weight-bold">Cosecha/Año:</span> {{product.year}}</p>
-            
+          <p class="title-text font-weight-bold">{{product.name}}</p>
+          <p class="subtitle-text space">{{product.region}}</p>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <p class="title-text1 font-weight-bold">País:</p>
+              <p class="subtitle-text space">{{product.country}}</p>
+              <p class="title-text1 font-weight-bold">Región:</p>
+              <p class="subtitle-text space">{{product.region}}</p>
+              <p class="title-text1 font-weight-bold">Tipo de Vino:</p>
+              <p class="subtitle-text space">{{product.windKind}}</p>
+              <p class="title-text1 font-weight-bold">Variedad:</p>
+              <p class="subtitle-text space">{{product.variety}}</p>
+              <p class="title-text1 font-weight-bold">Bodega:</p>
+              <p class="subtitle-text space">{{product.cellar}}</p>
+            </div>
+            <div class="col">
+              <p class="title-text1 font-weight-bold">Etiqueta:</p>
+              <p class="subtitle-text space">{{product.label}}</p>
+              <p class="title-text1 font-weight-bold">Año:</p>
+              <p class="subtitle-text space">{{product.year}}</p>
+              <p class="title-text1 font-weight-bold">Color:</p>
+              <p class="subtitle-text space">{{product.windKind}}</p>
+              <p class="title-text1 font-weight-bold">Nariz:</p>
+              <p class="subtitle-text space">{{product.odor}}</p>
+            </div>
+            <div class="col">
+              <p class="title-text1 font-weight-bold">Boca:</p>
+              <p class="subtitle-text space">{{product.smell}}</p>
+              <p class="title-text1 font-weight-bold">Maridaje:</p>
+              <p class="subtitle-text space">{{product.pairing}}</p>
+              <p class="title-text1 font-weight-bold">Temperatura ideal:</p>
+              <p class="subtitle-text space">{{product.year}}</p>
+            </div>
+          </div>
         </div>
       </div> 
-      <div class="row pt-5">
+      <div class="row text-center pt-1">
           <div class="col">
-              <a class="btn btn-success btn-add">Agregar</a>
+            <ng-template #rating let-fill="fill">
+              <span class="star" [class.full]="fill === 100">
+                <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+              </span>
+            </ng-template>
+            <p class="title-text2 font-weight-bold">Rating: <ngb-rating [(rate)]="product.rate"  [starTemplate]="rating" [readonly]="true" max="5"></ngb-rating></p>
+          </div>
+          <div class="col">
+              <a (click)="addCart(product.idP,'products')" class="btn add-btn font-weight-bold">Agregar <img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
           </div>
         </div>
     </div>
+    <div (click)="openModal(content)" class="col-3 text-center bg-bottle">
+      <img src="{{product.imageUrl}}" class="card-img" alt="{{product.name}}" height="400" width="150">
+      <img  src="../../../assets/lupa.png" class="bg-body img-zoom" alt="Zoom" width="25" height="25">
+    </div>
   </div>
+  
+  <!--PACKS-->
+  <!--begin Pack div-->
+  <div class="bg-items mt-1">
+    <div class="row mr-5 ml-5 pt-3 pb-3">
+      <div *ngFor="let pack of packList" class="col-4 bg-bottle text-center pr-0 pl-0 mr-2 ml-2">
+        <img src="{{pack.imageUrl}}" alt="{{pack.title}}" width="200" height="350">
+        <p class="title-text-pack">{{pack.title}}</p>
+      </div>
+    </div>
+  </div>
+    
+    <!--end Pack div section-->
+  <!--End packs-->
+
+  <!---->
+  <div class="row mt-1">
+    <div class="col-8 pr-1">
+      <img src="https://firebasestorage.googleapis.com/v0/b/e-mporio593.appspot.com/o/others%2Fsommelierjpg.jpg?alt=media&token=33f17219-481d-430e-8450-f6b0a25a3010" alt="sommelier" height="350" width="100%">
+    </div>
+    <div class="col-4">
+      <div class="row text-center bg-tips mb-1 tips-div">
+        <div class="col">
+          <h5 class="tips">Combina tus carnes con mejor vino tinto</h5>
+          <p class="text-tips">Vinos nacionales y extranjeros</p>
+        </div>
+      </div>
+      <div class="row text-center bg-tips mb-1 tips-div">
+        <div class="col">
+          <h5 class="tips">Degustación de vinos</h5>
+          <p class="text-tips">Visita Emporio las Rosas para degustación y<br>la mejor recomendación del sommelier.</p>
+        </div>
+      </div>
+      <div class="row text-center bg-tips mb-1 tips-div">
+        <div class="col">
+          <h5 class="tips">Guía de Vinos</h5>
+          <p class="text-tips">Satisface tu paladar con nuestras variedades.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!---->
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{product.name}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="{{product.imageUrl}}" class="card-img" alt="{{product.name}}" height="650">
+  </div>
+</ng-template> 
