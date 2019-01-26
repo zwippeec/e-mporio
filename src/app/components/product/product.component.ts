@@ -22,7 +22,7 @@ export class ProductComponent implements OnInit {
 
   //filters
   //filters:any={windKind:'',cost:'',foodFilter:'',moodFilter:'',styleFilter:'',cellerFilter:'',grapeFilter:'',regionFilter:'',countryFilter:''};
-    filters:any={windKind:''};
+    filters:any={windKind:'',country:'',region:'',cellar:''};
   constructor(public fireSrv: FirebaseService,private cookieService: CookieService,private modalService: NgbModal ) { 
     this.allProducts();
   }

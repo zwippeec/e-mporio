@@ -19,7 +19,7 @@
       <div class="col-1"></div>
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.windKind" id="sel1" name="sellist1">
-          <option class="font-weight-bold">Tipo de Vino</option>
+          <option class="font-weight-bold" value="">Tipo de Vino</option>
           <option value="Tinto">Tinto</option>
           <option value="Blanco">Blanco</option>
           <option value="Rosado">Rosado</option>
@@ -27,8 +27,8 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control bg-select" [(ngModel)]="filters.countryFilter" id="sel1" name="sellist1">
-          <option class="font-weight-bold">País</option>
+        <select class="form-control bg-select" [(ngModel)]="filters.country" id="sel1" name="sellist1">
+          <option class="font-weight-bold" value="">País</option>
           <option value="Chile">Chile</option>
           <option value="Argentina">Argentina</option>
           <option value="Italia">Italia</option>
@@ -40,9 +40,9 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control bg-select" [(ngModel)]="filters.regionFilter" id="sel1" name="sellist1">
-          <option class="font-weight-bold">Región</option>
-          <option value="Valdepañas">Valdepañas</option>
+        <select class="form-control bg-select" [(ngModel)]="filters.region" id="sel1" name="sellist1">
+          <option class="font-weight-bold" value="">Región</option>
+          <option value="Valdepeñas">Valdepeñas</option>
           <option value="Rioja">Rioja</option>
           <option value="Mendoza">Mendoza</option>
           <option value="Maipo">Maipo</option>
@@ -73,7 +73,7 @@
       </div>
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.grapeFilter" id="sel1" name="sellist1">
-          <option class="font-weight-bold">Uva</option>
+          <option class="font-weight-bold" value="">Uva</option>
           <option value="Carmenere">Carmenere</option>
           <option value="Cabernet Sauvignon">Cabernet Sauvignon</option>
           <option value="Malvec">Malvec</option>
@@ -112,8 +112,8 @@
         </select>
       </div>
       <div class="col">
-        <select class="form-control bg-select" [(ngModel)]="filters.cellerFilter" id="sel1" name="sellist1">
-          <option class="font-weight-bold">Bodega</option>
+        <select class="form-control bg-select" [(ngModel)]="filters.cellar" id="sel1" name="sellist1">
+          <option class="font-weight-bold" value="">Bodega</option>
           <option value="Albali">Albali</option>
           <option value="El Coto">El Coto</option>
           <option value="Rutini">Rutini</option>
@@ -160,7 +160,7 @@
       <div class="col-2"></div>
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.styleFilter" id="sel1" name="sellist1">
-          <option class="font-weight-bold">Estilo</option>
+          <option class="font-weight-bold" value="">Estilo</option>
           <option value="Armoniosos">Armoniosos</option>
           <option value="Aterciopelados">Aterciopelados</option>
           <option value="Barrica">Barrica</option>
@@ -177,7 +177,7 @@
       </div>
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.moodFilter" id="sel1" name="sellist1">
-            <option class="font-weight-bold">Estado de Ánimo</option>
+            <option class="font-weight-bold" value="">Estado de Ánimo</option>
             <option value="Alegre">Alegre</option>
             <option value="Bajativo">Bajativo</option>
             <option value="Celebración">Celebración</option>
@@ -191,7 +191,7 @@
       </div>
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.foodFilter" (change)="filter()" id="sel1" name="sellist1">
-          <option class="font-weight-bold">Comida</option>
+          <option class="font-weight-bold" value="">Comida</option>
           <option value="Aves">Aves</option>
           <option value="Carne de caza">Carne de caza</option>
           <option value="Carnes rojas">Carnes rojas</option>
@@ -203,7 +203,7 @@
       </div>
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.priceFilter" id="sel1" name="sellist1">
-          <option class="font-weight-bold">Rango de Precio</option>
+          <option class="font-weight-bold" value="">Rango de Precio</option>
           <option value="Promocionales">Promocionales</option>
           <option value="20"> < 20</option>
           <option value="40"> < 40 </option>
@@ -219,12 +219,12 @@
       <div *ngFor="let product of productsData | filterBy: filters" class="pt-2 pb-3 text-left col-4 pl-0 pr-2" style="width: 101%;">
         <div class=" bg-item " >
           <!--Card Product-->
-          <div class="row pt-3">
+          <div [routerLink]="['/products',product.code]"  class="row pt-3">
             <div class="col-5 pt-4">
               <img src="{{product.imageUrl}}" alt="{{product.name}}" height="220" width="130">
             </div>
             <div class="col text-left">
-              <p [routerLink]="['/products',product.code]" class="title-text font-weight-bold">{{product.name}}</p>
+              <p class="title-text font-weight-bold">{{product.name}}</p>
               <p class="subtitle-text space">{{product.region}}</p>
               <hr>
               <p class="title-text1 font-weight-bold">Bodega:</p>
