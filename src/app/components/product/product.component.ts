@@ -1,4 +1,4 @@
-import { Component, OnInit,Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../service/firebase.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -8,7 +8,6 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-@Pipe({name: 'windFilter'})
 export class ProductComponent implements OnInit {
 
   productsData:any;
@@ -22,19 +21,10 @@ export class ProductComponent implements OnInit {
   errorAuth:boolean=false;
 
   //filters
-  priceFilter:any=null;
-  foodFilter:any=null;
-  moodFilter:any=null;
-  styleFilter:any=null;
-  cellerFilter:any=null;
-  grapeFilter:any=null;
-  regionFilter:any=null;
-  countryFilter:any=null;
-  windFilter:any;
-
+  //filters:any={windKind:'',cost:'',foodFilter:'',moodFilter:'',styleFilter:'',cellerFilter:'',grapeFilter:'',regionFilter:'',countryFilter:''};
+    filters:any={windKind:'',country:'',region:'',cellar:''};
   constructor(public fireSrv: FirebaseService,private cookieService: CookieService,private modalService: NgbModal ) { 
     this.allProducts();
-    
   }
 
   ngOnInit() {
@@ -116,8 +106,5 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  filter(){
-    console.log(this.priceFilter,this.foodFilter,this.moodFilter,this.styleFilter,this.cellerFilter,this.grapeFilter,
-      this.regionFilter,this.countryFilter,this.windFilter)
-  }
+  
 }

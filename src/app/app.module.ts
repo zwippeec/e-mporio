@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 //Autocomplete
 import {NgAutoCompleteModule} from "ng-auto-complete";
+//Filter
+import { FilterPipeModule } from 'ngx-filter-pipe';
 //Bootstrap
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 //Firebase
@@ -49,7 +51,8 @@ import { WishesListComponent } from './components/wishes-list/wishes-list.compon
     AngularFireDatabaseModule,
     FormsModule,
     NgbModule,
-    NgAutoCompleteModule
+    NgAutoCompleteModule,
+    FilterPipeModule
   ],
   providers: [
     FirebaseService,
