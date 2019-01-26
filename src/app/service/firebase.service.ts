@@ -91,4 +91,9 @@ export class FirebaseService {
   payOrder(uid,data){
     return this.afDb.list('binnacle/'+uid).push(data);
   }
+
+  //Packs
+  getPacks(){
+    return this.afDb.list('packs').valueChanges();
+  }
 }

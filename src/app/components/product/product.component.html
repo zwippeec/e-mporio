@@ -13,13 +13,14 @@
 </div>
 
 <div class="bg-body">
-  <div class="container pt-4 pb-4">
+  <div class="container pt-4 pb-1">
     <!--begin Submenu-->
     <div class="row products-menu text-center pt-3"><!--First row-->
       <div class="col-1"></div>
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.windKind" id="sel1" name="sellist1">
           <option class="font-weight-bold" value="">Tipo de Vino</option>
+          <option value="">Todos</option>
           <option value="Tinto">Tinto</option>
           <option value="Blanco">Blanco</option>
           <option value="Rosado">Rosado</option>
@@ -29,6 +30,7 @@
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.country" id="sel1" name="sellist1">
           <option class="font-weight-bold" value="">País</option>
+          <option value="">Todos</option>
           <option value="Chile">Chile</option>
           <option value="Argentina">Argentina</option>
           <option value="Italia">Italia</option>
@@ -42,6 +44,7 @@
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.region" id="sel1" name="sellist1">
           <option class="font-weight-bold" value="">Región</option>
+          <option value="">Todos</option>
           <option value="Valdepeñas">Valdepeñas</option>
           <option value="Rioja">Rioja</option>
           <option value="Mendoza">Mendoza</option>
@@ -74,6 +77,7 @@
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.grapeFilter" id="sel1" name="sellist1">
           <option class="font-weight-bold" value="">Uva</option>
+          <option value="">Todos</option>
           <option value="Carmenere">Carmenere</option>
           <option value="Cabernet Sauvignon">Cabernet Sauvignon</option>
           <option value="Malvec">Malvec</option>
@@ -114,6 +118,7 @@
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.cellar" id="sel1" name="sellist1">
           <option class="font-weight-bold" value="">Bodega</option>
+          <option value="">Todos</option>
           <option value="Albali">Albali</option>
           <option value="El Coto">El Coto</option>
           <option value="Rutini">Rutini</option>
@@ -161,6 +166,7 @@
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.styleFilter" id="sel1" name="sellist1">
           <option class="font-weight-bold" value="">Estilo</option>
+          <option value="">Todos</option>
           <option value="Armoniosos">Armoniosos</option>
           <option value="Aterciopelados">Aterciopelados</option>
           <option value="Barrica">Barrica</option>
@@ -178,6 +184,7 @@
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.moodFilter" id="sel1" name="sellist1">
             <option class="font-weight-bold" value="">Estado de Ánimo</option>
+            <option value="">Todos</option>
             <option value="Alegre">Alegre</option>
             <option value="Bajativo">Bajativo</option>
             <option value="Celebración">Celebración</option>
@@ -192,6 +199,7 @@
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.foodFilter" (change)="filter()" id="sel1" name="sellist1">
           <option class="font-weight-bold" value="">Comida</option>
+          <option value="">Todos</option>
           <option value="Aves">Aves</option>
           <option value="Carne de caza">Carne de caza</option>
           <option value="Carnes rojas">Carnes rojas</option>
@@ -204,6 +212,7 @@
       <div class="col">
         <select class="form-control bg-select" [(ngModel)]="filters.priceFilter" id="sel1" name="sellist1">
           <option class="font-weight-bold" value="">Rango de Precio</option>
+          <option value="">Todos</option>
           <option value="Promocionales">Promocionales</option>
           <option value="20"> < 20</option>
           <option value="40"> < 40 </option>
@@ -255,11 +264,58 @@
         </div>
       </div>
       <!--end div section-->
-      <div *ngIf="productsData | filterBy: filters.length === 0">
-        No hay elementos con esos parámetros
+      <div class="col text-center pb-2" *ngIf="(productsData | filterBy: filters).length === 0">
+        <p class="text-center no-element-show"> No hay elementos con los parámetros de búsqueda seleccionados. </p>
       </div>
     </div>
   </div>
+
+  <!--begin Promotion div-->
+  <div class="pt-1 pb-3">
+    <div class="row text-center " style="width: 101%;">
+      <div class="col-1"></div>
+      <div *ngFor="let itemPromo of promotionList" class="col bg-item ml-2" >
+        <!--Card promotion-->
+        <div class="row " >
+          <div class="col text-right pt-3">
+            <div *ngIf="itemPromo.time!=null && itemPromo.time!='00:00:00' ;else Expired" class="btn btn-warning">   
+              <span>{{itemPromo.time}}</span>
+            </div>
+            <ng-template #Expired>
+              <div class="btn btn-warning">   
+                <span>Expired</span>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-5 pt-4">
+                <img src="{{itemPromo.imageUrl}}" alt="{{itemPromo.title}}" height="220" width="130">
+            </div>
+            <div class="col text-left">
+              <p class="title-text font-weight-bold">{{itemPromo.title}}</p>
+              <hr>
+              <p class="title-text1 font-weight-bold">Detalle:</p>
+              <p class="subtitle-text space">{{itemPromo.detail}}</p>
+              <p class="subtitle-text space">{{itemPromo.startDate}}</p>
+              <p class="subtitle-text space">{{itemPromo.endDate}}</p>
+            </div>
+        </div>
+        <div *ngIf="itemPromo.time!='00:00:00'" class="row mb-2 text-right pt-2">
+            <div class="col-md-7 col-sm-4"></div>
+            <div class="col-md-2 col-sm-4">
+              <input type="number" class="input-quantity mr-1" min="0" max="999" >
+            </div>
+            <div class="col-md-1 col-sm-4">
+              <a (click)="addCart(itemPromo.promoid,'promotion')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+            </div>
+          </div>
+        <!--End Card promotion-->
+      </div>
+      <div class="col-1"></div>
+    </div>
+  </div>
+  <!--end promotion div section-->
 </div>
 <ng-template #content let-modal>
   <div class="modal-header">
