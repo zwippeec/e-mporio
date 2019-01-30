@@ -1,46 +1,159 @@
-<div class="container">
-  <table class="table table-warning table-hover ">
-    <thead class="thead-dark">
-      <tr class="text-center">
-        <th scope="col-4">Producto/Item</th>
-        <th scope="col-1">Precio</th>
-        <th scope="col">Cantidad</th>
-        <th scope="col-1">Total/Uni.</th>
-      </tr>
-    </thead>
-    <tbody *ngIf="listCart.length>0; else noneList">
-      <tr *ngFor="let item of listCart" >
-        <th scope="row">{{item.data.name}}</th>
-        <td class="text-center">{{item.data.cost}}</td>
-        <td class="text-center">{{item.quantity}}</td>
-        <td class="text-center"> $ {{item.totalUni}}</td>
-      </tr>
-      <tr>
-        <td class="col-10 text-right font-weight-bold">Total a pagar:</td>
-        <td class="col-2"></td>
-        <td class="col-2"></td>
-        <td class="col text-center">$ {{totalPay}}</td>
-      </tr>
-    </tbody>
-    <ng-template #noneList>
-      <tbody *ngIf="listCart.length==0">
-        <tr>
-          <td class="text-center font-weight-bold col-12">El carrito se encuentra vacío.</td>
-        </tr>
-      </tbody>
-    </ng-template>
-  </table>
+<div class="bg-body">
+  <div class="container">
+    <div class="row pt-5 pb-5">
+      <div class="col-4"><!--FIRST-->
+        <div class="bg-black text-yellow text-center border-title">
+          <p class="p-2 mb-0">REGISTRATE</p>
+        </div>
+        <div class="bg-white border p-4">
+          <p class="title-text">INGRESO PARA MIEMBROS</p>
+          <form>
+            <div class="form-group">
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <a href="/" class="subtitle-text">Olvidaste tu contraseña</a>
+            <div class="text-center pt-2">
+              <button class="btn btn-login">Ingresar</button>
+            </div>
+          </form>
+          <hr>
+          <p class="title-text mb-1">INVITADOS</p>
+          <div class="text-center">
+            <p class="member-text">Si eres miembro puedes obtener muchos beneficios.</p> 
+            <a href="/newUser" class="btn btn-login">Registrarse</a>
+          </div>          
+        </div>
+        <div class="btn-member p-1 ">
+          <p class="mb-0">Hazte miembro</p>
+        </div>
+      </div><!--END FIRST-->
+      <div class="col-4"><!--SECOND-->
+        <div class="bg-black text-yellow text-center border-title">
+          <p class="p-2 mb-0">METODO DE PAGO</p>
+        </div>
+        <div class="bg-white border pt-2 pb-3">
+          <div class="p-1" *ngFor="let payment of paymentsType; let i = index">
+            <hr *ngIf="i!=0" class="mt-2">
+            <input type="radio" class="ml-4" [(ngModel)]="paymentSelect" name="paymentSelect" value="{{payment.name}}"> 
+            <img src="{{payment.url}}" alt="{{payment.name}}" class="pl-3" height="23px">
+            <span class="pl-3">{{payment.name}}</span>
+          </div>
+        </div>
+      </div><!--END SECOND-->
+      <div class="col-4"><!--THIRD-->
+        <div class="bg-black text-yellow text-center border-title">
+          <p class="p-2 mb-0">CONFIRMACION DE PEDIDO</p>
+        </div>
+        <div class="bg-white border pt-2 pb-3">
+          <div *ngIf="listCart.length>0;else noneElements">
+            <div *ngFor="let item of listCart; let i = index">
+              <hr *ngIf="i!=0" class="mt-1 mb-1">
+              <div class="row">
+                <div class="col-7 ml-3 pr-1 text-wrap item-text">
+                  {{item.data.name}}
+                </div>
+                <!--
+                <div class="col-1 pl-1 pr-1 text-wrap">
+                  ${{item.data.cost}}
+                </div>
+                -->
+                <div class="col-2 pl-1 pr-1 text-wrap item-text text-center">
+                  x{{item.quantity}}
+                </div>
+                <div class="col-2 pl-1 pr-1 text-wrap item-text text-center">
+                  ${{item.totalUni}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #noneElements>
+            <p class="item-pay-text text-center">El carrito se encuentra vacío.</p>
+          </ng-template>
+          <hr class="mt-2">
+          <div class="row">
+            <div class="col-4 ml-3">
+              <p class="item-pay-text">Subtotal</p>
+              <p class="item-pay-text">Cupón</p>
+              <p class="item-pay-text">Envío</p>
+              <p class="item-pay-text">Total</p>
+            </div>
+            <div class="col">
+              <p class="item-pay-text" *ngIf="listCart.length==0">0</p>
+              <p class="item-pay-text" *ngIf="listCart.length==0">0</p>
+              <p class="item-pay-text" *ngIf="listCart.length==0">0</p>
+              <p class="item-pay-text" *ngIf="listCart.length==0">$/. 0</p>
 
-  <!--Buttons-->
-  <div class="row">
-    <div class="col">
-      <a *ngIf="listCart.length>0" class="btn btn-warning ml-4" href="/products" >Seguir comprando</a>
-      <a *ngIf="listCart.length==0" class="btn btn-info ml-4" href="/products" >Ir a comprar</a>
+              <p class="item-pay-text" *ngIf="listCart.length!=0"><span>{{subtotalPay}}</span></p>
+              <p class="item-pay-text" *ngIf="listCart.length!=0"><span>{{coupon}}</span></p>
+              <p class="item-pay-text" *ngIf="listCart.length!=0"><span>{{taxSend}}</span></p>
+              <p class="item-pay-text" *ngIf="listCart.length!=0">$/. <span class="font-weight-bold">{{totalPay}}</span></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 ml-3">
+              <input type="checkbox" (change)="saveOnCellar($event)">
+              <span class="item-text pl-2">Guardar en mi cava</span>
+            </div>
+            <div class="col text-center pt-2">
+              <button *ngIf="itemsCart.length>0" class="btn btn-pay" (click)="goToPay()">Pagar</button>
+              <a href="/products" *ngIf="itemsCart.length==0" class="btn btn-explorer"><span class="text-yellow">Explorar</span></a>
+            </div>
+          </div>
+        </div>
+      </div><!--END THIRD-->
     </div>
-    <div *ngIf="totalPay>0" class="col text-right">
-      <button *ngIf="listCart.length>0" type="button" class="btn btn-danger mr-3" (click)="clearData()">Cancelar</button>
-      <button *ngIf="listCart.length>0" type="button" class="btn btn-success mr-4" (click)="goToPay()">Pagar</button>
-    </div>
-  </div>
+
+
+    <!--TABLA-->
+    <!--
+        <table class="table table-warning table-hover ">
+          <thead class="thead-dark">
+            <tr class="text-center">
+              <th scope="col-4">Producto/Item</th>
+              <th scope="col-1">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col-1">Total/Uni.</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="listCart.length>0; else noneList">
+            <tr *ngFor="let item of listCart" >
+              <th scope="row">{{item.data.name}}</th>
+              <td class="text-center">{{item.data.cost}}</td>
+              <td class="text-center">{{item.quantity}}</td>
+              <td class="text-center"> $ {{item.totalUni}}</td>
+            </tr>
+            <tr>
+              <td class="col-10 text-right font-weight-bold">Total a pagar:</td>
+              <td class="col-2"></td>
+              <td class="col-2"></td>
+              <td class="col text-center">$ {{totalPay}}</td>
+            </tr>
+          </tbody>
+          <ng-template #noneList>
+            <tbody *ngIf="listCart.length==0">
+              <tr>
+                <td class="text-center font-weight-bold col-12">El carrito se encuentra vacío.</td>
+              </tr>
+            </tbody>
+          </ng-template>
+        </table>
+      -->
+        <!--Buttons-->
+        <!--
+        <div class="row">
+          <div class="col">
+            <a *ngIf="listCart.length>0" class="btn btn-warning ml-4" href="/products" >Seguir comprando</a>
+            <a *ngIf="listCart.length==0" class="btn btn-info ml-4" href="/products" >Ir a comprar</a>
+          </div>
+          <div *ngIf="totalPay>0" class="col text-right">
+            <button *ngIf="listCart.length>0" type="button" class="btn btn-danger mr-3" (click)="clearData()">Cancelar</button>
+            <button *ngIf="listCart.length>0" type="button" class="btn btn-success mr-4" (click)="goToPay()">Pagar</button>
+          </div>
+        </div>
+      </div>
+    -->
+      
 </div>
-

@@ -96,4 +96,9 @@ export class FirebaseService {
   getPacks(){
     return this.afDb.list('packs').valueChanges();
   }
+  
+  //Cellar
+  saveOnMyCellar(uid,data){
+    return this.afDb.object ('cellar/'+uid).set(data);
+  }
 }

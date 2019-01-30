@@ -88,3 +88,15 @@ p{
 .tips-div{
     height: 114px;
 }
+
+.tips-sommelier{
+    color: #fff;
+    font-size: 16px;
+    background-color: #fbd12c;
+    max-width: 22%;
+    width: auto;
+    position: absolute;
+    top: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
