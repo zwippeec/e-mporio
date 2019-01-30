@@ -1,6 +1,6 @@
 <div class="bg-body">
   <div class="container">
-    <div class="row pt-5 pb-5">
+    <div class="row pt-5 pb-2">
       <div class="col-4"><!--FIRST-->
         <div class="bg-black text-yellow text-center border-title">
           <p class="p-2 mb-0">REGISTRATE</p>
@@ -105,55 +105,54 @@
         </div>
       </div><!--END THIRD-->
     </div>
-
-
-    <!--TABLA-->
-    <!--
-        <table class="table table-warning table-hover ">
-          <thead class="thead-dark">
-            <tr class="text-center">
-              <th scope="col-4">Producto/Item</th>
-              <th scope="col-1">Precio</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col-1">Total/Uni.</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="listCart.length>0; else noneList">
-            <tr *ngFor="let item of listCart" >
-              <th scope="row">{{item.data.name}}</th>
-              <td class="text-center">{{item.data.cost}}</td>
-              <td class="text-center">{{item.quantity}}</td>
-              <td class="text-center"> $ {{item.totalUni}}</td>
-            </tr>
-            <tr>
-              <td class="col-10 text-right font-weight-bold">Total a pagar:</td>
-              <td class="col-2"></td>
-              <td class="col-2"></td>
-              <td class="col text-center">$ {{totalPay}}</td>
-            </tr>
-          </tbody>
-          <ng-template #noneList>
-            <tbody *ngIf="listCart.length==0">
-              <tr>
-                <td class="text-center font-weight-bold col-12">El carrito se encuentra vacío.</td>
-              </tr>
-            </tbody>
-          </ng-template>
-        </table>
-      -->
-        <!--Buttons-->
-        <!--
-        <div class="row">
-          <div class="col">
-            <a *ngIf="listCart.length>0" class="btn btn-warning ml-4" href="/products" >Seguir comprando</a>
-            <a *ngIf="listCart.length==0" class="btn btn-info ml-4" href="/products" >Ir a comprar</a>
-          </div>
-          <div *ngIf="totalPay>0" class="col text-right">
-            <button *ngIf="listCart.length>0" type="button" class="btn btn-danger mr-3" (click)="clearData()">Cancelar</button>
-            <button *ngIf="listCart.length>0" type="button" class="btn btn-success mr-4" (click)="goToPay()">Pagar</button>
-          </div>
-        </div>
-      </div>
-    -->
-      
+    <div class="row pb-2">
+      <div class="col-6 bg-gray">
+        <ul id="promotion" class="bg-gray promotion"> 
+          <li class="promotion-Item" *ngFor="let itemPromo of promotionList">
+            <div class="row text-center " style="width: 101%;">
+              <div class="col bg-item ml-2" >
+                <!--Card promotion-->
+                <div class="row text-center ml-0 mr-0">
+                  <div class="col text-right pt-2">
+                    <div *ngIf="itemPromo.time!=null && itemPromo.time!='00:00:00' ;else Expired" class="btn btn-warning">   
+                      <span>{{itemPromo.time}}</span>
+                    </div>
+                    <ng-template #Expired>
+                      <div class="btn btn-warning"><span>Expired</span></div>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="row pt-1">
+                  <div class="col-5 p-0 pt-2">
+                    <img src="{{itemPromo.imageUrl}}" alt="{{itemPromo.title}}" height="250" width="50">
+                  </div>
+                  <div class="col pr-0 text-left">
+                    <p class="title-text font-weight-bold item mb-4">{{itemPromo.title}}</p>
+                    <hr class="item">
+                    <p class="title-text1 font-weight-bold item mt-2">Detalle:</p>
+                    <p class="subtitle-text space item">{{itemPromo.detail}}</p>
+                    <p class="subtitle-text space item">{{itemPromo.startDate}}</p>
+                    <p class="subtitle-text space item">{{itemPromo.endDate}}</p>
+                  </div>
+                </div>
+                <div *ngIf="itemPromo.time!='00:00:00'" class="row mb-2 text-right pt-2">
+                  <div class="col-2 col-sm-4">
+                    <input type="number" class="input-quantity mr-1" min="0" max="999" >
+                  </div>
+                  <div class="col-3"></div>
+                  <div class="col-5 col-sm-4">
+                    <a (click)="addCart(itemPromo.promoid,'promotion')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+                  </div>
+                </div>
+                <!--End Card promotion-->
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div> 
+      <div class="col-6">
+        <img src="https://firebasestorage.googleapis.com/v0/b/e-mporio593.appspot.com/o/others%2Fpayment_winds.jpg?alt=media&token=3d134eaf-12d9-461a-b65d-13fc76ddf672" height="250" width="100%" alt="">
+      </div>  
+    </div>
+  </div>
 </div>
