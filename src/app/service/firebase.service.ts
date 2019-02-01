@@ -105,4 +105,9 @@ export class FirebaseService {
   saveOnMyCellar(uid,data){
     return this.afDb.object ('cellar/'+uid).set(data);
   }
+  
+  //Principal Menu
+  getPrincipalMenu(){
+    return this.afDb.object('PrincipalMenu').valueChanges();
+  }
 }

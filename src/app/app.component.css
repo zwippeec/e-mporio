@@ -25,3 +25,26 @@
     border-top: 0!important;
     border-bottom: 0!important;
 }
+
+.megamenu {
+  position:static;
+}
+.megamenu > .dropdown-menu {
+  width:100%;
+}
+@media screen and (min-width: 992px) {
+  .megamenu ul {
+    padding-bottom:15px;
+  }
+  .megamenu > .dropdown-menu {
+    min-width: 800px;
+  }
+}
+
+.dropdown-item{
+    font-size: 12px;
+}
+
+.dropdown-item-title{
+    font-size: 14px;
+}
