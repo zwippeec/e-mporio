@@ -16,20 +16,17 @@ export class ShoppingCartComponent implements OnInit {
   totalPay:any=0.00;
   coupon:any=0.00;
   taxSend:any=5.00;
-
+  paymentSelect:any=null;
   saveCellar:boolean=false;
   isAuth:boolean=false;
 
-  //promotion
-  promotionList:any;
-  timerPromotion:any=[];
-  horas;
-  minuto;
-  segundos; 
-  intervalo;
-
   //suggestion
   suggestionList:any;
+  //login 
+  mail:any=null;
+  password:any=null;
+  message:any=null;
+
   paymentsType:any=[
     {
       id:1,
@@ -71,7 +68,6 @@ export class ShoppingCartComponent implements OnInit {
   constructor( public fireSrv:FirebaseService,private cookieService:CookieService) {  }
 
   ngOnInit() {
-    this.getPromotion();
     this.getSuggestion();
     if(this.cookieService.check('userLogged')){
       this.isAuth=true;
@@ -104,33 +100,35 @@ export class ShoppingCartComponent implements OnInit {
     this.subtotalPay=0;
     this.totalPay=0;
     this.saveCellar=false;
+    this.paymentSelect=null;
   }
 
   goToPay(){
-    if(this.isAuth){
+    
       if(this.itemsCart.length>0){
-        let _uid=this.cookieService.get('userLogged');
-        let _data={};
-        _data={
-          date:database.ServerValue.TIMESTAMP,
-          itemsData:this.itemsCart,
-          //itemsProd:this.listCart,
-          subtotal:this.subtotalPay,
-          payment:null,
-          statusPayment:'pending'
+        if(this.paymentSelect!=null){
+          let _uid=this.cookieService.get('userLogged');
+          let _data={};
+          _data={
+            date:database.ServerValue.TIMESTAMP,
+            itemsData:this.itemsCart,
+            //itemsProd:this.listCart,
+            subtotal:this.subtotalPay,
+            payment:this.paymentSelect,
+            statusPayment:'pending'
+          }
+          console.log(_data)
+          this.fireSrv.payOrder(_uid,_data);
+          if(this.saveCellar){
+            this.fireSrv.saveOnMyCellar(_uid,this.itemsCart);
+          }
+          this.clearData();
+        }else{
+          alert('No se a seleccionado un método de pago.');
         }
-        console.log(_data)
-        this.fireSrv.payOrder(_uid,_data);
-        if(this.saveCellar){
-          this.fireSrv.saveOnMyCellar(_uid,this.itemsCart);
-        }
-        this.clearData();
       }else{
         alert('carrito vacio')
       }
-    }else{
-      alert('debes iniciar sesion')
-    }
   }
 
   saveOnCellar(e){
@@ -182,72 +180,10 @@ export class ShoppingCartComponent implements OnInit {
     }, timer);
   }
 
-  getPromotion(){
-    this.fireSrv.getPromotion(3).subscribe(dataPromotion=>{
-      this.promotionList=dataPromotion;
-      for(let i = 0; i<dataPromotion.length;i++){
-        this.timerPromotion.push({id:i, endDate:dataPromotion[i]['endDate']})
-      }
-
-      setTimeout(()=>{this.slidePromotion();},2000);
-      //BeginTimer//Display timer
-      this.intervalo=window.setInterval(()=>{
-        for(let i = 0; i<this.timerPromotion.length; i++){
-          let now = new Date();  //Get nowaday
-          let clock = new Date(this.timerPromotion[i].endDate); // Obtener la fecha y almacenar en clock  
-          let day=clock.getUTCDate()-now.getUTCDate();//Get day
-          let cont=false;
-          if(day>=0){
-            this.horas=day*24;//cuando dia sea mayor a 0
-            this.horas+=clock.getHours() - now.getHours();//Sum hours with days
-            if(this.horas>=0){
-              if(clock.getMinutes() >= now.getMinutes()){
-                this.minuto = clock.getMinutes()-1 - now.getMinutes();//Get minutos
-                if(clock.getSeconds() >= now.getSeconds()){
-                  this.segundos = clock.getSeconds() - now.getSeconds();//Get seconds
-                } else if(clock.getSeconds() < now.getSeconds()){ 
-                  this.segundos = clock.getSeconds()+60 - now.getSeconds();//Get seconds
-                }
-              } else if(clock.getMinutes() < now.getMinutes()){
-                this.minuto = clock.getMinutes()+60 - now.getMinutes();//Get minutos
-                if(clock.getSeconds() >= now.getSeconds()){
-                  this.segundos = clock.getSeconds() - now.getSeconds();//Get   seconds
-                } else if(clock.getSeconds() < now.getSeconds()){ 
-                  this.segundos = clock.getSeconds()+60 - now.getSeconds();//Get seconds
-                }
-              }
-              if(this.horas==1){
-                this.horas=0;
-              }
-              if(this.minuto<0){
-                this.minuto="0"+0;
-                cont=true;
-              }
-              if(this.horas == "0" && this.minuto <= "00" && cont){
-                this.promotionList[i].time="00:00:00";
-                cont=false
-                this.timerPromotion.splice(i,1)
-              }else{
-                this.promotionList[i].time=this.horas+":"+this.minuto+":"+this.segundos;
-              }
-            }else{
-              this.horas=0;
-              this.minuto=0;
-              this.segundos=0;
-            }
-          }else{
-            clearTimeout(this.intervalo);
-            this.timerPromotion.splice(i,1)
-          }
-        }
-      }, 1000);// Frecuencia de actualización;
-      //endTimer
-    })
-  }
-
   getSuggestion(){
     this.fireSrv.getSuggestion(3).subscribe(dataSuggestion=>{
       this.suggestionList=dataSuggestion;
+      setTimeout(()=>{this.slidePromotion();},2000);
     })
   }
 
@@ -271,5 +207,66 @@ export class ShoppingCartComponent implements OnInit {
       localStorage.setItem('listCart',JSON.stringify(items))//create list
       this.ngOnInit();
     }
+  }
+
+  scroll(){
+    document.querySelector('#cartSection').scrollIntoView();
+  }
+
+  login(){
+    if(this.mail != null && this.password != null){
+      this.message=null;
+      this.fireSrv.login(this.mail,this.password)
+      .then(ok=>{
+        this.mail=null;
+        this.password=null;
+        this.cookieService.set( 'userLogged', ''+ok.user.uid );
+        console.log(this.cookieService.get('userLogged'))
+        this.reloadPage()
+      })
+      .catch(e=>{
+          this.errorAlert(e.code);
+          console.log('2 Error: ',e)
+        })
+    }else{
+      this.message="Los campos no deben estar vacíos.";
+    } 
+  }
+
+  reloadPage(){
+    window.location.reload();
+  }
+
+  errorAlert(code){
+    switch (code) {
+      case "auth/email-already-in-use":
+        this.message="El correo ya se encuentra registrado.";
+        break;
+
+      case "auth/invalid-email":
+        this.message="Ingresa un correo válido.";
+        break;
+
+      case "auth/weak-password":
+        this.message="La contraseña debe tener 6 caracteres.";
+        break;
+
+      case "auth/wrong-password":
+        this.message="La contraseña es incorrecta y/o debe tener 6 caracteres.";
+        break;
+
+      case "auth/network-request-failed":
+        this.message="Parece que no tienes conexión a internet.";
+        break;
+
+      case "auth/user-not-found":
+        this.message="Usuario/contraseña incorrectos.";
+        break;
+      
+      default:
+        this.message="A ocurrido un problema.";
+        break;
+    }
+    
   }
 }
