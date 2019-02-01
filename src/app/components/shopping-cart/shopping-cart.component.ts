@@ -14,12 +14,22 @@ export class ShoppingCartComponent implements OnInit {
   itemsCart:any=[];
   subtotalPay:any=0.00;
   totalPay:any=0.00;
-  coupon:any=10.00;
+  coupon:any=0.00;
   taxSend:any=5.00;
 
   saveCellar:boolean=false;
   isAuth:boolean=false;
 
+  //promotion
+  promotionList:any;
+  timerPromotion:any=[];
+  horas;
+  minuto;
+  segundos; 
+  intervalo;
+
+  //suggestion
+  suggestionList:any;
   paymentsType:any=[
     {
       id:1,
@@ -61,6 +71,8 @@ export class ShoppingCartComponent implements OnInit {
   constructor( public fireSrv:FirebaseService,private cookieService:CookieService) {  }
 
   ngOnInit() {
+    this.getPromotion();
+    this.getSuggestion();
     if(this.cookieService.check('userLogged')){
       this.isAuth=true;
     }else{
@@ -69,10 +81,12 @@ export class ShoppingCartComponent implements OnInit {
 
     this.listCart=[];
     this.itemsCart=[];
+    this.subtotalPay=0;
+    this.totalPay=0;
     if(localStorage.getItem('listCart')){
       this.itemsCart=JSON.parse(localStorage.getItem('listCart'));
       for(let i = 0; i < JSON.parse(localStorage.getItem('listCart')).length ;i++){
-        this.fireSrv.getProducById(this.itemsCart[i].id).subscribe(itemData=>{
+        this.fireSrv.getProducByIdPay(this.itemsCart[i].type,this.itemsCart[i].id).subscribe(itemData=>{
           let _totalUni=this.itemsCart[i].quantity*itemData['cost'];
           this.subtotalPay+=_totalUni;
           this.totalPay=this.subtotalPay+this.taxSend-this.coupon;
@@ -123,4 +137,139 @@ export class ShoppingCartComponent implements OnInit {
     this.saveCellar=e.target.checked
   }
 
+  slidePromotion(){
+    var timer = 8000;//time to change items
+    var i=0;
+    var max = document.querySelectorAll('#promotion > li').length;//length list to show promotion
+    var showNumItems=3;
+    let _positionItem=0;
+    let _transitionItem=0;
+
+    for(let j = 0; j < showNumItems; j++){
+      document.querySelectorAll('#promotion > li')[j].classList.add('active');//Add class active to item
+      document.querySelectorAll('#promotion > li')[j].setAttribute("style","left:"+_positionItem+"%;")//Add 'position' style
+      _positionItem+=(100/showNumItems);
+    }
+    //funtion to change item
+    setInterval(function(){ 
+      _positionItem=0;
+      _transitionItem=0;
+      //remove 'active' class on all items
+      for(let i = 0; i<max ;i++){
+        document.querySelectorAll('#promotion > li')[i].classList.remove('active');
+      }
+      //Transition
+      for(let j = i; j < i+showNumItems; j++){
+        _transitionItem+=(1/showNumItems);
+        document.querySelectorAll('#promotion > li')[j].setAttribute('style','left:'+_positionItem+'%; transition-delay:'+_transitionItem+'s;');//Add 'transition' style
+        _positionItem+=(100/showNumItems);
+      }
+      //Sum var 'i' to change items 
+      if (i < max-showNumItems) {
+        i = i+showNumItems; 
+      }else { 
+        i = 0; 
+      }  
+      //Add 'active' class//Add 'transition' style
+      _positionItem=0;
+      _transitionItem=1;
+      for(let j = i; j < i+showNumItems; j++){
+        _transitionItem+=(1/showNumItems);
+        document.querySelectorAll('#promotion > li')[j].classList.add('active');//Add 'active' class
+        document.querySelectorAll('#promotion > li')[j].setAttribute('style','left:'+_positionItem+'%;transition-delay:'+_transitionItem+'s;');//Add 'transition' style
+        _positionItem+=(100/showNumItems);
+      }    
+    }, timer);
+  }
+
+  getPromotion(){
+    this.fireSrv.getPromotion(3).subscribe(dataPromotion=>{
+      this.promotionList=dataPromotion;
+      for(let i = 0; i<dataPromotion.length;i++){
+        this.timerPromotion.push({id:i, endDate:dataPromotion[i]['endDate']})
+      }
+
+      setTimeout(()=>{this.slidePromotion();},2000);
+      //BeginTimer//Display timer
+      this.intervalo=window.setInterval(()=>{
+        for(let i = 0; i<this.timerPromotion.length; i++){
+          let now = new Date();  //Get nowaday
+          let clock = new Date(this.timerPromotion[i].endDate); // Obtener la fecha y almacenar en clock  
+          let day=clock.getUTCDate()-now.getUTCDate();//Get day
+          let cont=false;
+          if(day>=0){
+            this.horas=day*24;//cuando dia sea mayor a 0
+            this.horas+=clock.getHours() - now.getHours();//Sum hours with days
+            if(this.horas>=0){
+              if(clock.getMinutes() >= now.getMinutes()){
+                this.minuto = clock.getMinutes()-1 - now.getMinutes();//Get minutos
+                if(clock.getSeconds() >= now.getSeconds()){
+                  this.segundos = clock.getSeconds() - now.getSeconds();//Get seconds
+                } else if(clock.getSeconds() < now.getSeconds()){ 
+                  this.segundos = clock.getSeconds()+60 - now.getSeconds();//Get seconds
+                }
+              } else if(clock.getMinutes() < now.getMinutes()){
+                this.minuto = clock.getMinutes()+60 - now.getMinutes();//Get minutos
+                if(clock.getSeconds() >= now.getSeconds()){
+                  this.segundos = clock.getSeconds() - now.getSeconds();//Get   seconds
+                } else if(clock.getSeconds() < now.getSeconds()){ 
+                  this.segundos = clock.getSeconds()+60 - now.getSeconds();//Get seconds
+                }
+              }
+              if(this.horas==1){
+                this.horas=0;
+              }
+              if(this.minuto<0){
+                this.minuto="0"+0;
+                cont=true;
+              }
+              if(this.horas == "0" && this.minuto <= "00" && cont){
+                this.promotionList[i].time="00:00:00";
+                cont=false
+                this.timerPromotion.splice(i,1)
+              }else{
+                this.promotionList[i].time=this.horas+":"+this.minuto+":"+this.segundos;
+              }
+            }else{
+              this.horas=0;
+              this.minuto=0;
+              this.segundos=0;
+            }
+          }else{
+            clearTimeout(this.intervalo);
+            this.timerPromotion.splice(i,1)
+          }
+        }
+      }, 1000);// Frecuencia de actualización;
+      //endTimer
+    })
+  }
+
+  getSuggestion(){
+    this.fireSrv.getSuggestion(3).subscribe(dataSuggestion=>{
+      this.suggestionList=dataSuggestion;
+    })
+  }
+
+  addCart(Pid,typeData){
+    let items:any=[];//array to first object
+    let _tmpList:any=[];//temporal array to list cart
+    //Condition if exits listCart or create new list
+    if(localStorage.getItem('listCart')!=null){
+      _tmpList=JSON.parse(localStorage.getItem('listCart'));//get list cart
+      //Condition to add item or increase quantity on item
+      if(_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)!=-1){
+        _tmpList[_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)].quantity+=1;//increase quantity on item 
+      }else{
+        _tmpList.push({id:Pid,quantity:1,type:typeData})//add item on list if no exist
+      } 
+      localStorage.removeItem('listCart');//remove old list
+      localStorage.setItem('listCart',JSON.stringify(_tmpList))//create new list
+      this.ngOnInit();
+    }else{
+      items.push({id:Pid,quantity:1,type:typeData});//first item on list
+      localStorage.setItem('listCart',JSON.stringify(items))//create list
+      this.ngOnInit();
+    }
+  }
 }
