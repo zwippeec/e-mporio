@@ -104,7 +104,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   goToPay(){
-    if(this.isAuth){
+    
       if(this.itemsCart.length>0){
         if(this.paymentSelect!=null){
           let _uid=this.cookieService.get('userLogged');
@@ -129,9 +129,6 @@ export class ShoppingCartComponent implements OnInit {
       }else{
         alert('carrito vacio')
       }
-    }else{
-      alert('debes iniciar sesion')
-    }
   }
 
   saveOnCellar(e){
