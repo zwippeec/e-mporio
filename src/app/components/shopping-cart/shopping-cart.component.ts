@@ -14,12 +14,13 @@ export class ShoppingCartComponent implements OnInit {
   itemsCart:any=[];
   subtotalPay:any=0.00;
   totalPay:any=0.00;
-  coupon:any=10.00;
+  coupon:any=0.00;
   taxSend:any=5.00;
 
   saveCellar:boolean=false;
   isAuth:boolean=false;
 
+  //promotion
   promotionList:any;
   timerPromotion:any=[];
   horas;
@@ -27,6 +28,8 @@ export class ShoppingCartComponent implements OnInit {
   segundos; 
   intervalo;
 
+  //suggestion
+  suggestionList:any;
   paymentsType:any=[
     {
       id:1,
@@ -69,6 +72,7 @@ export class ShoppingCartComponent implements OnInit {
 
   ngOnInit() {
     this.getPromotion();
+    this.getSuggestion();
     if(this.cookieService.check('userLogged')){
       this.isAuth=true;
     }else{
@@ -77,10 +81,12 @@ export class ShoppingCartComponent implements OnInit {
 
     this.listCart=[];
     this.itemsCart=[];
+    this.subtotalPay=0;
+    this.totalPay=0;
     if(localStorage.getItem('listCart')){
       this.itemsCart=JSON.parse(localStorage.getItem('listCart'));
       for(let i = 0; i < JSON.parse(localStorage.getItem('listCart')).length ;i++){
-        this.fireSrv.getProducById(this.itemsCart[i].id).subscribe(itemData=>{
+        this.fireSrv.getProducByIdPay(this.itemsCart[i].type,this.itemsCart[i].id).subscribe(itemData=>{
           let _totalUni=this.itemsCart[i].quantity*itemData['cost'];
           this.subtotalPay+=_totalUni;
           this.totalPay=this.subtotalPay+this.taxSend-this.coupon;
@@ -237,5 +243,33 @@ export class ShoppingCartComponent implements OnInit {
       }, 1000);// Frecuencia de actualización;
       //endTimer
     })
+  }
+
+  getSuggestion(){
+    this.fireSrv.getSuggestion(3).subscribe(dataSuggestion=>{
+      this.suggestionList=dataSuggestion;
+    })
+  }
+
+  addCart(Pid,typeData){
+    let items:any=[];//array to first object
+    let _tmpList:any=[];//temporal array to list cart
+    //Condition if exits listCart or create new list
+    if(localStorage.getItem('listCart')!=null){
+      _tmpList=JSON.parse(localStorage.getItem('listCart'));//get list cart
+      //Condition to add item or increase quantity on item
+      if(_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)!=-1){
+        _tmpList[_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)].quantity+=1;//increase quantity on item 
+      }else{
+        _tmpList.push({id:Pid,quantity:1,type:typeData})//add item on list if no exist
+      } 
+      localStorage.removeItem('listCart');//remove old list
+      localStorage.setItem('listCart',JSON.stringify(_tmpList))//create new list
+      this.ngOnInit();
+    }else{
+      items.push({id:Pid,quantity:1,type:typeData});//first item on list
+      localStorage.setItem('listCart',JSON.stringify(items))//create list
+      this.ngOnInit();
+    }
   }
 }

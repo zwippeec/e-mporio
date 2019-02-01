@@ -49,6 +49,10 @@ export class FirebaseService {
     return this.afDb.object('products/'+Pid).valueChanges();
   }
 
+  getProducByIdPay(node,Pid){
+    return this.afDb.object(node+"/"+Pid).valueChanges();
+  }
+
   //Wishes list
   addItemWishesList(uid,pid,name){
     if(name==null){

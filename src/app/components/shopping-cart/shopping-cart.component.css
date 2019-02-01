@@ -75,7 +75,7 @@ hr{
 
 ul.promotion {
     position: relative;
-    height: 370px;
+    height: 350px;
 }
 
 ul > li.promotion-Item {
@@ -133,4 +133,12 @@ p.item{
 
 .btn-round{
     border-radius: 7px;
+}
+
+.btn-moreInfo{
+    background-color: #fbd12c;
+    position: absolute;
+    width: 150px;
+    right: 5%;
+    bottom: 3%;
 }
