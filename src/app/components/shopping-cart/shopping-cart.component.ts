@@ -114,7 +114,7 @@ export class ShoppingCartComponent implements OnInit {
             itemsData:this.itemsCart,
             //itemsProd:this.listCart,
             subtotal:this.subtotalPay,
-            payment:null,
+            payment:this.paymentSelect,
             statusPayment:'pending'
           }
           console.log(_data)
