@@ -16,11 +16,27 @@ export class AppComponent {
   title = 'e-mporio';
   isUserAuth:boolean=false;
   countTotalItems:any=0;
+  //Menu Winds
+  menuWindsTypeGrapes:any=[];
+  menuWindsCountries:any=[];
+  menuWindsType:any=[];
+  menuWindsCellar:any=[];
+  menuWindsRegion:any=[];
+  //Menu Espirituals
+  menuEspiritualsBrand:any=[];
+  menuEspiritualsCountries:any=[];
+  menuEspiritualsType:any=[];
+  //Menu Accesories
+  menuAccesoriesBrand:any=[];
+  menuAccesoriesCountries:any=[];
+  menuAccesoriesType:any=[];
+
   public group = [];
 
   constructor(private cookieService: CookieService, private fireSrv:FirebaseService,private _router: Router) { }
 
   ngOnInit() {
+    this.getMenu();
     this.fireSrv.getAllProducts().subscribe(productsData=>{
       this.group = [
         CreateNewAutocompleteGroup(
@@ -52,5 +68,30 @@ export class AppComponent {
   Selected(item: SelectedAutocompleteItem) {
     window.location.reload()
     this._router.navigate(['/products',item.item.original.code]);
+  }
+
+  getMenu(){
+    this.fireSrv.getPrincipalMenu().subscribe(menuData=>{
+      //Winds
+      this.menuWindsCellar=menuData['WindsWorld']['cellar'];
+      this.menuWindsCountries=menuData['WindsWorld']['countries'];
+      this.menuWindsRegion=menuData['WindsWorld']['region'];
+      this.menuWindsType=menuData['WindsWorld']['type'];
+      this.menuWindsTypeGrapes=menuData['WindsWorld']['typeGrapes'];
+      //Espiritual
+      this.menuEspiritualsBrand=menuData['EspiritualWorld']['brand'];
+      this.menuEspiritualsCountries=menuData['EspiritualWorld']['countries'];
+      this.menuEspiritualsType=menuData['EspiritualWorld']['type'];
+      //Accesories
+      this.menuAccesoriesBrand=menuData['Accessories']['brand'];
+      this.menuAccesoriesCountries=menuData['Accessories']['countries'];
+      this.menuAccesoriesType=menuData['Accessories']['type'];
+
+      console.log('MENU',this.menuAccesoriesBrand,this.menuAccesoriesCountries,this.menuAccesoriesType)
+    });
+  }
+
+  goToProducts(item){
+    this._router.navigate(['/products',item]);
   }
 }

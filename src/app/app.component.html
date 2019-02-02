@@ -13,27 +13,76 @@
         <li class="nav-item">
           <a class="nav-link" href="/home">Inicio</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Productos
+        <li class="nav-item dropdown megamenu">
+          <a class="nav-link dropdown-toggle" href="#" id="Winds" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Mundo Vino
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="/products">Vinos</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-menu" aria-labelledby="Winds">
+            <div class="row text-center">
+              <div class="col">
+                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo de vino</a>
+                <a *ngFor="let item of menuWindsType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{windKind:item}">{{item}}</a>
+              </div>
+              <div class="col">
+                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
+                <a *ngFor="let item of menuWindsCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
+              </div>
+              <div class="col">
+                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Región</a>
+                <a *ngFor="let item of menuWindsRegion" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{region:item}">{{item}}</a>
+              </div>
+              <div class="col">
+                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo de Uva</a>
+                <a *ngFor="let item of menuWindsTypeGrapes" class="dropdown-item">{{item}}</a>
+              </div>
+              <div class="col">
+                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Bodega</a>
+                <a *ngFor="let item of menuWindsCellar" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{cellar:item}">{{item}}</a>
+              </div>
+            </div>
           </div>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Sobre Nosotros
+        <li class="nav-item dropdown megamenu">
+            <a class="nav-link dropdown-toggle" href="#" id="espirituals" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Mundo Espirituosos
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/us">¿Qué es el E-mporio?</a>
+            <div class="dropdown-menu" aria-labelledby="accessories">
+              <div class="row text-center">
+                <div class="col">
+                  <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
+                  <a *ngFor="let item of menuEspiritualsCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
+                </div>
+                <div class="col">
+                  <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo</a>
+                  <a *ngFor="let item of menuEspiritualsType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{windKind:item}">{{item}}</a>
+                </div>
+                <div class="col">
+                  <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Marca</a>
+                  <a *ngFor="let item of menuEspiritualsBrand" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{brand:item}">{{item}}</a>
+                </div>
+              </div>
             </div>
           </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contacto</a>
+        <li class="nav-item dropdown megamenu">
+          <a class="nav-link dropdown-toggle" href="#" id="accessories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Accesorios
+          </a>
+          <div class="dropdown-menu" aria-labelledby="accessories">
+            <div class="row text-center">
+              <div class="col">
+                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
+                <a *ngFor="let item of menuAccesoriesCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
+              </div>
+              <div class="col">
+                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo</a>
+                <a *ngFor="let item of menuAccesoriesType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{type:item}">{{item}}</a>
+              </div>
+              <div class="col">
+                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Marca</a>
+                <a *ngFor="let item of menuAccesoriesBrand" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{brand:item}">{{item}}</a>
+              </div>
+            </div>
+          </div>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -45,10 +94,10 @@
       </form>
       <ul class="navbar-nav ">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <img src="https://openclipart.org/image/2400px/svg_to_png/247324/abstract-user-flat-1.png" width="30" height="30" alt="Usuario" title="Usuario"/>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" aria-labelledby="userMenu">
             <a *ngIf="!isUserAuth"class="dropdown-item" href="/newUser">Registrarse</a>
             <a *ngIf="!isUserAuth"class="dropdown-item" href="/login">Iniciar Sesión</a>
             <a *ngIf="isUserAuth" class="dropdown-item" href="/profile">Mi perfil</a>
