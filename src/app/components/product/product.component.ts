@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../service/firebase.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -30,15 +31,35 @@ export class ProductComponent implements OnInit {
   //filters
   //filters:any={windKind:'',cost:'',foodFilter:'',moodFilter:'',styleFilter:'',cellerFilter:'',grapeFilter:'',regionFilter:'',countryFilter:''};
     filters:any={windKind:'',country:'',region:'',cellar:''};
-  constructor(public fireSrv: FirebaseService,private cookieService: CookieService,private modalService: NgbModal ) { 
+  constructor(public fireSrv: FirebaseService,private cookieService: CookieService,private modalService: NgbModal,private _router: Router,private _route: ActivatedRoute,) { 
     this.allProducts();
     this.getPromotion();
   }
 
   ngOnInit() {
+    //get params on url
+    this._route.queryParams.subscribe(params=>{
+      //add param on filter windKind
+      if(params['windKind']!=null){
+        this.filters.windKind=params['windKind'];
+      }
+      //add param on filter country
+      if(params['country']!=null){
+        this.filters.country=params['country'];
+      }
+      //add param on filter region
+      if(params['region']!=null){
+        this.filters.region=params['region'];
+      }
+      //add param on filter cellar
+      if(params['cellar']!=null){
+        this.filters.cellar=params['cellar'];
+      }
+    })
+    //Compare if session is active
     if(this.cookieService.check('userLogged')){
       this.isUserAuth = true;
-      this.getWishesList();
+      this.getWishesList();//Get wishes list
     }else{
       this.isUserAuth = false;
     }

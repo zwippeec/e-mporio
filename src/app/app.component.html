@@ -21,23 +21,23 @@
             <div class="row text-center">
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo de vino</a>
-                <a *ngFor="let item of menuWindsType" class="dropdown-item" href="#">{{item}}</a>
+                <a *ngFor="let item of menuWindsType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{windKind:item}">{{item}}</a>
               </div>
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
-                <a *ngFor="let item of menuWindsCountries" class="dropdown-item" href="#">{{item}}</a>
+                <a *ngFor="let item of menuWindsCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
               </div>
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Región</a>
-                <a *ngFor="let item of menuWindsRegion" class="dropdown-item" href="#">{{item}}</a>
+                <a *ngFor="let item of menuWindsRegion" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{region:item}">{{item}}</a>
               </div>
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo de Uva</a>
-                <a *ngFor="let item of menuWindsTypeGrapes" class="dropdown-item" href="#">{{item}}</a>
+                <a *ngFor="let item of menuWindsTypeGrapes" class="dropdown-item">{{item}}</a>
               </div>
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Bodega</a>
-                <a *ngFor="let item of menuWindsCellar" class="dropdown-item" href="#">{{item}}</a>
+                <a *ngFor="let item of menuWindsCellar" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{cellar:item}">{{item}}</a>
               </div>
             </div>
           </div>
@@ -50,15 +50,15 @@
               <div class="row text-center">
                 <div class="col">
                   <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
-                  <a *ngFor="let item of menuEspiritualsCountries" class="dropdown-item" href="#">{{item}}</a>
+                  <a *ngFor="let item of menuEspiritualsCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
                 </div>
                 <div class="col">
                   <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo</a>
-                  <a *ngFor="let item of menuEspiritualsType" class="dropdown-item" href="#">{{item}}</a>
+                  <a *ngFor="let item of menuEspiritualsType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{windKind:item}">{{item}}</a>
                 </div>
                 <div class="col">
                   <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Marca</a>
-                  <a *ngFor="let item of menuEspiritualsBrand" class="dropdown-item" href="#">{{item}}</a>
+                  <a *ngFor="let item of menuEspiritualsBrand" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{brand:item}">{{item}}</a>
                 </div>
               </div>
             </div>
@@ -71,15 +71,15 @@
             <div class="row text-center">
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
-                <a *ngFor="let item of menuAccesoriesCountries" class="dropdown-item" href="#">{{item}}</a>
+                <a *ngFor="let item of menuAccesoriesCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
               </div>
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo</a>
-                <a *ngFor="let item of menuAccesoriesType" class="dropdown-item" href="#">{{item}}</a>
+                <a *ngFor="let item of menuAccesoriesType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{type:item}">{{item}}</a>
               </div>
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Marca</a>
-                <a *ngFor="let item of menuAccesoriesBrand" class="dropdown-item" href="#">{{item}}</a>
+                <a *ngFor="let item of menuAccesoriesBrand" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{brand:item}">{{item}}</a>
               </div>
             </div>
           </div>

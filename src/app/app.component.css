@@ -31,7 +31,10 @@
 }
 .megamenu > .dropdown-menu {
   width:100%;
+  background-color: #FBD12C;
+  opacity: 0.9;
 }
+
 @media screen and (min-width: 992px) {
   .megamenu ul {
     padding-bottom:15px;
@@ -44,7 +47,10 @@
 .dropdown-item{
     font-size: 12px;
 }
-
+.dropdown-item:hover{
+    background-color: transparent;
+    font-size: 15px;
+}
 .dropdown-item-title{
     font-size: 14px;
 }

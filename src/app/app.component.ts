@@ -90,4 +90,8 @@ export class AppComponent {
       console.log('MENU',this.menuAccesoriesBrand,this.menuAccesoriesCountries,this.menuAccesoriesType)
     });
   }
+
+  goToProducts(item){
+    this._router.navigate(['/products',item]);
+  }
 }
