@@ -17,7 +17,7 @@
 }
 
 .footer-container{
-    padding-left: 150px;
+    padding-left: 130px;
 }
 .border-footer {
     border: 1px solid #FBD12C!important;
@@ -53,4 +53,9 @@
 }
 .dropdown-item-title{
     font-size: 14px;
+}
+
+.btn-suscription{
+    background-color: #3c3c3c;
+    color: #fff
 }
