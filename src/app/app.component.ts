@@ -1,8 +1,8 @@
 
 import { CookieService } from 'ngx-cookie-service';
 import { FirebaseService } from './service/firebase.service';
-import {Component, ViewChild} from "@angular/core";
-import {CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutoCompleteComponent} from "ng-auto-complete";
+import { Component, ViewChild, ElementRef } from "@angular/core";
+import { CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutoCompleteComponent } from "ng-auto-complete";
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,10 +12,17 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   @ViewChild(NgAutoCompleteComponent) public autocompleter: NgAutoCompleteComponent;
+  @ViewChild("openModalBtn") openModalBtn:ElementRef;
 
   title = 'e-mporio';
   isUserAuth:boolean=false;
   countTotalItems:any=0;
+  uid:any;
+  //Survey
+  surveyData:any={
+    title:''
+  };
+  optionSurvey:any=[];
   //Menu Winds
   menuWindsTypeGrapes:any=[];
   menuWindsCountries:any=[];
@@ -37,24 +44,40 @@ export class AppComponent {
 
   ngOnInit() {
     this.getMenu();
+    this.fireSrv.getSurvey().subscribe(surveyData=>{
+      this.surveyData=surveyData;
+    });
     this.fireSrv.getAllProducts().subscribe(productsData=>{
       this.group = [
         CreateNewAutocompleteGroup(
-            'Buscar...',
-            'autocompleter',
-            productsData,
-            {titleKey: 'name', childrenKey: null}
+          'Buscar...',
+          'autocompleter',
+          productsData,
+          {titleKey: 'name', childrenKey: null}
         ),
       ];
     });
     
     if(this.cookieService.check('userLogged')){
       this.isUserAuth = true;
+      this.uid=this.cookieService.get('userLogged');
       if(localStorage.getItem('listCart')){
         this.countTotalItems=JSON.parse(localStorage.getItem('listCart')).length;
       }
+      this.fireSrv.getDataByUser(this.uid).subscribe(userData=>{
+        if(userData['favorite']==null || userData['favorite']== undefined){
+          setTimeout(()=>{
+            this.openModalBtn.nativeElement.click();
+          },5000);
+        }
+      });
     }else{
       this.isUserAuth = false;
+      if(localStorage.getItem('favoriteList')==null){
+        setTimeout(()=>{
+          this.openModalBtn.nativeElement.click();
+        },5000);
+      }
     }
   }
 
@@ -86,12 +109,26 @@ export class AppComponent {
       this.menuAccesoriesBrand=menuData['Accessories']['brand'];
       this.menuAccesoriesCountries=menuData['Accessories']['countries'];
       this.menuAccesoriesType=menuData['Accessories']['type'];
-
-      console.log('MENU',this.menuAccesoriesBrand,this.menuAccesoriesCountries,this.menuAccesoriesType)
     });
   }
 
   goToProducts(item){
     this._router.navigate(['/products',item]);
+  }
+
+  selectOption(event){
+    if(event.target.checked){
+      this.optionSurvey.push(event.target.value);
+    }else{
+      this.optionSurvey.splice(this.optionSurvey.indexOf(event.target.value),1);
+    }
+  }
+
+  saveSurvey(){
+    if(this.isUserAuth){
+      this.fireSrv.setFavoritesData(this.uid,this.optionSurvey);
+    }else{
+      localStorage.setItem('favoriteList',this.optionSurvey);
+    }
   }
 }
