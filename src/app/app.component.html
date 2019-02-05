@@ -161,7 +161,7 @@
 <footer class="bg-footer mt-1" >
   <div class="row text-footer text-left pb-4" style="width: 101%;">
     <div class="col-3 footer-container">
-      <div class="row pt-3 ">
+      <div class="row pt-4 ">
         <div class="col">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active"><b>Empresa</b></li>
@@ -171,7 +171,7 @@
           </ul>
         </div>
       </div>
-      <div class="row pt-4">
+      <div class="row pt-5">
         <div class="col">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active"><b>Servicio</b></li>
@@ -183,11 +183,11 @@
       </div>
     </div>
     <div class="col-1">
-      <div class="row pt-4">
+      <div class="row pt-5">
         <div class="col border-footer border-top-0 border-bottom-0 border-left-0 " style="height: 90px;"></div>
       </div>
       <div class="row pt-5">
-        <div class="col border-footer border-top-0 border-bottom-0 border-left-0" style="height: 75px;"></div>
+        <div class="col border-footer border-top-0 border-bottom-0 border-left-0" style="height: 90px;"></div>
       </div>
     </div>
     <div class="col-3 footer-container">
@@ -198,7 +198,10 @@
                 <li class="nav-item">American Express</li>
                 <li class="nav-item">MasterCard</li>
                 <li class="nav-item">Visa</li>
+                <li class="nav-item">Diners Club</li>
                 <li class="nav-item">PayPal</li>
+                <li class="nav-item">Efectivo</li>
+                <li class="nav-item">Transferencia</li>
               </ul>
             </div>
       </div>
@@ -213,15 +216,15 @@
       </div>
     </div>
     <div class="col-1">
-      <div class="row pt-4">
+      <div class="row pt-5">
         <div class="col border-footer border-top-0 border-bottom-0 border-left-0 " style="height: 90px;"></div>
       </div>
       <div class="row pt-5">
-        <div class="col border-footer border-top-0 border-bottom-0 border-left-0" style="height: 75px;"></div>
+        <div class="col border-footer border-top-0 border-bottom-0 border-left-0" style="height: 90px;"></div>
       </div>
     </div>
     <div class="col-3 footer-container">
-      <div class="row pt-3">
+      <div class="row pt-4">
         <div class="col">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"><b>Social</b></li>
@@ -232,17 +235,27 @@
       </div>
       <div class="row pt-4">
         <div class="col">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><b>Susbcripción</b></li>
-              </ul>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"><b>Susbcripción</b>
+              <form ngNoForm action="https://zwippe.us7.list-manage.com/subscribe/post?u=d2ab2a7006e129c428cd4ae59&amp;id=9264dec8a4" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_blank" novalidate #form>
+                <div class="form-group mb-2">
+                <input type="email" name="EMAIL" [(ngModel)]="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Correo electrónico" required style="width: 160px;">
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d2ab2a7006e129c428cd4ae59_9264dec8a4" tabindex="-1" value=""></div>
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-suscription ml-2">Enviar</button>
+              </div>
+            </form>
+            </li>
+          </ul>
         </div>
       </div>
       <div class="row pt-4">
-          <div class="col">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active"><b>Power by Urbano</b></li>
-              </ul>
-            </div>
+        <div class="col">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"><b class="text-left">Power by Urbano</b>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEVpTDk3Sf2kbqlks7jUF_SLpbMay3stoabKy_0jTOQZxQWlFT" alt="" height="60px" width="100px">
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
