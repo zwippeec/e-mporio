@@ -41,6 +41,9 @@ export class FirebaseService {
   erasedFavorite(uid){
     return this.afDb.object('user/'+uid+'/favorite').remove();
   }
+  getFavoritesByUser(uid){
+    return this.afDb.list('user/'+uid+'/favorite').valueChanges();
+  }
   //Products
   getAllProducts(){
     return this.afDb.list('products').valueChanges();

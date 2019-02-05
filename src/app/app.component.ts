@@ -62,52 +62,57 @@ export class AppComponent {
     
     if(this.cookieService.check('userLogged')){
       this.isUserAuth = true;
-      this.uid=this.cookieService.get('userLogged');
+      this.uid=this.cookieService.get('userLogged');//Get user data
       if(localStorage.getItem('listCart')){
-        this.countTotalItems=JSON.parse(localStorage.getItem('listCart')).length;
+        this.countTotalItems=JSON.parse(localStorage.getItem('listCart')).length;//Count items on cart
       }
+      //Get favorite list
       this.fireSrv.getDataByUser(this.uid).subscribe(userData=>{
+        //If not exists favorite list (attribute/firebase)
         if(userData['favorite']==null || userData['favorite']== undefined){
           setTimeout(()=>{
-            this.openModalBtn.nativeElement.click();
+            this.openModalBtn.nativeElement.click();//automatic click on buttom to open modal (survey)
           },5000);
-        }else{
+        }
+        //Delete favorite data of user log
+        /*else{
           let _now=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDate();
           if(_now!=userData['favorite'][0]){
             this.fireSrv.erasedFavorite(this.uid);
           }
-        }
+        }*/
       });
     }else{
       this.isUserAuth = false;
-      //usuario no loggeado
+      //User not Auth
       if(localStorage.getItem('createList')){
-        let _tmpLocalDate=localStorage.getItem('createList');
-        let _now=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDay()
+        let _tmpLocalDate=localStorage.getItem('createList');//get data to last visit
+        let _now=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDay()//nowaday
+        //Remove data saved
         if(_now!=_tmpLocalDate){
-          console.log('no es igual',_tmpLocalDate,_now);
           localStorage.removeItem('createList');
           localStorage.removeItem('favoriteList');
         }
       }
+      //If not exists favorite list (local)
       if(localStorage.getItem('favoriteList')==null){
         setTimeout(()=>{
-          this.openModalBtn.nativeElement.click();
+          this.openModalBtn.nativeElement.click();//automatic click on buttom to open modal (survey)
         },5000);
       }
     }
   }
 
   logout(){
-    this.cookieService.delete('userLogged','/','localhost')
-    this.isUserAuth=false;  
-    this.fireSrv.logout();
-    window.location.reload();
+    this.cookieService.delete('userLogged','/','localhost')//delete cookie
+    this.isUserAuth=false; //change status
+    this.fireSrv.logout(); //logout session
+    window.location.reload();//reload page
   }
-
-  Selected(item: SelectedAutocompleteItem) {
-    window.location.reload()
-    this._router.navigate(['/products',item.item.original.code]);
+  //function to select item on autocomplete
+  Selected(item: SelectedAutocompleteItem){
+    window.location.reload()//reload page
+    this._router.navigate(['/products',item.item.original.code]);//redirect to url (products) and pass data
   }
 
   getMenu(){
@@ -132,25 +137,26 @@ export class AppComponent {
   goToProducts(item){
     this._router.navigate(['/products',item]);
   }
-
+  //function to add options on survey
   selectOption(event){
+    //Add first element (date)
     if(this.isUserAuth && this.optionSurvey.length==0){
       this.optionSurvey.push(this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDate());
     }
     if(event.target.checked){ 
-      this.optionSurvey.push(event.target.value);
+      this.optionSurvey.push(event.target.value);//add options on array
     }else{
-      this.optionSurvey.splice(this.optionSurvey.indexOf(event.target.value),1);
+      this.optionSurvey.splice(this.optionSurvey.indexOf(event.target.value),1);//delete option on array
     }
   }
 
   saveSurvey(){
     if(this.isUserAuth){
-      this.fireSrv.setFavoritesData(this.uid,this.optionSurvey);
+      this.fireSrv.setFavoritesData(this.uid,this.optionSurvey);//Save data on Firebase
     }else{
-      let _date=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDay()
-      localStorage.setItem('favoriteList',this.optionSurvey);
-      localStorage.setItem('createList',_date);
+      let _date=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDay()//Save data local
+      localStorage.setItem('favoriteList',this.optionSurvey);//create list
+      localStorage.setItem('createList',_date);//date
     }
   }
 }
