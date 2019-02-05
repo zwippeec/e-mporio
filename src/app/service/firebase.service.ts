@@ -32,9 +32,11 @@ export class FirebaseService {
   getDataByUser(uid){
     return this.afDb.object('user/'+uid).valueChanges();
   }
-
   updateProfile(newUserData,uid){
     return this.afDb.object('user/'+uid).update(newUserData);
+  }
+  setFavoritesData(uid,data){
+    return this.afDb.object('user/'+uid+'/favorite').set(data);
   }
   //Products
   getAllProducts(){
@@ -110,4 +112,10 @@ export class FirebaseService {
   getPrincipalMenu(){
     return this.afDb.object('PrincipalMenu').valueChanges();
   }
+
+  //Survey
+  getSurvey(){
+    return this.afDb.object('Survey').valueChanges();
+  }
+
 }
