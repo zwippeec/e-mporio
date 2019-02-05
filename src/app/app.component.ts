@@ -18,6 +18,7 @@ export class AppComponent {
   isUserAuth:boolean=false;
   countTotalItems:any=0;
   uid:any;
+  _dateCookie:Date=new Date();
   //Survey
   surveyData:any={
     title:''
@@ -44,6 +45,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.getMenu();
+
     this.fireSrv.getSurvey().subscribe(surveyData=>{
       this.surveyData=surveyData;
     });
@@ -69,10 +71,25 @@ export class AppComponent {
           setTimeout(()=>{
             this.openModalBtn.nativeElement.click();
           },5000);
+        }else{
+          let _now=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDate();
+          if(_now!=userData['favorite'][0]){
+            this.fireSrv.erasedFavorite(this.uid);
+          }
         }
       });
     }else{
       this.isUserAuth = false;
+      //usuario no loggeado
+      if(localStorage.getItem('createList')){
+        let _tmpLocalDate=localStorage.getItem('createList');
+        let _now=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDay()
+        if(_now!=_tmpLocalDate){
+          console.log('no es igual',_tmpLocalDate,_now);
+          localStorage.removeItem('createList');
+          localStorage.removeItem('favoriteList');
+        }
+      }
       if(localStorage.getItem('favoriteList')==null){
         setTimeout(()=>{
           this.openModalBtn.nativeElement.click();
@@ -117,7 +134,10 @@ export class AppComponent {
   }
 
   selectOption(event){
-    if(event.target.checked){
+    if(this.isUserAuth && this.optionSurvey.length==0){
+      this.optionSurvey.push(this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDate());
+    }
+    if(event.target.checked){ 
       this.optionSurvey.push(event.target.value);
     }else{
       this.optionSurvey.splice(this.optionSurvey.indexOf(event.target.value),1);
@@ -128,7 +148,9 @@ export class AppComponent {
     if(this.isUserAuth){
       this.fireSrv.setFavoritesData(this.uid,this.optionSurvey);
     }else{
+      let _date=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDay()
       localStorage.setItem('favoriteList',this.optionSurvey);
+      localStorage.setItem('createList',_date);
     }
   }
 }
