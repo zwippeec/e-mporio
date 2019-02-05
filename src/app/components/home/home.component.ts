@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../service/firebase.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +12,27 @@ export class HomeComponent implements OnInit {
   elementList:any;
   boardList:any;
   promotionList:any;
-  suggestionList:any;
+  suggestionList:any=[];
   timerPromotion:any=[];
   horas;
   minuto;
   segundos; 
   intervalo;
+  uid:any;//user id
+  isAuth:boolean=false;//auth user
+  favorites:any=[];//favorite list by user
 
-  constructor( public fireSrv:FirebaseService) { }
+  constructor( public fireSrv:FirebaseService,private cookieService: CookieService) { }
 
   ngOnInit() {
+
+    if(this.cookieService.check('userLogged')){
+      this.uid=this.cookieService.get('userLogged');
+      this.isAuth=true;
+    }else{
+      this.isAuth=false;
+    }
+
     this.fireSrv.getHomePage().subscribe(resp=>{
       this.elementList=resp;
       for(let i = 0; i<resp.length; i++){
@@ -95,9 +107,44 @@ export class HomeComponent implements OnInit {
           })
         }
         if(resp[i]['elementType']==="Div" && resp[i]['sectionName']==="Sugerencias"){
-          this.fireSrv.getSuggestion(resp[i]['numsElements']).subscribe(dataSuggestion=>{
-            this.suggestionList=dataSuggestion;
-          })
+          if(this.isAuth){
+            this.fireSrv.getFavoritesByUser(this.uid).subscribe(userData=>{
+              for(let i = 1; i<userData.length;i++){
+                this.favorites.push(userData[i]);
+              }
+            })
+            this.fireSrv.getAllProducts().subscribe(productsData=>{
+              for(let i = 0; i < productsData.length; i++){
+                for(let j = 0; j < this.favorites.length; j++){
+                  if(productsData[i]['windKind']==this.favorites[j]){
+                    this.suggestionList.push(productsData[i])
+                  }
+                }
+              }
+            });
+          }else{
+            if(localStorage.getItem('favoriteList')){
+              let _tmpList=localStorage.getItem('favoriteList').split(',');
+              for(let i = 0; i < _tmpList.length; i++){
+                this.favorites.push(_tmpList[i]);
+              }
+
+              this.fireSrv.getAllProducts().subscribe(productsData=>{
+                for(let i = 0; i < productsData.length; i++){
+                  for(let j = 0; j < this.favorites.length; j++){
+                    if(productsData[i]['windKind']==this.favorites[j]){
+                      this.suggestionList.push(productsData[i])
+                    }
+                  }
+                }
+              });
+
+            }else{
+              this.fireSrv.getSuggestion(resp[i]['numsElements']).subscribe(dataSuggestion=>{
+                this.suggestionList=dataSuggestion;
+              })
+            }
+          }
         }
       }
     });
