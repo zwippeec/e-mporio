@@ -100,3 +100,8 @@ p{
     padding-left: 10px;
     padding-right: 10px;
 }
+.img-transfor{
+    transform: rotate(270deg);
+    height: 200px;
+    width: 200px;
+}
