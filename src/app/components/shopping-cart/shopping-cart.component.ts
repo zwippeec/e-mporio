@@ -31,37 +31,37 @@ export class ShoppingCartComponent implements OnInit {
     {
       id:1,
       name:'American Express',
-      url:'../../assets/amex.png'
+      url:'../../assets/American Express.png'
     },
     {
       id:2,
       name:'MasterCard',
-      url:'../../assets/master.png'
+      url:'../../assets/MasterCard.png'
     },
     {
       id:3,
       name:'Visa',
-      url:'../../assets/visa.png'
+      url:'../../assets/Visa.png'
     },
     {
       id:4,
       name:'Diners Club',
-      url:'../../assets/diners.png'
+      url:'../../assets/Diners Club.png'
     },
     {
       id:5,
       name:'PayPal',
-      url:'../../assets/paypal.png'
+      url:'../../assets/PayPal.png'
     },
     {
       id:6,
       name:'Efectivo',
-      url:'../../assets/money.png'
+      url:'../../assets/Efectivo.png'
     },
     {
       id:7,
       name:'Transferencia',
-      url:'../../assets/transfer.png'
+      url:'../../assets/Transferencia.png'
     }
   ];
 

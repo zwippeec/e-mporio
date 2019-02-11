@@ -10,6 +10,7 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { WishesListComponent } from './components/wishes-list/wishes-list.component';
+import { ShoppingHistoryComponent } from './components/shopping-history/shopping-history.component'
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path:'products/:id', component:ProductDetailComponent},
   {path:'cart', component:ShoppingCartComponent},
   {path:'wishes', component:WishesListComponent},
+  {path:'historial', component:ShoppingHistoryComponent},
   {path:'**', pathMatch:'full', redirectTo:'home'},
 ];
 

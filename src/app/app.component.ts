@@ -38,7 +38,44 @@ export class AppComponent {
   menuAccesoriesBrand:any=[];
   menuAccesoriesCountries:any=[];
   menuAccesoriesType:any=[];
-
+  //Payment Type
+  paymentsType:any=[
+    {
+      id:1,
+      name:'American Express',
+      url:'../../assets/American Express.png'
+    },
+    {
+      id:2,
+      name:'MasterCard',
+      url:'../../assets/MasterCard.png'
+    },
+    {
+      id:3,
+      name:'Visa',
+      url:'../../assets/Visa.png'
+    },
+    {
+      id:4,
+      name:'Diners Club',
+      url:'../../assets/Diners Club.png'
+    },
+    {
+      id:5,
+      name:'PayPal',
+      url:'../../assets/PayPal.png'
+    },
+    {
+      id:6,
+      name:'Efectivo',
+      url:'../../assets/Efectivo.png'
+    },
+    {
+      id:7,
+      name:'Transferencia',
+      url:'../../assets/Transferencia.png'
+    }
+  ];
   public group = [];
 
   constructor(private cookieService: CookieService, private fireSrv:FirebaseService,private _router: Router) { }
