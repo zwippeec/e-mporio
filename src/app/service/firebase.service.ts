@@ -123,5 +123,11 @@ export class FirebaseService {
   getSurvey(){
     return this.afDb.object('Survey').valueChanges();
   }
-
+  //Historial
+  getHistorialByUserId(uid){
+    return this.afDb.list('binnacle/'+uid).valueChanges();
+  }
+  getHistorialByUserIdObjects(uid){
+    return this.afDb.object('binnacle/'+uid).valueChanges();
+  }
 }

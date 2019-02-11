@@ -1,0 +1,103 @@
+<div class="container">
+  <!--Title-->
+  <div class="row text-center mt-2">
+    <div class="col-4"></div>
+    <div class="pt-1 col-4">
+      <p class="bg-black text-yellow text-center border-title mb-0 text-title pt-2" style="height: 45px!important">Historial de Compras</p>
+    </div>
+    <div class="col-4"></div>
+  </div>
+  <!--End title-->
+  <!--Content-->
+  <!--Head-->
+  <div class="row p-1">
+    <div class="col bg-yellow mr-1">
+      <p class="mb-0 text-center">Número de Orden</p>
+    </div>
+    <div class="col bg-yellow mr-1">
+      <p class="mb-0 text-center">Fecha de compra</p>
+    </div>
+    <div class="col bg-yellow mr-1">
+      <p class="mb-0 text-center">Cantidad</p>
+    </div>
+    <div class="col bg-yellow">
+      <p class="mb-0 text-center">Método de pago</p>
+    </div>
+    <div class="col-2 bg-yellow"></div>
+  </div>
+  <!--Body-->
+  
+  <div *ngFor="let item of historial.reverse(); let i = index; let key of historialKeys.key" class="row pt-1 pl-1">
+    <div class="col text-center mr-1 pt-4" [ngClass]="i%2==0 ? 'bg-gray1':'bg-gray2'">
+      <p class="text-gray p-0 m-0">{{key.key}}</p>
+    </div>
+    <div class="col text-center mr-1 pt-4" [ngClass]="i%2==0 ? 'bg-gray1':'bg-gray2'">
+      <p class="text-gray p-0 m-0">{{item.date}}</p>
+    </div>
+    <div class="col text-center mr-1 pt-4" [ngClass]="i%2==0 ? 'bg-gray1':'bg-gray2'">
+      <p class="text-gray p-0 m-0">{{item.itemsData.length}}</p>
+    </div>
+    <div class="col text-left mr-1 pt-4 pl-2" [ngClass]="i%2==0 ? 'bg-gray1':'bg-gray2'">
+      <p class="text-gray p-0 m-0">
+        <img class="pl-2" src="../../../assets/{{item.payment}}.png" alt="{{item.payment}}" title="Pago realizado con {{item.payment}}" height="20px" width="30px">
+        <span class="pl-2">{{item.payment}}</span>
+      </p>
+    </div>
+    <div class="col-2 text-left mr-1 pt-2 pb-2" [ngClass]="i%2==0 ? 'bg-gray1':'bg-gray2'">
+      <a class="btn pl-0 pb-1 pt-0" (click)="moreDetail(key.key)"><img class="pb-1" src="../../../assets/eye.png" alt="Ver" height="14" width="18"> <span class="pl-2">Ver detalle</span></a>
+      <br>
+      <a class="btn p-0" (click)="moreDetail(key.key)"><img src="../../../assets/cart1.png" alt="Volver ordenar" height="15" width="15"> <span class="pl-2">Volver a ordenar</span></a>
+    </div>
+  </div>
+  <!--End content-->
+
+  <!--PROMOTIONS-->
+  <div class="row pb-0 mt-2">
+      <div class="col-6 bg-gray p-0">
+        <ul id="promotion" class="bg-gray promotion p-0 m-0"> 
+          <li class="promotion-Item" *ngFor="let itemPromo of suggestionList">
+            <!--Card promotion-->
+            <div class="row " >
+              <div class="col text-right pt-2">
+                <button class="btn btn-warning">Timer</button>
+              </div>
+            </div>
+            <div class="row pt-3">
+              <div class="col-2 p-0 pt-4 pl-1">
+                <img src="{{itemPromo.imageUrl}}" alt="{{itemPromo.name}}" height="180" width="50">
+              </div>
+              <div class="col-9 text-left ml-1 pr-0">
+                <p class="title-text1 font-weight-bold item">{{itemPromo.name}}</p>
+                <p class="subtitle-text item">{{itemPromo.region}}</p>
+                <hr class="item mt-1">
+                <p class="title-text1 font-weight-bold m-0">Bodega:</p>
+                <p class="subtitle-text item">{{itemPromo.cellar}}</p>
+                <p class="title-text1 font-weight-bold m-0">Región:</p>
+                <p class="subtitle-text item">{{itemPromo.region}}</p>
+                <p class="title-text1 font-weight-bold m-0">Año:</p>
+                <p class="subtitle-text item">{{itemPromo.year}}</p>
+                <p class="title-text1 font-weight-bold m-0">Etiqueta:</p>
+                <p class="subtitle-text item">{{itemPromo.label}}</p>
+                <p class="title-text1 font-weight-bold m-0">Color:</p>
+                <p class="subtitle-text item">{{itemPromo.windKind}}</p>
+              </div>
+            </div>
+            <div class="row mb-0 text-right pt-2">
+              <div class="col col-sm-4 ml-4">
+                <input type="number" class="input-quantity mr-1" min="0" max="999" >
+              </div>
+              <div class="col col-sm-4">
+                <a (click)="addCart(itemPromo.idP,'products')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+              </div>
+            </div>
+            <!--End Card promotion-->
+          </li>
+        </ul>
+      </div> 
+      <div class="col-6">
+        <img src="https://firebasestorage.googleapis.com/v0/b/e-mporio593.appspot.com/o/others%2Fpayment_winds.jpg?alt=media&token=3d134eaf-12d9-461a-b65d-13fc76ddf672" height="350" width="100%" alt="">
+        <button class="btn btn-moreInfo">Conocer más</button>
+      </div>  
+    </div>
+    <!--END PROMOTION-->
+</div>
