@@ -101,3 +101,6 @@ p.item{
     overflow: auto;;
     background: #fff;
 }
+.text-error{
+    font-size: 18px;
+}
