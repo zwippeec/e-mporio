@@ -10,7 +10,8 @@ import { ProductComponent } from './components/product/product.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { WishesListComponent } from './components/wishes-list/wishes-list.component';
-import { ShoppingHistoryComponent } from './components/shopping-history/shopping-history.component'
+import { ShoppingHistoryComponent } from './components/shopping-history/shopping-history.component';
+import { ShoppingHistoryDetailComponent } from './components/shopping-history-detail/shopping-history-detail.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path:'cart', component:ShoppingCartComponent},
   {path:'wishes', component:WishesListComponent},
   {path:'historial', component:ShoppingHistoryComponent},
+  {path:'orderDetail', component:ShoppingHistoryDetailComponent},
   {path:'**', pathMatch:'full', redirectTo:'home'},
 ];
 

@@ -112,7 +112,7 @@ export class ShoppingCartComponent implements OnInit {
           _data={
             date:database.ServerValue.TIMESTAMP,
             itemsData:this.itemsCart,
-            //itemsProd:this.listCart,
+            itemsProd:this.listCart,
             subtotal:this.subtotalPay,
             payment:this.paymentSelect,
             statusPayment:'pending'

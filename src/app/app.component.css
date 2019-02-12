@@ -19,13 +19,21 @@
 .footer-container{
     padding-left: 130px;
 }
-.border-footer {
+.footer-container1{
+    padding-left: 70px;
+}
+.border-color1 {
     border: 1px solid #FBD12C!important;
     border-left: 0!important;
     border-top: 0!important;
     border-bottom: 0!important;
 }
-
+.border-color2 {
+    border: 1px solid #FBD12C!important;
+    border-right: 0!important;
+    border-top: 0!important;
+    border-bottom: 0!important;
+}
 .megamenu {
   position:static;
 }

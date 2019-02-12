@@ -1,270 +1,254 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <!-- Menu Header -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-menu">
-    <a class="navbar-brand" href="#">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png" width="60" height="30" alt="Logo_Emporio">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+  <a class="navbar-brand" href="#">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png" width="60" height="30" alt="Logo_Emporio">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/home">Inicio</a>
-        </li>
-        <li class="nav-item dropdown megamenu">
-          <a class="nav-link dropdown-toggle" href="#" id="Winds" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Mundo Vino
-          </a>
-          <div class="dropdown-menu" aria-labelledby="Winds">
-            <div class="row text-center">
-              <div class="col">
-                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo de vino</a>
-                <a *ngFor="let item of menuWindsType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{windKind:item}">{{item}}</a>
-              </div>
-              <div class="col">
-                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
-                <a *ngFor="let item of menuWindsCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
-              </div>
-              <div class="col">
-                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Región</a>
-                <a *ngFor="let item of menuWindsRegion" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{region:item}">{{item}}</a>
-              </div>
-              <div class="col">
-                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo de Uva</a>
-                <a *ngFor="let item of menuWindsTypeGrapes" class="dropdown-item">{{item}}</a>
-              </div>
-              <div class="col">
-                <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Bodega</a>
-                <a *ngFor="let item of menuWindsCellar" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{cellar:item}">{{item}}</a>
-              </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/home">Inicio</a>
+      </li>
+      <li class="nav-item dropdown megamenu">
+        <a class="nav-link dropdown-toggle" href="#" id="Winds" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mundo Vino
+        </a>
+        <div class="dropdown-menu" aria-labelledby="Winds">
+          <div class="row text-center">
+            <div class="col">
+              <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo de vino</a>
+              <a *ngFor="let item of menuWindsType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{windKind:item}">{{item}}</a>
+            </div>
+            <div class="col">
+              <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
+              <a *ngFor="let item of menuWindsCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
+            </div>
+            <div class="col">
+              <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Región</a>
+              <a *ngFor="let item of menuWindsRegion" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{region:item}">{{item}}</a>
+            </div>
+            <div class="col">
+              <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo de Uva</a>
+              <a *ngFor="let item of menuWindsTypeGrapes" class="dropdown-item">{{item}}</a>
+            </div>
+            <div class="col">
+              <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Bodega</a>
+              <a *ngFor="let item of menuWindsCellar" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{cellar:item}">{{item}}</a>
             </div>
           </div>
-        </li>
-        <li class="nav-item dropdown megamenu">
-            <a class="nav-link dropdown-toggle" href="#" id="espirituals" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Mundo Espirituosos
-            </a>
-            <div class="dropdown-menu" aria-labelledby="accessories">
-              <div class="row text-center">
-                <div class="col">
-                  <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
-                  <a *ngFor="let item of menuEspiritualsCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
-                </div>
-                <div class="col">
-                  <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo</a>
-                  <a *ngFor="let item of menuEspiritualsType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{windKind:item}">{{item}}</a>
-                </div>
-                <div class="col">
-                  <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Marca</a>
-                  <a *ngFor="let item of menuEspiritualsBrand" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{brand:item}">{{item}}</a>
-                </div>
-              </div>
-            </div>
-          </li>
-        <li class="nav-item dropdown megamenu">
-          <a class="nav-link dropdown-toggle" href="#" id="accessories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Accesorios
+        </div>
+      </li>
+      <li class="nav-item dropdown megamenu">
+          <a class="nav-link dropdown-toggle" href="#" id="espirituals" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Mundo Espirituosos
           </a>
           <div class="dropdown-menu" aria-labelledby="accessories">
             <div class="row text-center">
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
-                <a *ngFor="let item of menuAccesoriesCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
+                <a *ngFor="let item of menuEspiritualsCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
               </div>
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo</a>
-                <a *ngFor="let item of menuAccesoriesType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{type:item}">{{item}}</a>
+                <a *ngFor="let item of menuEspiritualsType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{windKind:item}">{{item}}</a>
               </div>
               <div class="col">
                 <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Marca</a>
-                <a *ngFor="let item of menuAccesoriesBrand" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{brand:item}">{{item}}</a>
+                <a *ngFor="let item of menuEspiritualsBrand" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{brand:item}">{{item}}</a>
               </div>
             </div>
           </div>
         </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <div class="input-group">
-          <div class="input-group">
-            <ng-auto-complete (selected)="Selected($event)" [group]="group"></ng-auto-complete>
+      <li class="nav-item dropdown megamenu">
+        <a class="nav-link dropdown-toggle" href="#" id="accessories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Accesorios
+        </a>
+        <div class="dropdown-menu" aria-labelledby="accessories">
+          <div class="row text-center">
+            <div class="col">
+              <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">País</a>
+              <a *ngFor="let item of menuAccesoriesCountries" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{country:item}">{{item}}</a>
+            </div>
+            <div class="col">
+              <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Tipo</a>
+              <a *ngFor="let item of menuAccesoriesType" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{type:item}">{{item}}</a>
+            </div>
+            <div class="col">
+              <a class="dropdown-item font-weight-bold dropdown-item-title" href="/products">Marca</a>
+              <a *ngFor="let item of menuAccesoriesBrand" class="dropdown-item" [routerLink]="['/products']" [queryParams]="{brand:item}">{{item}}</a>
+            </div>
           </div>
         </div>
-      </form>
-      <ul class="navbar-nav ">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="../assets/user.png" width="25" height="30" alt="Usuario" title="Usuario"/>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="userMenu">
-            <a *ngIf="!isUserAuth"class="dropdown-item" href="/newUser">Registrarse</a>
-            <a *ngIf="!isUserAuth"class="dropdown-item" href="/login">Iniciar Sesión</a>
-            <a *ngIf="isUserAuth" class="dropdown-item" href="/profile">Mi perfil</a>
-            <a *ngIf="isUserAuth" class="dropdown-item" href="#">Sugeridos</a>
-            <a *ngIf="isUserAuth" class="dropdown-item" href="/wishes">Lista de deseos</a>
-            <a *ngIf="isUserAuth" class="dropdown-item" href="/historial">Mis Compras</a>
-            <div *ngIf="isUserAuth" class="dropdown-divider"></div>
-            <a *ngIf="isUserAuth" class="dropdown-item" (click)="logout()">Salir</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/cart">
-            <img src="../assets/cart.png" width="25" height="30" alt="Carrito de compras" title="Carrito de compras"/>
-            <span class="badge badge-success">{{countTotalItems}}</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <img src="../assets/cava.png" width="25" height="30" alt="Cava" title="Mi cava"/>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <div class="input-group">
+        <div class="input-group">
+          <ng-auto-complete (selected)="Selected($event)" [group]="group"></ng-auto-complete>
+        </div>
+      </div>
+    </form>
+    <ul class="navbar-nav ">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="../assets/user.png" width="25" height="30" alt="Usuario" title="Usuario"/>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="userMenu">
+          <a *ngIf="!isUserAuth"class="dropdown-item" href="/newUser">Registrarse</a>
+          <a *ngIf="!isUserAuth"class="dropdown-item" href="/login">Iniciar Sesión</a>
+          <a *ngIf="isUserAuth" class="dropdown-item" href="/profile">Mi perfil</a>
+          <a *ngIf="isUserAuth" class="dropdown-item" href="#">Sugeridos</a>
+          <a *ngIf="isUserAuth" class="dropdown-item" href="/wishes">Lista de deseos</a>
+          <a *ngIf="isUserAuth" class="dropdown-item" href="/historial">Mis Compras</a>
+          <div *ngIf="isUserAuth" class="dropdown-divider"></div>
+          <a *ngIf="isUserAuth" class="dropdown-item" (click)="logout()">Salir</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/cart">
+          <img src="../assets/cart.png" width="25" height="30" alt="Carrito de compras" title="Carrito de compras"/>
+          <span class="badge badge-success">{{countTotalItems}}</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <img src="../assets/cava.png" width="25" height="25" alt="Cava" title="Mi cava"/>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-  <!-- Pages container -->
+<!-- Pages container -->
 
 <router-outlet class="bg-body">
-  
-  <!-- Button trigger modal -->
+
+<!-- Button trigger modal -->
 <button type="button" class="border-0 p-0" #openModalBtn [hidden]="true" data-toggle="modal" data-target="#exampleModal"></button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 *ngIf="surveyData.title!=null" class="modal-title" id="exampleModalLabel">{{surveyData.title}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div *ngFor="let question of surveyData.questions; index as i">
-          <p>{{question.question}}</p>
-          <div *ngFor="let option of surveyData.options[i]">
-            <input type="checkbox" name="{{option}}" value="{{option}}"  (change)="selectOption($event)"> {{option}}
-          </div>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 *ngIf="surveyData.title!=null" class="modal-title" id="exampleModalLabel">{{surveyData.title}}</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div *ngFor="let question of surveyData.questions; index as i">
+        <p>{{question.question}}</p>
+        <div *ngFor="let option of surveyData.options[i]">
+          <input type="checkbox" name="{{option}}" value="{{option}}"  (change)="selectOption($event)"> {{option}}
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-success" (click)="saveSurvey()" data-dismiss="modal">Guardar</button>
-      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+      <button type="button" class="btn btn-success" (click)="saveSurvey()" data-dismiss="modal">Guardar</button>
     </div>
   </div>
+</div>
 </div>
 </router-outlet>
 
 <!-- Footer content -->
 <footer class="bg-footer mt-1" >
-  <div class="row text-footer text-left pb-4" style="width: 101%;">
-    <div class="col-3 footer-container">
-      <div class="row pt-4 ">
-        <div class="col">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><b>Empresa</b></li>
-            <li class="nav-item">Nosotros</li>
-            <li class="nav-item">Boletín Mensual</li>
-            <li class="nav-item">Prensa</li>
-          </ul>
-        </div>
-      </div>
-      <div class="row pt-5">
-        <div class="col">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><b>Servicio</b></li>
-            <li class="nav-item">Certificado de Regalo</li>
-            <li class="nav-item">Referir Amigo</li>
-            <li class="nav-item">Contacto</li>
-          </ul>
-        </div>
+<div class="row text-footer text-left pb-4" style="width: 101%;">
+  <div class="col-4 mt-4 footer-container border-right border-color1">
+    <div class="row pt-2 ">
+      <div class="col">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><b>Empresa</b></li>
+          <li class="nav-item">Nosotros</li>
+          <li class="nav-item">Boletín Mensual</li>
+          <li class="nav-item">Prensa</li>
+        </ul>
       </div>
     </div>
-    <div class="col-1">
-      <div class="row pt-5">
-        <div class="col border-footer border-top-0 border-bottom-0 border-left-0 " style="height: 90px;"></div>
-      </div>
-      <div class="row pt-5">
-        <div class="col border-footer border-top-0 border-bottom-0 border-left-0" style="height: 90px;"></div>
-      </div>
-    </div>
-    <div class="col-3 footer-container">
-      <div class="row pt-3">
-        <div class="col ">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><b>Métodos de Pago</b></li>
-            <li class="nav-item" *ngFor="let item of paymentsType"><img class="mr-2" src="{{item.url}}" alt="{{item.name}}" height="15" width="20">{{item.name}}</li>
-          </ul>
-        </div>
-      </div>
-      <div class="row pt-4">
-        <div class="col ">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><b>Información Legal</b></li>
-            <li class="nav-item">Términos y Condiciones</li>
-            <li class="nav-item">Política de Privacidad y Uso</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="col-1">
-      <div class="row pt-5">
-        <div class="col border-footer border-top-0 border-bottom-0 border-left-0 " style="height: 90px;"></div>
-      </div>
-      <div class="row pt-5">
-        <div class="col border-footer border-top-0 border-bottom-0 border-left-0" style="height: 90px;"></div>
-      </div>
-    </div>
-    <div class="col-3 footer-container">
-      <div class="row pt-4">
-        <div class="col">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><b>Social</b></li>
-            <li class="nav-item">
-              <img src="../assets/fb-logo.png" width="20" height="20" alt="Facebook">
-              Facebook
-            </li>
-            <li class="nav-item">
-              <img src="../assets/instagram-logo.png" width="20" height="20" alt="Instagram">
-              Instagram
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="row pt-4">
-        <div class="col">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><b>Susbcripción</b>
-              <form ngNoForm action="https://zwippe.us7.list-manage.com/subscribe/post?u=d2ab2a7006e129c428cd4ae59&amp;id=9264dec8a4" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_blank" novalidate #form>
-                <div class="form-group mb-2">
-                <input type="email" name="EMAIL" [(ngModel)]="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Correo electrónico" required style="width: 160px;">
-                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d2ab2a7006e129c428cd4ae59_9264dec8a4" tabindex="-1" value=""></div>
-                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-suscription ml-2">Enviar</button>
-              </div>
-            </form>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="row pt-4">
-        <div class="col">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><b class="text-left">Power by Urbano</b>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEVpTDk3Sf2kbqlks7jUF_SLpbMay3stoabKy_0jTOQZxQWlFT" alt="" height="60px" width="100px">
-            </li>
-          </ul>
-        </div>
+    <div class="row pt-5">
+      <div class="col">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><b>Servicio</b></li>
+          <li class="nav-item">Certificado de Regalo</li>
+          <li class="nav-item">Referir Amigo</li>
+          <li class="nav-item">Contacto</li>
+        </ul>
       </div>
     </div>
   </div>
-  <div class="row bg-footer1 text-center text-footer">
-    <div class="col">
-      <p>Power By ZWIPPE.COM</p>
+  <div class="col-4 footer-container">
+    <div class="row pt-3">
+      <div class="col ">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><b>Métodos de Pago</b></li>
+          <li class="nav-item" *ngFor="let item of paymentsType"><img class="mr-2" src="{{item.url}}" alt="{{item.name}}" height="15" width="20">{{item.name}}</li>
+        </ul>
+      </div>
     </div>
-    <div class="col">
-      <p>Derechos Reservados 2019. ©  E-MPORIO.STORE</p> 
+    <div class="row pt-4">
+      <div class="col ">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><b>Información Legal</b></li>
+          <li class="nav-item">Términos y Condiciones</li>
+          <li class="nav-item">Política de Privacidad y Uso</li>
+        </ul>
+      </div>
     </div>
   </div>
+  <div class="col-4 footer-container border-left border-color2 mt-4">
+    <div class="row pt-2">
+      <div class="col">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><b>Social</b></li>
+          <li class="nav-item">
+            <img src="../assets/fb-logo.png" width="20" height="20" alt="Facebook">
+            Facebook
+          </li>
+          <li class="nav-item">
+            <img src="../assets/instagram-logo.png" width="20" height="20" alt="Instagram">
+            Instagram
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row pt-4">
+      <div class="col">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><b>Susbcripción</b>
+            <form ngNoForm action="https://zwippe.us7.list-manage.com/subscribe/post?u=d2ab2a7006e129c428cd4ae59&amp;id=9264dec8a4" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="form-inline" target="_blank" novalidate #form>
+              <div class="form-group mb-2">
+              <input type="email" name="EMAIL" [(ngModel)]="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Correo electrónico" required style="width: 160px;">
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_d2ab2a7006e129c428cd4ae59_9264dec8a4" tabindex="-1" value=""></div>
+              <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-suscription ml-2">Enviar</button>
+            </div>
+          </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row pt-4">
+      <div class="col">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active"><b class="text-left">Power by Urbano</b><br>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEVpTDk3Sf2kbqlks7jUF_SLpbMay3stoabKy_0jTOQZxQWlFT" alt="" height="60px" width="100px">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row bg-footer1 text-center text-footer">
+  <div class="col">
+    <p>Power By ZWIPPE.COM</p>
+  </div>
+  <div class="col">
+    <p>Derechos Reservados 2019. ©  E-MPORIO.STORE</p> 
+  </div>
+</div>
 </footer>

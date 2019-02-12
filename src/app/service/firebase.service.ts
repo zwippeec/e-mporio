@@ -130,4 +130,7 @@ export class FirebaseService {
   getHistorialByUserIdObjects(uid){
     return this.afDb.object('binnacle/'+uid).valueChanges();
   }
+  getHistorialByOrder(uid,order){
+    return this.afDb.object('binnacle/'+uid+'/'+order).valueChanges();
+  }
 }
