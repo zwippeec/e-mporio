@@ -46,11 +46,11 @@
       <div class="col-2 text-left mr-1 pt-2 pb-2" [ngClass]="i%2==0 ? 'bg-gray1':'bg-gray2'">
         <!--a class="btn pl-0 pb-1 pt-0" data-toggle="collapse" [attr.data-target]="'#modal'+ i" (click)="isCollapsed = !isCollapsed"
         [attr.aria-expanded]="false" -->
-        <a class="btn pl-0 pb-1 pt-0" (click)="moreDetail(key.key)">
+        <a class="btn pl-0 pb-1 pt-0" (click)="detailsByOrder(key.key)">
           <img class="pb-1" src="../../../assets/eye.png" alt="Ver" height="14" width="18"> <span class="pl-2">Ver detalle</span>
         </a>
         <br>
-        <a class="btn p-0" (click)="moreDetail(key.key)">
+        <a class="btn p-0" (click)="detailsByOrder(key.key)">
           <img src="../../../assets/cart1.png" alt="Volver ordenar" height="15" width="15"> <span class="pl-2">Volver a ordenar</span>
         </a>
       </div>

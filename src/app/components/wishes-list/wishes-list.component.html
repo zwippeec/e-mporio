@@ -31,7 +31,7 @@
               </div>
               <div class="col text-center p-0">
                 <p class="text-gray text-size1 m-1">{{product.cost}} usd.</p>
-                <button class="btn bg-yellow m-1">Agregar al carrito</button>
+                <button class="btn bg-yellow m-1" (click)="addCart(product.idP,'products')">Agregar al carrito</button>
                 <label class="text-center mb-0 text-gray text-size m-1 border-bottom" (click)="removeItem(idListSelect,i)">Remover de la lista</label>
               </div>
             </div>
@@ -57,7 +57,7 @@
   <!--Sugerencias-->
   <div class="row bg-gray mt-1 mb-2">
     <div class="col p-0">
-      <ul id="promotion" class=" promotion p-0 m-0"> 
+      <ul id="promotion" class="promotion ml-2 mr-1 mb-1 mt-3"> 
         <li class="promotion-Item bg-white pl-1 pr-1" *ngFor="let itemPromo of suggestionList">
           <!--Card promotion-->
           <!--div class="row " >
@@ -86,10 +86,10 @@
             </div>
           </div>
           <div class="row mb-0 pt-2">
-            <div class="col col-sm-4 ml-4 text-right">
+            <div class="col text-right">
               <input type="number" class="input-quantity mr-1" min="0" max="999" >
             </div>
-            <div class="col col-sm-4 text-left">
+            <div class="col text-left pl-0">
               <a (click)="addCart(itemPromo.idP,'products')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
             </div>
           </div>
