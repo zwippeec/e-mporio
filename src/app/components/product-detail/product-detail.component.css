@@ -9,6 +9,12 @@
     background-color: #333333;
 }
 
+.img-zoom{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 hr {
     border: 1px solid #fbd12c;
     margin-bottom: 0px !important;

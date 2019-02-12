@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../service/firebase.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Router,NavigationExtras } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-shopping-history',
@@ -18,7 +18,7 @@ export class ShoppingHistoryComponent implements OnInit {
   //suggestion
   suggestionList:any;
 
-  constructor(public fireSrv:FirebaseService,private cookieService:CookieService,private _router: Router) { 
+  constructor(public fireSrv:FirebaseService,private cookieService:CookieService) { 
     if(this.cookieService.check('userLogged')){
       this.isAuth=true;
       this.uid=this.cookieService.get('userLogged');
@@ -46,19 +46,16 @@ export class ShoppingHistoryComponent implements OnInit {
     this.getSuggestion();
   }
 
-  detailsByOrder(id){
-    window.location.reload();
-    let navigationExtras: NavigationExtras={
-      queryParams:{'orderId':id}
-    }
-    this._router.navigate(['/orderDetail'],navigationExtras);
+  moreDetail(id){
+    console.clear();
+    console.log(id)
   }
 
   slidePromotion(){
     var timer = 8000;//time to change items
     var i=0;
     var max = document.querySelectorAll('#promotion > li').length;//length list to show promotion
-    var showNumItems=3;//num item to show on promotion slide
+    var showNumItems=3;
     let _positionItem=0;
     let _transitionItem=0;
 

@@ -47,11 +47,11 @@ label.border-bottom:hover{
 }
 ul.promotion {
     position: relative;
-    height: 295px;
+    height: 280px;
 }
 
 ul > li.promotion-Item {
-    width: 24.7%;
+    width: 25%;
     list-style-type: none;
     position: absolute;
     top: 0;
