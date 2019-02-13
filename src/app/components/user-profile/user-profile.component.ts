@@ -14,17 +14,7 @@ export class UserProfileComponent implements OnInit {
   isEditing:boolean=false;
   newUserData:any;
 
-  constructor(private fireSrv:FirebaseService, private cookieService: CookieService,private _router: Router) {
-    console.log('ALEATORIO');
-    let cont=1;
-    for(let i=0; i < 100; i++){
-      let _value=Math.round(Math.random()*1000000);
-      if(_value>100000){
-        console.log(cont,_value)
-        cont+=1;
-      }
-    }
-   }
+  constructor(private fireSrv:FirebaseService, private cookieService: CookieService,private _router: Router) { }
 
   ngOnInit() {
     if(this.cookieService.check('userLogged')){
@@ -43,7 +33,6 @@ export class UserProfileComponent implements OnInit {
 
   saveNewData(){
     this.isEditing=false;
-    
     this.fireSrv.updateProfile(this.newUserData,this.cookieService.get('userLogged'));
   }
 }

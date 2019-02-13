@@ -29,23 +29,25 @@
         <!--Second column-->
         <div  class="col-6 pt-3 pb-4">
           <div class="row">
-            <div *ngFor="let board of boardList | slice:5:6" class="col-4 text-left pt-2 pl-1 pr-0" >  
+            <div *ngFor="let board of boardList | slice:5:6" class="col text-left pt-2 pl-1 pr-0" >  
               <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" width="100%" height="278">
               <h3 *ngIf="board.title">{{board.title}}</h3>
               <p *ngIf="board.text">{{board.text}}</p>
             </div>
-            <div *ngFor="let board of boardList | slice:6:7" class="col-6 text-left pt-2 pl-0 pr-0" >  
+            <div *ngFor="let board of boardList | slice:6:7" class="col text-left pt-2 pl-0 pr-0" >  
               <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" width="100%" height="278">
               <h3 *ngIf="board.title">{{board.title}}</h3>
               <p *ngIf="board.text">{{board.text}}</p>
             </div>
             <div class="col-2"></div>
-            <div *ngFor="let board of boardList | slice:7:9" class="col text-left pt-2 pl-1 pr-1" >  
+          </div>
+          <div class="row">
+            <div *ngFor="let board of boardList | slice:7:10" class="col text-left pt-2 pl-1 pr-1" >  
               <img *ngIf="board.imageUrl" src="{{board.imageUrl}}" alt="" width="100%" height="200">
               <h3 *ngIf="board.title">{{board.title}}</h3>
               <p *ngIf="board.text">{{board.text}}</p>
             </div>
-            <div class="col-2"></div>
+            <div class="col-2 ml-0 p-0"></div>
           </div>
         </div>
       </div>

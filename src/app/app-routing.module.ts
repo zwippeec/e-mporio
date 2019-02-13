@@ -12,6 +12,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { WishesListComponent } from './components/wishes-list/wishes-list.component';
 import { ShoppingHistoryComponent } from './components/shopping-history/shopping-history.component';
 import { ShoppingHistoryDetailComponent } from './components/shopping-history-detail/shopping-history-detail.component';
+import { ReferencePersonComponent } from './components/reference-person/reference-person.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path:'wishes', component:WishesListComponent},
   {path:'historial', component:ShoppingHistoryComponent},
   {path:'orderDetail', component:ShoppingHistoryDetailComponent},
+  {path:'references', component:ReferencePersonComponent},
   {path:'**', pathMatch:'full', redirectTo:'home'},
 ];
 

@@ -44,6 +44,9 @@ export class FirebaseService {
   getFavoritesByUser(uid){
     return this.afDb.list('user/'+uid+'/favorite').valueChanges();
   }
+  getSuggestionPerson(uid){
+    return this.afDb.object('user/'+uid+'/suggestionPerson').valueChanges();
+  }
   //Products
   getAllProducts(){
     return this.afDb.list('products').valueChanges();

@@ -1,0 +1,29 @@
+<div class="first-element container">
+  <!--Title-->
+  <div class="row text-center mt-2">
+    <div class="col-4"></div>
+    <div class="pt-1 col-4">
+      <p class="bg-black text-yellow text-center border-title mb-0 text-title pt-2" style="height: 45px!important">Personas Referidas</p>
+    </div>
+    <div class="col-4"></div>
+  </div>
+  <!--end Title-->
+  <!--Content-->
+  <div *ngIf="suggestionPerson.length>0;else anyPerson">
+    <div class="row" *ngFor="let person of suggestionPerson">
+      <div class="col">
+        {{person}}
+      </div>
+      <div class="col">
+        1
+      </div>
+      <div class="col">
+        1
+      </div>
+    </div>
+  </div>
+  <ng-template #anyPerson>
+    No ha sugerido a ninguna persona aún.
+  </ng-template>
+  <!--End content-->
+</div>

@@ -1,0 +1,13 @@
+.first-element{
+    margin-top: 4.75%!important;
+}
+.bg-black{
+    background-color: #000;
+}
+.text-yellow{
+    color:#fbd12c;
+}
+.border-title{
+    border-top-left-radius: 7px;
+    border-top-right-radius:  7px;
+}
