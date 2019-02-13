@@ -109,3 +109,34 @@ p.item{
 .first-element{
     margin-top: 4.75%!important;
 }
+#cartItems{
+    position: fixed;
+    top: 10%;
+    right: 0%;
+    z-index: 999;
+}
+#cartSection{
+    height: 149px;
+    width: auto;
+    overflow: auto;;
+    background: #fff;
+}
+.text-yellow{
+    color:#fbd12c;
+}
+.img-arrow-left{
+    cursor: pointer;
+}
+.text-alert{
+    font-size: 14px;
+}
+.btn-pay{
+    background-color: #fbd12c;
+}
+.btn-explorer{
+    background-color: #000;
+}
+.item-text{
+    color: #000;
+    font-size: 12px;
+}

@@ -16,10 +16,16 @@ export class WishesListComponent implements OnInit {
   idListSelect:any=0;//show data on array
   packList:any;//list pack
   suggestionList:any;
+  //Info cart
+  listCart:any=[];
+  itemsCart:any=[];
+  subtotalPay:any=0.00;
+  showInfoCart:boolean=true;//show or hide info
 
   constructor(public fireSrv: FirebaseService,private cookieService: CookieService) {}
 
   ngOnInit() {
+    this.listCart=[];
     if(this.cookieService.check('userLogged')){
       this.isUserAuth = true;
       this.uid=this.cookieService.get('userLogged');
@@ -29,6 +35,18 @@ export class WishesListComponent implements OnInit {
     }
     this.getPacks();
     this.getSuggestion();
+    
+    if(localStorage.getItem('listCart')){
+      this.itemsCart=JSON.parse(localStorage.getItem('listCart'));
+      this.subtotalPay=0;
+      for(let i = 0; i < JSON.parse(localStorage.getItem('listCart')).length ;i++){
+        this.fireSrv.getProducByIdPay(this.itemsCart[i].type,this.itemsCart[i].id).subscribe(itemData=>{
+          let _totalUni=this.itemsCart[i].quantity*itemData['cost'];
+          this.subtotalPay+=_totalUni;
+          this.listCart.push({id:this.itemsCart[i].id,data:itemData,quantity:this.itemsCart[i].quantity,totalUni:_totalUni})
+        });
+      }
+    }
   }
 
   getWishesList(){
@@ -123,6 +141,7 @@ export class WishesListComponent implements OnInit {
     }, timer);
   }
   addCart(Pid,typeData){
+    this.showInfoCart=false;
     let items:any=[];//array to first object
     let _tmpList:any=[];//temporal array to list cart
     //Condition if exits listCart or create new list
@@ -142,5 +161,8 @@ export class WishesListComponent implements OnInit {
       localStorage.setItem('listCart',JSON.stringify(items))//create list
       this.ngOnInit();
     }
+  }
+  hideInfoCart(){
+    this.showInfoCart=true;
   }
 }

@@ -27,6 +27,11 @@ export class ProductComponent implements OnInit {
   minuto;
   segundos; 
   intervalo;
+  //Info cart
+  listCart:any=[];
+  itemsCart:any=[];
+  subtotalPay:any=0.00;
+  showInfoCart:boolean=true;//show or hide info
 
   //filters
   //filters:any={windKind:'',cost:'',foodFilter:'',moodFilter:'',styleFilter:'',cellerFilter:'',grapeFilter:'',regionFilter:'',countryFilter:''};
@@ -37,6 +42,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.listCart=[];
     //get params on url
     this._route.queryParams.subscribe(params=>{
       //add param on filter windKind
@@ -62,6 +68,18 @@ export class ProductComponent implements OnInit {
       this.getWishesList();//Get wishes list
     }else{
       this.isUserAuth = false;
+    }
+
+    if(localStorage.getItem('listCart')){
+      this.itemsCart=JSON.parse(localStorage.getItem('listCart'));
+      this.subtotalPay=0;
+      for(let i = 0; i < JSON.parse(localStorage.getItem('listCart')).length ;i++){
+        this.fireSrv.getProducByIdPay(this.itemsCart[i].type,this.itemsCart[i].id).subscribe(itemData=>{
+          let _totalUni=this.itemsCart[i].quantity*itemData['cost'];
+          this.subtotalPay+=_totalUni;
+          this.listCart.push({id:this.itemsCart[i].id,data:itemData,quantity:this.itemsCart[i].quantity,totalUni:_totalUni})
+        });
+      }
     }
   }
 
@@ -116,6 +134,7 @@ export class ProductComponent implements OnInit {
   }
 
   addCart(Pid,typeData){
+    this.showInfoCart=false;
     let items:any=[];//array to first object
     let _tmpList:any=[];//temporal array to list cart
     //Condition if exits listCart or create new list
@@ -133,6 +152,7 @@ export class ProductComponent implements OnInit {
       items.push({id:Pid,quantity:1,type:typeData});//first item on list
       localStorage.setItem('listCart',JSON.stringify(items))//create list
     }
+    this.ngOnInit();
   }
 
   getPromotion(){
@@ -194,5 +214,9 @@ export class ProductComponent implements OnInit {
       }, 1000);// Frecuencia de actualización;
       //endTimer
     })
+  }
+
+  hideInfoCart(){
+    this.showInfoCart=true;
   }
 }
