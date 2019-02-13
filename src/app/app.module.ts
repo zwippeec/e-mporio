@@ -31,6 +31,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { WishesListComponent } from './components/wishes-list/wishes-list.component';
 import { ShoppingHistoryComponent } from './components/shopping-history/shopping-history.component';
 import { ShoppingHistoryDetailComponent } from './components/shopping-history-detail/shopping-history-detail.component';
+import { ReferencePersonComponent } from './components/reference-person/reference-person.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ShoppingHistoryDetailComponent } from './components/shopping-history-de
     ShoppingCartComponent,
     WishesListComponent,
     ShoppingHistoryComponent,
-    ShoppingHistoryDetailComponent
+    ShoppingHistoryDetailComponent,
+    ReferencePersonComponent
   ],
   imports: [
     BrowserModule,
