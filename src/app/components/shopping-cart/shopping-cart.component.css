@@ -150,3 +150,6 @@ p.item{
     overflow: auto;;
     background: #fff;
 }
+.first-element{
+    margin-top: 4.75%!important;
+}

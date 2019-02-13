@@ -14,7 +14,15 @@
 .bg-body{
     background: #fff;
 }
-
+.bg-black{
+    background-color: #000;
+}
+.bg-yellow{
+    background-color: #f2b517;
+}
+.text-white{
+    color:#fff;
+}
 .bg-items{
     background-color: #0D0D0D;
 }
@@ -66,4 +74,39 @@ p{
 
 .btn-round{
     border-radius: 7px;
+}
+#cartSection{
+    height: 149px;
+    width: auto;
+    overflow: auto;;
+    background: #fff;
+}
+.item-text{
+    color: #000;
+    font-size: 12px;
+}
+.btn-pay{
+    background-color: #fbd12c;
+}
+.btn-explorer{
+    background-color: #000;
+}
+.text-alert{
+    font-size: 14px;
+}
+#cartItems{
+    position: fixed;
+    top: 10%;
+    right: 0%;
+    z-index: 999;
+}
+
+.text-yellow{
+    color:#fbd12c;
+}
+.img-arrow-left{
+    cursor: pointer;
+}
+.first-element{
+    margin-top: 4.75%!important;
 }

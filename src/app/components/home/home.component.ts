@@ -21,18 +21,12 @@ export class HomeComponent implements OnInit {
   uid:any;//user id
   isAuth:boolean=false;//auth user
   favorites:any=[];//favorite list by user
+  listCart:any=[];
+  itemsCart:any=[];
+  subtotalPay:any=0.00;
+  showInfoCart:boolean=true;//show or hide info
 
-  constructor( public fireSrv:FirebaseService,private cookieService: CookieService) { }
-
-  ngOnInit() {
-
-    if(this.cookieService.check('userLogged')){
-      this.uid=this.cookieService.get('userLogged');
-      this.isAuth=true;
-    }else{
-      this.isAuth=false;
-    }
-
+  constructor( public fireSrv:FirebaseService,private cookieService: CookieService) {
     this.fireSrv.getHomePage().subscribe(resp=>{
       this.elementList=resp;
       for(let i = 0; i<resp.length; i++){
@@ -114,10 +108,11 @@ export class HomeComponent implements OnInit {
               }
             })
             this.fireSrv.getAllProducts().subscribe(productsData=>{
+              //user log and survey
               for(let i = 0; i < productsData.length; i++){
                 for(let j = 0; j < this.favorites.length; j++){
-                  if(productsData[i]['windKind']==this.favorites[j]){
-                    this.suggestionList.push(productsData[i])
+                  if(productsData[i]['windKind']==this.favorites[j] && this.suggestionList.length<3){
+                    this.suggestionList.push(productsData[i]);
                   }
                 }
               }
@@ -130,6 +125,8 @@ export class HomeComponent implements OnInit {
               }
 
               this.fireSrv.getAllProducts().subscribe(productsData=>{
+                //user log and not survey
+                console.log('aqui 1');
                 for(let i = 0; i < productsData.length; i++){
                   for(let j = 0; j < this.favorites.length; j++){
                     if(productsData[i]['windKind']==this.favorites[j]){
@@ -140,6 +137,7 @@ export class HomeComponent implements OnInit {
               });
 
             }else{
+              //user not log and not survey
               this.fireSrv.getSuggestion(resp[i]['numsElements']).subscribe(dataSuggestion=>{
                 this.suggestionList=dataSuggestion;
               })
@@ -150,7 +148,30 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+    this.listCart=[];
+    if(this.cookieService.check('userLogged')){
+      this.uid=this.cookieService.get('userLogged');
+      this.isAuth=true;
+    }else{
+      this.isAuth=false;
+    }
+
+    if(localStorage.getItem('listCart')){
+      this.itemsCart=JSON.parse(localStorage.getItem('listCart'));
+      this.subtotalPay=0;
+      for(let i = 0; i < JSON.parse(localStorage.getItem('listCart')).length ;i++){
+        this.fireSrv.getProducByIdPay(this.itemsCart[i].type,this.itemsCart[i].id).subscribe(itemData=>{
+          let _totalUni=this.itemsCart[i].quantity*itemData['cost'];
+          this.subtotalPay+=_totalUni;
+          this.listCart.push({id:this.itemsCart[i].id,data:itemData,quantity:this.itemsCart[i].quantity,totalUni:_totalUni})
+        });
+      }
+    }
+  }
+
   addCart(Pid,typeData){
+    this.showInfoCart=false;
     let items:any=[];//array to first object
     let _tmpList:any=[];//temporal array to list cart
     //Condition if exits listCart or create new list
@@ -168,5 +189,10 @@ export class HomeComponent implements OnInit {
       items.push({id:Pid,quantity:1,type:typeData});//first item on list
       localStorage.setItem('listCart',JSON.stringify(items))//create list
     }
+    this.ngOnInit();
+  }
+
+  hideInfoCart(){
+    this.showInfoCart=true;
   }
 }

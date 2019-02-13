@@ -70,3 +70,6 @@
 .dropdown-toggle::after {
     display:none;
 }
+.first-element{
+    margin-top: 4.75%!important;
+}
