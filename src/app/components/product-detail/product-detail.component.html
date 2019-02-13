@@ -117,3 +117,71 @@
     <img src="{{product.imageUrl}}" class="card-img" alt="{{product.name}}" height="650">
   </div>
 </ng-template> 
+
+<!--Info Cart-->
+<div id="cartItems" class="bg-white" style="width: 22rem;" [hidden]="showInfoCart">
+    <div class="card-body p-0">
+      <div class="row bg-black m-0 mb-1">
+        <div class="col-2 p-0">
+          <img class="img-arrow-left" (click)="hideInfoCart()" src="../../../assets/arrow-left.png" alt="" height="40" width="auto">
+        </div>
+        <div class="col">
+          <p class="mb-2 mt-2 text-white text-alert">Seguir comprando</p>
+        </div>
+      </div>
+      <div class="border">
+        <div class="row bg-yellow m-0">
+          <div class="col-2 p-0">
+            <img src="../../../assets/check.png" alt="" height="40" width="auto">
+          </div>
+          <div class="col">
+            <p class="mb-2 mt-2 text-white text-alert">Se agregó un artículo a tu cesta.</p>
+          </div>
+        </div>
+        <!--Container-->
+        <div id="cartSection" style="height: 149px;" *ngIf="listCart.length>0;else noneElements">
+          <div  *ngFor="let item of listCart; let i = index">
+            <hr *ngIf="i!=0" class="mt-1 mb-1">
+            <div class="row m-0">
+              <div class="col-7 pr-1 ml-0 text-wrap item-text">
+                {{item.data.name}}
+              </div>
+              <!--
+              <div class="col-1 pl-1 pr-1 ml-0 text-wrap item-text text-center">
+                ${{item.data.cost}}
+              </div>
+              -->
+              <div class="col-2 pl-1 pr-1 ml-0 text-wrap item-text text-center">
+                x{{item.quantity}}
+              </div>
+              <div class="col-2 pl-1 pr-1 ml-0 text-wrap item-text text-center">
+                ${{item.totalUni}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noneElements>
+          <div style="height: 149px;">
+            <p class="item-pay-text text-center pt-5">El carrito se encuentra vacío.</p>
+          </div>
+        </ng-template>
+        <hr class="mt-2">
+        <div class="row m-0">
+          <div class="col ml-3 text-right">
+            <p class="item-pay-text">Subtotal</p>
+          </div>
+          <div class="col">
+            <p class="item-pay-text text-center" *ngIf="listCart.length==0">0</p>
+            <p class="item-pay-text text-center" *ngIf="listCart.length!=0">$./ <span>{{subtotalPay}}</span></p>
+          </div>
+        </div>
+        <div class="row mb-3 ml-0 mr-0">
+          <div class="col text-center pt-2">
+            <button *ngIf="itemsCart.length>0" class="btn btn-pay" [routerLink]="['/cart']">Finalizar</button>
+            <a href="/products" *ngIf="itemsCart.length==0" class="btn btn-explorer"><span class="text-yellow">Explorar</span></a>
+          </div>
+        </div>
+      </div>
+      <!--end container-->
+    </div>
+  </div>

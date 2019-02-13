@@ -19,15 +19,32 @@ export class ProductDetailComponent implements OnInit {
   minuto;
   segundos; 
   intervalo;
+  //Info cart
+  listCart:any=[];
+  itemsCart:any=[];
+  subtotalPay:any=0.00;
+  showInfoCart:boolean=true;//show or hide info
 
   constructor(private _router: Router, private _activeRouter: ActivatedRoute, public fireSrv:FirebaseService,private modalService: NgbModal) {
   }
 
   ngOnInit() {
+    this.listCart=[];
     this.fireSrv.getProducByCode(this._activeRouter.snapshot.paramMap.get('id')).subscribe(product=>{
       this.product=product[0];
     });
     this.getPacks();
+    if(localStorage.getItem('listCart')){
+      this.itemsCart=JSON.parse(localStorage.getItem('listCart'));
+      this.subtotalPay=0;
+      for(let i = 0; i < JSON.parse(localStorage.getItem('listCart')).length ;i++){
+        this.fireSrv.getProducByIdPay(this.itemsCart[i].type,this.itemsCart[i].id).subscribe(itemData=>{
+          let _totalUni=this.itemsCart[i].quantity*itemData['cost'];
+          this.subtotalPay+=_totalUni;
+          this.listCart.push({id:this.itemsCart[i].id,data:itemData,quantity:this.itemsCart[i].quantity,totalUni:_totalUni})
+        });
+      }
+    }
   }
 
   openModal(content) {
@@ -39,6 +56,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addCart(Pid,typeData){
+    this.showInfoCart=false;
     let items:any=[];//array to first object
     let _tmpList:any=[];//temporal array to list cart
     //Condition if exits listCart or create new list
@@ -56,6 +74,7 @@ export class ProductDetailComponent implements OnInit {
       items.push({id:Pid,quantity:1,type:typeData});//first item on list
       localStorage.setItem('listCart',JSON.stringify(items))//create list
     }
+    this.ngOnInit();
   }
 
   getPacks(){
@@ -64,5 +83,8 @@ export class ProductDetailComponent implements OnInit {
       this.packList=packData;
       
     });
+  }
+  hideInfoCart(){
+    this.showInfoCart=true;
   }
 }

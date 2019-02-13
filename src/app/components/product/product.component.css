@@ -29,8 +29,16 @@
 .bg-body{
     background-color: #0D0D0D;
 }
-
+.bg-yellow{
+    background-color: #f2b517;
+}
+.bg-black{
+    background-color: #000;
+}
 .bg-item{
+    background-color: #fff
+}
+.bg-white{
     background-color: #fff
 }
 .products-menu{
@@ -106,4 +114,35 @@ p{
 }
 .first-element{
     margin-top: 4.75%!important;
+}
+#cartItems{
+    position: fixed;
+    top: 10%;
+    right: 0%;
+    z-index: 999;
+}
+#cartSection{
+    height: 149px;
+    width: auto;
+    overflow: auto;;
+    background: #fff;
+}
+.text-yellow{
+    color:#fbd12c;
+}
+.img-arrow-left{
+    cursor: pointer;
+}
+.text-alert{
+    font-size: 14px;
+}
+.item-text{
+    color: #000;
+    font-size: 12px;
+}
+.btn-pay{
+    background-color: #fbd12c;
+}
+.btn-explorer{
+    background-color: #000;
 }
