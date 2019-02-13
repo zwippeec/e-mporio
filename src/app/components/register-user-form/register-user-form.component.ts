@@ -14,14 +14,20 @@ export class RegisterUserFormComponent implements OnInit {
   password:any;
   confirmCreate:boolean=false;
   isUserAuth:boolean=false;
+  stringRan="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  code:any='';
 
   constructor( public fireSrv:FirebaseService, private cookieService: CookieService,private _router: Router) { }
 
   ngOnInit() {
-    
+    for(let i = 0; i < 6; i++){
+      this.code+=this.stringRan.charAt(Math.round(Math.random()*this.stringRan.length));
+    }
   }
 
   createUser(){
+    this.user.code=this.code;
+    console.log(this.user.code)
     this.fireSrv.createNewUser(this.user.mail,this.password, this.user)
     .then(ok=>{
       this.confirmCreate=true;
@@ -37,5 +43,4 @@ export class RegisterUserFormComponent implements OnInit {
 
     this._router.navigate(['/']);
   }
-
 }

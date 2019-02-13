@@ -123,10 +123,8 @@ export class HomeComponent implements OnInit {
               for(let i = 0; i < _tmpList.length; i++){
                 this.favorites.push(_tmpList[i]);
               }
-
               this.fireSrv.getAllProducts().subscribe(productsData=>{
                 //user log and not survey
-                console.log('aqui 1');
                 for(let i = 0; i < productsData.length; i++){
                   for(let j = 0; j < this.favorites.length; j++){
                     if(productsData[i]['windKind']==this.favorites[j]){
@@ -135,7 +133,6 @@ export class HomeComponent implements OnInit {
                   }
                 }
               });
-
             }else{
               //user not log and not survey
               this.fireSrv.getSuggestion(resp[i]['numsElements']).subscribe(dataSuggestion=>{
@@ -156,7 +153,6 @@ export class HomeComponent implements OnInit {
     }else{
       this.isAuth=false;
     }
-
     if(localStorage.getItem('listCart')){
       this.itemsCart=JSON.parse(localStorage.getItem('listCart'));
       this.subtotalPay=0;

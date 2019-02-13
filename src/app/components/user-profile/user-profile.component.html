@@ -9,10 +9,17 @@
     </div>
     <div class="col">
       <div class="card-body">
-        <h4 class="card-title">Nombres:</h4> <p *ngIf="!isEditing">{{userData.name}} {{userData.lastname}}</p>
+        <h4 class="text-title-profile mb-2">
+          Nombres: <span *ngIf="!isEditing" class="font-weight-normal text-profile">{{userData.name}} {{userData.lastname}}</span>
+        </h4> 
         <input *ngIf="isEditing" [(ngModel)]="newUserData.name" name="name" type="text" value="{{newUserData.name}}">
         <input *ngIf="isEditing" [(ngModel)]="newUserData.lastname" name="lastname" type="text" value="{{newUserData.lastname}}">
-        <h4 class="card-text">Correo:</h4> <p *ngIf="!isEditing">{{userData.mail}}</p>
+        <h4 *ngIf="!isEditing" class="text-title-profile mb-2">
+          Correo: <span *ngIf="!isEditing" class="font-weight-normal text-profile">{{userData.mail}}</span>
+        </h4> 
+        <h4 *ngIf="!isEditing" class="text-title-profile mb-2">
+          Código: <span *ngIf="!isEditing" class="font-weight-normal text-profile">{{userData.code}}</span>
+        </h4> 
       </div>
     </div>
   </div>
