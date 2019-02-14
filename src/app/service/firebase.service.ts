@@ -47,6 +47,15 @@ export class FirebaseService {
   getSuggestionPerson(uid){
     return this.afDb.object('user/'+uid+'/suggestionPerson').valueChanges();
   }
+  saveEmailFriend(uid,emailFriend){
+    return this.afDb.list('user/'+uid+'/referencesEmail/').push(emailFriend)
+  }
+  getSuggestionPersonByEmail(uid){
+    return this.afDb.list('user/'+uid+'/referencesEmail').valueChanges();
+  }
+  getAllUser(mail){//Search all user who are registred
+    return this.afDb.list('user', ref=>ref.orderByChild('mail').equalTo(mail))
+  }
   //Products
   getAllProducts(){
     return this.afDb.list('products').valueChanges();
