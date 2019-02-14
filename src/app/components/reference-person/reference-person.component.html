@@ -9,19 +9,43 @@
   </div>
   <!--end Title-->
   <!--Content-->
+  <!--Registered-->
   <div *ngIf="suggestionPerson.length>0;else anyPerson">
-    <div class="row" *ngFor="let person of suggestionPerson">
-      <div class="col">
-        {{person}}
+    <div *ngFor="let person of suggestionPerson; let i = index" class="row pt-1 pl-1">
+      <div class="col-1"></div>
+      <div class="col-2 text-center mr-0 pt-2 bg-gray2" style="margin-right: -3px!important;">
+        <img class="bg-black" style="border-radius: 100%" src="../../../assets/user.png" alt="" height="80" width="80">
       </div>
-      <div class="col">
-        1
+      <div class="col text-left pt-4 mr-1 bg-gray2 pb-2" >
+        <p class="text-gray p-0 m-0 "> 
+          <img src="../../../assets/star.png" alt="" height="15" width="15" style="margin-top: -3px">
+          <span class="pl-2">{{person[0].name}} {{person[0].lastname}}</span>
+        </p>
+        <p class="text-gray p-0 m-0 pl-4">{{person[0].mail}}</p>
+        <p class="text-gray p-0 m-0 pl-4">Active</p>
       </div>
-      <div class="col">
-        1
-      </div>
+      <div class="col-1"></div>
     </div>
   </div>
+  <!--end registered-->
+  <!--Unregistered-->
+  <div *ngIf="suggestionPersonInactive.length>0">
+    <div *ngFor="let personInactive of suggestionPersonInactive; let i = index" class="row pt-1 pl-1">
+      <div class="col-1"></div>
+      <div class="col-2 text-center mr-0 pt-2 bg-gray1" style="margin-right: -3px!important;">
+        <img class="bg-black" style="border-radius: 100%" src="../../../assets/user.png" alt="" height="80" width="80">
+      </div>
+      <div class="col text-left pt-4 mr-1 bg-gray1" >
+        <p class="text-gray p-0 m-0 "> 
+          <img src="../../../assets/star.png" alt="" height="15" width="15" style="margin-top: -3px">
+          <span class="pl-2">{{personInactive}}</span>
+        </p>
+        <p class="text-gray p-0 m-0 pl-4">Inactive</p>
+      </div>
+      <div class="col-1"></div>
+    </div>
+  </div>
+  <!--end Unregistered-->
   <ng-template #anyPerson>
     No ha sugerido a ninguna persona aún.
   </ng-template>

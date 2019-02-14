@@ -11,3 +11,15 @@
     border-top-left-radius: 7px;
     border-top-right-radius:  7px;
 }
+.bg-gray{
+    background-color: #333333;
+}
+.bg-gray1{
+    background-color: #E6E6E6;
+}
+.bg-gray2{
+    background-color: #CCCCCC;
+}
+.text-gray{
+    color: #4D4D4D;
+}
