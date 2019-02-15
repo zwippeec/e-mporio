@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { CookieService } from 'ngx-cookie-service';
+import * as database from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,12 @@ export class FirebaseService {
   constructor(public afDb:AngularFireDatabase, public afAuth:AngularFireAuth , private cookieService:CookieService) { }
 
   //Login and register
-  createNewUser(mail,pass,data){
+  createNewUser(mail,pass,data,referenceId){
     return this.afAuth.auth.createUserWithEmailAndPassword(mail,pass)
     .then(userOk=>{
       this.cookieService.set( 'userLogged', ''+userOk.user.uid );
       this.afDb.object('user/'+userOk.user.uid).set(data);
+      this.afDb.object('user/'+referenceId+'/suggestionPerson/'+userOk.user.uid).set(true)
     })
     .catch(e=>console.log('Error: ', e ))
   }
@@ -55,6 +57,11 @@ export class FirebaseService {
   }
   getAllUser(mail){//Search all user who are registred
     return this.afDb.list('user', ref=>ref.orderByChild('mail').equalTo(mail))
+  }
+  getUserByCode(code){//Search all user who are registred
+    //return this.afDb.list('user', ref=>ref.orderByChild('code').equalTo(code)).valueChanges();
+    //return this.afDb.object('user').snapshotChanges();
+    return database.database().ref('user').orderByChild("code").equalTo(code).once('value');
   }
   //Products
   getAllProducts(){
