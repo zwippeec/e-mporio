@@ -1,3 +1,45 @@
 .first-element{
     margin-top: 4.75%!important;
 }
+.bg-white{
+    background-color: #fff;
+}
+.bg-black{
+    background-color: #000;
+}
+.title-text{
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+}
+.subtitle-text{
+    color: #000;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.btn-login{
+    background-color: #fbd12c;
+}
+
+hr{
+    border: 0.5px solid #cccccc;
+}
+.member-text{
+    font-size: 12px;
+}
+
+.btn-member{
+    background-color: #fbd12c;
+    text-align: center;
+    font-size: 13px;
+}
+.text-yellow{
+    color:#fbd12c;
+}
+.bg-gray{
+    background-color: #333333;
+}
+.text-white{
+    color: #fff;
+}

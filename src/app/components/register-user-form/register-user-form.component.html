@@ -4,18 +4,26 @@
       <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form class="first-element">
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label>Nombres</label>
-      <input [(ngModel)]="user.name" name="name" type="text" class="form-control" placeholder="Nombres">
-    </div>
-
-    <div class="form-group col-md-6">
-      <label>Apellidos</label>
-      <input [(ngModel)]="user.lastname" name="lastname" type="text" class="form-control"  placeholder="Apellidos">
-    </div>
-  
+<div class="container first-element">
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label>Nombres</label>
+        <input [(ngModel)]="user.name" name="name" type="text" class="form-control" placeholder="Nombres">
+      </div>
+      
+      <div class="form-group col-md-6">
+        <label>Apellidos</label>
+        <input [(ngModel)]="user.lastname" name="lastname" type="text" class="form-control"  placeholder="Apellidos">
+      </div>
+    
+      <div class="form-group col-md-2">
+        <label>Código de invitación</label>
+        <input [(ngModel)]="user.code" name="code" type="text" class="form-control" placeholder="AaBbCc">
+      </div>
+          
+      <div class="form-group col-md-10"></div>
+      
       <div class="form-group col-md-6">
         <label >Email</label>
         <input [(ngModel)]="user.mail" name="mail" type="email" class="form-control" placeholder="Email">
@@ -27,3 +35,4 @@
     </div>
     <button type="submit" class="btn btn-primary" (click)="createUser()">Sign in</button>
   </form>
+</div>
