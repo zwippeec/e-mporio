@@ -1,53 +1,87 @@
-<div class="container p-5 first-element">
-  <div class="row">
-    <div class="col-3 text-center">
-      <img src="https://openclipart.org/image/2400px/svg_to_png/247324/abstract-user-flat-1.png" alt="..." width="200" height="200">
-      <div class="pt-3">
-        <button *ngIf="!isEditing" type="button" class="btn btn-info" (click)="editProfile()">Editar</button>
-        <button *ngIf="isEditing" type="button" class="btn btn-warning" (click)="saveNewData()">Guardar</button>
+<div class="mt-2">
+  <div class="container pt-2 pb-2 first-element">
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col bg-gray">
+        <div class="row text-center pt-2">
+          <div class="col">
+            <!--img src="https://openclipart.org/image/2400px/svg_to_png/247324/abstract-user-flat-1.png" alt="..." width="40" height="40"-->
+            <img src="../../../assets/user.png" alt="" height="50" width="40">
+          </div>
+        </div>
+        <div class="row pt-1 pb-1 pl-5 pr-3">
+          <div class="col pt-2">
+            <h4 class="text-title-profile text-yellow">
+              Nombres: <span *ngIf="!isEditing" class="font-weight-normal text-profile text-white">{{userData.name}} {{userData.lastname}}</span>
+              <span>
+                <input class="mr-1" *ngIf="isEditing" [(ngModel)]="newUserData.name" name="name" type="text" value="{{newUserData.name}}" style="width: 165px!important; height: 22px!important; font-size: 14px;">
+                <input *ngIf="isEditing" [(ngModel)]="newUserData.lastname" name="lastname" type="text" value="{{newUserData.lastname}}" style="width: 165px!important; height: 22px!important; font-size: 14px;">
+              </span>
+            </h4>       
+          </div>
+        </div>
+        <div class="row pt-1 pb-1 pl-5 pr-5">
+          <div class="col pt-2">
+            <h4 class="text-title-profile text-yellow">
+              Correo: <span class="font-weight-normal text-profile text-white">{{userData.mail}}</span>
+            </h4> 
+          </div>
+        </div>
+        <div class="row pt-1 pb-1 pl-5 pr-5">
+          <div class="col-4 pt-2">
+            <h4 class="text-title-profile text-yellow">
+              Código: <span class="font-weight-normal text-profile text-white">{{userData.code}}</span>
+            </h4> 
+          </div>
+          <div class="col">
+            <p id="urlCode" [hidden]="true">http://localhost:4200/newUser?code={{userData.code}}</p>
+            <button type="button" class="btn btn-warning mr-2" data-toggle="modal" data-target=".bd-example-modal-sm">
+              <img src="../../../assets/shareEmail.png" alt="Compartir" height="23" width="23" title="Compartir vía correo">
+              Compartir
+            </button>
+            <button class="btn btn-warning" (click)="copyCode();copyMessagShow()">
+              <img src="../../../assets/copy-icon.png" alt="Compartir" height="23" width="23" title="Copiar">
+              Copiar
+            </button>
+            <span class="toast-Alert">
+              <div id="toast" class="toast fade" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                  {{messageAlert}}
+                </div>
+              </div>
+            </span>
+          </div>
+        </div>
+        <hr>
+        <div class="row text-center pt-2 pb-2">
+          <div class="col">
+            <button *ngIf="!isEditing" type="button" class="btn btn-warning" (click)="editProfile()">Editar Perfil</button>
+            <button *ngIf="isEditing" type="button" class="btn btn-warning" (click)="saveNewData()">Guardar</button>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="card-body">
-        <h4 class="text-title-profile mb-2">
-          Nombres: <span *ngIf="!isEditing" class="font-weight-normal text-profile">{{userData.name}} {{userData.lastname}}</span>
-        </h4> 
-        <input *ngIf="isEditing" [(ngModel)]="newUserData.name" name="name" type="text" value="{{newUserData.name}}">
-        <input *ngIf="isEditing" [(ngModel)]="newUserData.lastname" name="lastname" type="text" value="{{newUserData.lastname}}">
-        <h4 *ngIf="!isEditing" class="text-title-profile mb-2">
-          Correo: <span *ngIf="!isEditing" class="font-weight-normal text-profile">{{userData.mail}}</span>
-        </h4> 
-      </div>
-    </div>
-    <div class="col">
-      <h4 *ngIf="!isEditing" class="text-title-profile mb-2">
-        Código: <span *ngIf="!isEditing" class="font-weight-normal text-profile">{{userData.code}}</span>
-      </h4> 
-      <p id="urlCode" [hidden]="true">http://localhost:4200/newUser?code={{userData.code}}</p>
-      <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-sm">Compartir</button>
-      <button class="btn btn-warning" (click)="copyCode()">Copiar</button>
+      <div class="col-3"></div>
     </div>
   </div>
 </div>
 
-
-<!-- Small modal -->
+<!-- Formulario invitación por correo -->
 <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalScrollableTitle">Invitar a mis amigos</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <input type="text" class="form-control" name="emailFriend" [(ngModel)]="emailFriend" placeholder="email@example.com">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" (click)="send(userData.name,userData.code)" data-dismiss="modal">Enviar</button>
-            </div>
-          </div>
-        </div>
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Invitar a mis amigos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" name="emailFriend" [(ngModel)]="emailFriend" placeholder="email@example.com">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="send(userData.name,userData.code)" data-dismiss="modal">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
