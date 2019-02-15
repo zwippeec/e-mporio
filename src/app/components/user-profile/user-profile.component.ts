@@ -15,6 +15,8 @@ export class UserProfileComponent implements OnInit {
   newUserData:any;
   emailFriend:any=null;
   uid:any;
+  messageAlert:any=null;
+  _toastShow;
   constructor(private fireSrv:FirebaseService, private cookieService: CookieService,private _router: Router) { }
 
   ngOnInit() {
@@ -55,5 +57,21 @@ export class UserProfileComponent implements OnInit {
     aux.select();
     document.execCommand('copy');
     document.body.removeChild(aux);
+  }
+
+  copyMessagShow(){
+    this.messageAlert="Código copiado";
+    let toast = document.querySelector('#toast')
+    toast.classList.remove('hide')
+    toast.classList.add('show')
+    this._toastShow=setTimeout(()=>{this.copyMessagHide()},2000)
+  }
+  
+  copyMessagHide(){
+    this.messageAlert=null;
+    let toast = document.querySelector('#toast')
+    toast.classList.remove('show')
+    toast.classList.add('hide')
+    window.clearTimeout(this._toastShow);
   }
 }

@@ -8,3 +8,25 @@
 .text-title-profile{
     font-size:18px;
 }
+.text-yellow{
+    color:#fbd12c;
+}
+.bg-gray{
+    background-color: #333333;
+}
+.text-white{
+    color: #fff;
+}
+hr{
+    border: 0.5px solid #fff;
+    width: 70%;
+}
+.bg-white{
+    background-color: #fff;
+}
+
+.toast-Alert{
+    position: absolute;
+    display: flex;
+    left: 46%;
+}
