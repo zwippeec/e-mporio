@@ -1,3 +1,23 @@
 .first-element{
     margin-top: 4.75%!important;
 }
+.bg-gray{
+    background-color: #333333;
+}
+.title-text{
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+}
+.text-yellow{
+    color:#fbd12c;
+}
+.text-white{
+    color: #fff;
+}
+.btn-login{
+    background-color: #fbd12c;
+}
+.member-text{
+    font-size: 12px;
+}

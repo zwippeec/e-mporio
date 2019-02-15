@@ -4,35 +4,46 @@
       <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="container first-element">
-  <form>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label>Nombres</label>
-        <input [(ngModel)]="user.name" name="name" type="text" class="form-control" placeholder="Nombres">
+<div class="first-element">
+  <div class="container">
+    <div class="row pt-3 pb-2 text-center">
+      <div class="col-4"></div>
+      <div class="col-4 bg-gray border">
+        <p class="title-text text-yellow mb-0 pt-3 pb-2">REGISTRO</p>
+        <form class="pt-1 pb-1">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <!--label>Nombres</label-->
+              <input [(ngModel)]="user.name" name="name" type="text" class="form-control" placeholder="Nombres">
+            </div>    
+            <div class="form-group col-12">
+              <!--label>Apellidos</label-->
+              <input [(ngModel)]="user.lastname" name="lastname" type="text" class="form-control"  placeholder="Apellidos">
+            </div>
+            <div class="form-group col-12">
+              <!--label>Código de invitación</label-->
+              <input [(ngModel)]="user.code" name="code" type="text" class="form-control" placeholder="Código Referencial (Opcional)">
+            </div>              
+          </div>
+          <div class="form-row">
+          <div class="form-group col-12">
+            <!--label >Email</label-->
+            <input [(ngModel)]="user.mail" name="mail" type="email" class="form-control" placeholder="Email">
+          </div>
+          <div class="form-group col-md-12">
+              <!--label >Password</label-->
+              <input [(ngModel)]="password" name="password" type="password" class="form-control" placeholder="Password">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-login" (click)="createUser()">Registrarse</button>
+        </form>
+        <hr class="m-2">
+        <div class="text-center pb-3">
+          <p class="member-text mb-2 pt-2 pb-2 text-white">Ya soy miembro.</p> 
+          <a href="/login" class="btn btn-login">Iniciar Sesión</a>
+        </div>          
       </div>
-      
-      <div class="form-group col-md-6">
-        <label>Apellidos</label>
-        <input [(ngModel)]="user.lastname" name="lastname" type="text" class="form-control"  placeholder="Apellidos">
-      </div>
-    
-      <div class="form-group col-md-2">
-        <label>Código de invitación</label>
-        <input [(ngModel)]="user.code" name="code" type="text" class="form-control" placeholder="AaBbCc">
-      </div>
-          
-      <div class="form-group col-md-10"></div>
-      
-      <div class="form-group col-md-6">
-        <label >Email</label>
-        <input [(ngModel)]="user.mail" name="mail" type="email" class="form-control" placeholder="Email">
-      </div>
-      <div class="form-group col-md-6">
-        <label >Password</label>
-        <input [(ngModel)]="password" name="password" type="password" class="form-control" placeholder="Password">
-      </div>
+      <div class="col-4"></div>
     </div>
-    <button type="submit" class="btn btn-primary" (click)="createUser()">Sign in</button>
-  </form>
+  </div>
 </div>
