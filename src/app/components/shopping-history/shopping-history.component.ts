@@ -17,6 +17,11 @@ export class ShoppingHistoryComponent implements OnInit {
   message:any=null;
   //suggestion
   suggestionList:any;
+  //Info cart
+  listCart:any=[];
+  itemsCart:any=[];
+  subtotalPay:any=0.00;
+  showInfoCart:boolean=true;//show or hide info
 
   constructor(public fireSrv:FirebaseService,private cookieService:CookieService,private _router: Router) { 
     if(this.cookieService.check('userLogged')){
@@ -44,6 +49,20 @@ export class ShoppingHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.getSuggestion();
+
+    this.listCart=[];
+    this.itemsCart=[];
+    this.subtotalPay=0;
+    if(localStorage.getItem('listCart')){
+      this.itemsCart=JSON.parse(localStorage.getItem('listCart'));
+      for(let i = 0; i < JSON.parse(localStorage.getItem('listCart')).length ;i++){
+        this.fireSrv.getProducByIdPay(this.itemsCart[i].type,this.itemsCart[i].id).subscribe(itemData=>{
+          let _totalUni=this.itemsCart[i].quantity*itemData['cost'];
+          this.subtotalPay+=_totalUni;
+          this.listCart.push({id:this.itemsCart[i].id,data:itemData,quantity:this.itemsCart[i].quantity,totalUni:_totalUni})
+        });
+      }
+    }
   }
 
   detailsByOrder(id){
@@ -106,29 +125,37 @@ export class ShoppingHistoryComponent implements OnInit {
     })
   }
 
-  addCart(Pid,typeData){
+  addCart(Pid,typeData,quantity){
+    this.showInfoCart=false;
     let items:any=[];//array to first object
     let _tmpList:any=[];//temporal array to list cart
+
+    if(quantity==undefined){
+      quantity=1;
+    }
+
     //Condition if exits listCart or create new list
     if(localStorage.getItem('listCart')!=null){
       _tmpList=JSON.parse(localStorage.getItem('listCart'));//get list cart
       //Condition to add item or increase quantity on item
       if(_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)!=-1){
-        _tmpList[_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)].quantity+=1;//increase quantity on item 
+        _tmpList[_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)].quantity+=quantity;//increase quantity on item 
       }else{
-        _tmpList.push({id:Pid,quantity:1,type:typeData})//add item on list if no exist
+        _tmpList.push({id:Pid,quantity:quantity,type:typeData})//add item on list if no exist
       } 
       localStorage.removeItem('listCart');//remove old list
       localStorage.setItem('listCart',JSON.stringify(_tmpList))//create new list
-      this.ngOnInit();
     }else{
-      items.push({id:Pid,quantity:1,type:typeData});//first item on list
+      items.push({id:Pid,quantity:quantity,type:typeData});//first item on list
       localStorage.setItem('listCart',JSON.stringify(items))//create list
-      this.ngOnInit();
     }
+    this.ngOnInit();
   }
 
   scroll(){
     document.querySelector('#cartSection').scrollIntoView();
+  }
+  hideInfoCart(){
+    this.showInfoCart=true;
   }
 }

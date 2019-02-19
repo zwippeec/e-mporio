@@ -89,10 +89,10 @@
           <div class="row mb-2 text-right pt-2">
             <div class="col-md-7 col-sm-4"></div>
             <div class="col-md-2 col-sm-4">
-              <input type="number" class="input-quantity mr-1" min="0" max="999" >
+              <input type="number" class="input-quantity mr-1 text-center" min="1" max="999" [(ngModel)]="itemPromo.quantityProd">
             </div>
             <div class="col-md-1 col-sm-4">
-              <a (click)="addCart(itemPromo.idP,'products')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+              <a (click)="addCart(itemPromo.idP,'products',itemPromo.quantityProd)"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
             </div>
           </div>
           <!--End Card promotion-->
@@ -107,7 +107,7 @@
     <div class="pt-2 pb-3">
         <div class="row text-center " style="width: 101%;">
           <div class="col-1"></div>
-          <div *ngFor="let itemPromo of promotionList" class="col bg-item ml-2" >
+          <div *ngFor="let itemPromo of promotionList; let i = index" class="col bg-item ml-2" >
             <!--Card promotion-->
             <div class="row " >
               <div class="col text-right pt-3">
@@ -137,10 +137,10 @@
             <div *ngIf="itemPromo.time!='00:00:00'" class="row mb-2 text-right pt-2">
                 <div class="col-md-7 col-sm-4"></div>
                 <div class="col-md-2 col-sm-4">
-                  <input type="number" class="input-quantity mr-1" min="0" max="999" >
+                  <input type="number" class="input-quantity mr-1" min="1" max="999" [(ngModel)]="itemPromo.quantityProd">
                 </div>
                 <div class="col-md-1 col-sm-4">
-                  <a (click)="addCart(itemPromo.promoid,'promotion')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+                  <a (click)="addCart(itemPromo.promoid,'promotion',itemPromo.quantityProd)"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
                 </div>
               </div>
             <!--End Card promotion-->

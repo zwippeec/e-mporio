@@ -140,10 +140,10 @@
             </div>
             <div class="row mb-0 text-right pt-2">
               <div class="col col-sm-4 ml-4">
-                <input type="number" class="input-quantity mr-1" min="0" max="999" >
+                <input type="number" class="input-quantity mr-1" min="0" max="999" [(ngModel)]="itemPromo.quantityProd">
               </div>
               <div class="col col-sm-4">
-                <a (click)="addCart(itemPromo.idP,'products')"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+                <a (click)="addCart(itemPromo.idP,'products',itemPromo.quantityProd)"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
               </div>
             </div>
             <!--End Card promotion-->
