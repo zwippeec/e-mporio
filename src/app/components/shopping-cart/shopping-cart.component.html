@@ -60,8 +60,14 @@
                   ${{item.data.cost}}
                 </div>
                 -->
-                <div class="col-2 pl-1 pr-1 ml-0 text-wrap item-text text-center">
+                <div class="col-1 pl-1 pr-1 ml-0 text-wrap item-text text-center">
+                  <img (click)="remove(item.id,item.type)" class="img-cart-AR" src="../../../assets/minor.png" alt="" width="6">
+                </div>
+                <div class="col-1 pl-1 pr-1 ml-0 text-wrap item-text text-center ">
                   x{{item.quantity}}
+                </div>
+                <div class="col-1 pl-1 pr-1 ml-0 text-wrap item-text text-center">
+                  <img (click)="add(item.id,item.type)" class="img-cart-AR" src="../../../assets/plus.png" alt="" width="8">
                 </div>
                 <div class="col-2 pl-1 pr-1 ml-0 text-wrap item-text text-center">
                   ${{item.totalUni}}
@@ -140,7 +146,7 @@
             </div>
             <div class="row mb-0 text-right pt-2">
               <div class="col col-sm-4 ml-4">
-                <input type="number" class="input-quantity mr-1" min="0" max="999" [(ngModel)]="itemPromo.quantityProd">
+                <input type="number" class="input-quantity mr-1" min="1" max="999" [(ngModel)]="itemPromo.quantityProd">
               </div>
               <div class="col col-sm-4">
                 <a (click)="addCart(itemPromo.idP,'products',itemPromo.quantityProd)"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
