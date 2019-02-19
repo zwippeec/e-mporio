@@ -153,3 +153,7 @@ p.item{
 .first-element{
     margin-top: 4.75%!important;
 }
+
+.img-cart-AR{
+    cursor: pointer;
+}

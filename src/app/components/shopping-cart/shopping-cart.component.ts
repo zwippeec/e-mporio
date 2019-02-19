@@ -86,7 +86,7 @@ export class ShoppingCartComponent implements OnInit {
           let _totalUni=this.itemsCart[i].quantity*itemData['cost'];
           this.subtotalPay+=_totalUni;
           this.totalPay=this.subtotalPay+this.taxSend-this.coupon;
-          this.listCart.push({id:this.itemsCart[i].id,data:itemData,quantity:this.itemsCart[i].quantity,totalUni:_totalUni})
+          this.listCart.push({id:this.itemsCart[i].id,data:itemData,quantity:this.itemsCart[i].quantity,totalUni:_totalUni,type:this.itemsCart[i].type})
         });
       }
     }
@@ -273,5 +273,34 @@ export class ShoppingCartComponent implements OnInit {
         break;
     }
     
+  }
+
+  remove(Pid,typeData){
+    let _tmpList:any=[];//temporal array to list cart
+
+    _tmpList=JSON.parse(localStorage.getItem('listCart'));//get list cart
+    //Condition to remove quantity on item
+    _tmpList[_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)].quantity-=1;//increase quantity on item 
+    if(_tmpList[_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)].quantity==0){
+      let _position=_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)
+      _tmpList.splice(_position,1)
+    }
+    localStorage.removeItem('listCart');//remove old list
+    localStorage.setItem('listCart',JSON.stringify(_tmpList))//create new list
+    
+    this.ngOnInit();
+  }
+
+  add(Pid,typeData){
+    let _tmpList:any=[];//temporal array to list cart
+
+    _tmpList=JSON.parse(localStorage.getItem('listCart'));//get list cart
+    //Condition to add quantity on item
+    _tmpList[_tmpList.findIndex(data=>data.id===Pid && data.type===typeData)].quantity+=1;//increase quantity on item 
+    
+    localStorage.removeItem('listCart');//remove old list
+    localStorage.setItem('listCart',JSON.stringify(_tmpList))//create new list
+    
+    this.ngOnInit();
   }
 }
