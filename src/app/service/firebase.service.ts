@@ -129,8 +129,8 @@ export class FirebaseService {
   }
   
   //Cellar
-  saveOnMyCellar(uid,data){
-    return this.afDb.object ('cellar/'+uid).set(data);
+  saveOnMyCellar(uid,idP,data){
+    return this.afDb.object ('cellar/'+uid+'/'+idP).set(data);
   }
   
   //Principal Menu

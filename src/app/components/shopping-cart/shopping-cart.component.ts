@@ -19,7 +19,8 @@ export class ShoppingCartComponent implements OnInit {
   paymentSelect:any=null;
   saveCellar:boolean=false;
   isAuth:boolean=false;
-
+  //Cellar wind
+  myCellarWinds:any=[];
   //suggestion
   suggestionList:any;
   //login 
@@ -104,31 +105,30 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   goToPay(){
-    
-      if(this.itemsCart.length>0){
-        if(this.paymentSelect!=null){
-          let _uid=this.cookieService.get('userLogged');
-          let _data={};
-          _data={
-            date:database.ServerValue.TIMESTAMP,
-            itemsData:this.itemsCart,
-            itemsProd:this.listCart,
-            subtotal:this.subtotalPay,
-            payment:this.paymentSelect,
-            statusPayment:'pending'
-          }
-          console.log(_data)
-          this.fireSrv.payOrder(_uid,_data);
-          if(this.saveCellar){
-            this.fireSrv.saveOnMyCellar(_uid,this.itemsCart);
-          }
-          this.clearData();
-        }else{
-          alert('No se a seleccionado un método de pago.');
+    this.cellar();
+    if(this.itemsCart.length>0){
+      if(this.paymentSelect!=null){
+        let _uid=this.cookieService.get('userLogged');
+        let _data={};
+        _data={
+          date:database.ServerValue.TIMESTAMP,
+          itemsData:this.itemsCart,
+          itemsProd:this.listCart,
+          subtotal:this.subtotalPay,
+          payment:this.paymentSelect,
+          statusPayment:'pending'
         }
+        this.fireSrv.payOrder(_uid,_data);
+        if(this.saveCellar){
+          this.fireSrv.saveOnMyCellar(_uid,this.itemsCart);
+        }
+        this.clearData();
       }else{
-        alert('carrito vacio')
+        alert('No se a seleccionado un método de pago.');
       }
+    }else{
+      alert('carrito vacio')
+    }
   }
 
   saveOnCellar(e){
@@ -188,7 +188,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   addCart(Pid,typeData,quantity){
-    //this.showInfoCart=false;
     let items:any=[];//array to first object
     let _tmpList:any=[];//temporal array to list cart
 
@@ -302,5 +301,41 @@ export class ShoppingCartComponent implements OnInit {
     localStorage.setItem('listCart',JSON.stringify(_tmpList))//create new list
     
     this.ngOnInit();
+  }
+
+  cellar(){
+    this.myCellarWinds=[];
+    for(let i=0; i<this.itemsCart.length;i++){
+      if(this.listCart[i].type=="promotion"){
+        for(let j=0; j<Object.keys(this.listCart[i].data.product).length;j++){
+          if(this.myCellarWinds.length>0){
+            if(this.myCellarWinds.findIndex(data=>data.id==JSON.parse(Object.keys(this.listCart[i].data.product)[j]))==-1){
+              this.myCellarWinds.push({id:JSON.parse(Object.keys(this.listCart[i].data.product)[j]),quantity:Object.values(this.listCart[i].data.product)[j]})
+            }else{
+              this.myCellarWinds[this.myCellarWinds.findIndex(data=>data.id==JSON.parse(Object.keys(this.listCart[i].data.product)[j]))].quantity+=Object.values(this.listCart[i].data.product)[j];
+            }
+          }else{
+            this.myCellarWinds.push({id:JSON.parse(Object.keys(this.listCart[i].data.product)[j]),quantity:Object.values(this.listCart[i].data.product)[j]})
+          }
+        }
+      }else if(this.listCart[i].type=="products"){
+        if(this.myCellarWinds.length>0){
+          if(this.myCellarWinds.findIndex(data=>data.id==this.listCart[i].id)==-1){
+            this.myCellarWinds.push({id:this.listCart[i].id,quantity:this.listCart[i].quantity})
+          }else{
+            this.myCellarWinds[this.myCellarWinds.findIndex(data=>data.id==this.listCart[i].id)].quantity+=this.listCart[i].quantity;
+          }
+        }else{
+          this.myCellarWinds.push({id:this.listCart[i].id,quantity:this.listCart[i].quantity})    
+        }
+      }
+    }
+    //console.log(this.myCellarWinds)
+
+    let _uid=this.cookieService.get('userLogged');
+    for(let i = 0; i < this.myCellarWinds.length; i++){
+      console.log(this.myCellarWinds[i].id)
+      this.fireSrv.saveOnMyCellar(_uid,this.myCellarWinds[i].id,this.myCellarWinds[i]);
+    }
   }
 }
