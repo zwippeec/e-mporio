@@ -124,38 +124,7 @@
 </nav>
 
 <!-- Pages container -->
-
-<router-outlet class="bg-body">
-
-<!-- Button trigger modal -->
-<button type="button" class="border-0 p-0" #openModalBtn [hidden]="true" data-toggle="modal" data-target="#exampleModal"></button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 *ngIf="surveyData.title!=null" class="modal-title" id="exampleModalLabel">{{surveyData.title}}</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div *ngFor="let question of surveyData.questions; index as i">
-        <p>{{question.question}}</p>
-        <div *ngFor="let option of surveyData.options[i]">
-          <input type="checkbox" name="{{option}}" value="{{option}}"  (change)="selectOption($event)"> {{option}}
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-      <button type="button" class="btn btn-success" (click)="saveSurvey()" data-dismiss="modal">Guardar</button>
-    </div>
-  </div>
-</div>
-</div>
-</router-outlet>
+<router-outlet class="bg-body"></router-outlet>
 
 <!-- Footer content -->
 <footer class="bg-footer mt-1" >

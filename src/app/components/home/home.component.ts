@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { FirebaseService } from '../../service/firebase.service';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -8,7 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  @ViewChild("openModalBtn") openModalBtn:ElementRef;
+  
   elementList:any;
   boardList:any;
   promotionList:any;
@@ -26,6 +27,14 @@ export class HomeComponent implements OnInit {
   subtotalPay:any=0.00;
   showInfoCart:boolean=true;//show or hide info
   quantityProd:number=1;
+  //Survey
+  countTotalItems:any=0;
+  _dateCookie:Date=new Date();
+  surveyData:any={
+    title:''
+  };
+  optionSurvey:any=[];
+  countSurvey:number=0;
 
   constructor( public fireSrv:FirebaseService,private cookieService: CookieService) {
     this.fireSrv.getHomePage().subscribe(resp=>{
@@ -147,6 +156,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fireSrv.getSurvey().subscribe(surveyData=>{
+      this.surveyData=surveyData;
+    });
     this.listCart=[];
     if(this.cookieService.check('userLogged')){
       this.uid=this.cookieService.get('userLogged');
@@ -196,5 +208,71 @@ export class HomeComponent implements OnInit {
 
   hideInfoCart(){
     this.showInfoCart=true;
+  }
+  @HostListener('window:scroll', []) // for window scroll events
+  userScroll(){
+    let _scroll=document.documentElement.scrollTop || document.body.scrollTop;
+    if(_scroll>960 && this.countSurvey==0){
+      this.surveyLauch();
+      this.countSurvey+=1;
+    }
+  }
+
+  surveyLauch(){
+    if(this.cookieService.check('userLogged')){
+      this.uid=this.cookieService.get('userLogged');//Get user data
+      //Get favorite list
+      this.fireSrv.getDataByUser(this.uid).subscribe(userData=>{
+        //If not exists favorite list (attribute/firebase)
+        if(userData['favorite']==null || userData['favorite']== undefined){
+          this.openModalBtn.nativeElement.click();//automatic click on buttom to open modal (survey)
+        }
+        //Delete favorite data of user log
+        /*else{
+          let _now=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDate();
+          if(_now!=userData['favorite'][0]){
+            this.fireSrv.erasedFavorite(this.uid);
+          }
+        }*/
+      });
+    }else{
+      //User not Auth
+      if(localStorage.getItem('createList')){
+        let _tmpLocalDate=localStorage.getItem('createList');//get data to last visit
+        let _now=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDate()//nowaday
+        //Remove data saved
+        if(_now!=_tmpLocalDate){
+          localStorage.removeItem('createList');
+          localStorage.removeItem('favoriteList');
+        }
+      }
+      //If not exists favorite list (local)
+      if(localStorage.getItem('favoriteList')==null){
+        this.openModalBtn.nativeElement.click();//automatic click on buttom to open modal (survey)
+      }
+    }
+  }
+
+  //function to add options on survey
+  selectOption(event){
+    //Add first element (date)
+    if(this.isAuth && this.optionSurvey.length==0){
+      this.optionSurvey.push(this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDate());
+    }
+    if(event.target.checked){ 
+      this.optionSurvey.push(event.target.value);//add options on array
+    }else{
+      this.optionSurvey.splice(this.optionSurvey.indexOf(event.target.value),1);//delete option on array
+    }
+  }
+
+  saveSurvey(){
+    if(this.isAuth){
+      this.fireSrv.setFavoritesData(this.uid,this.optionSurvey);//Save data on Firebase
+    }else{
+      let _date=this._dateCookie.getFullYear()+"-"+(this._dateCookie.getMonth()+1)+"-"+this._dateCookie.getDate()//Save data local
+      localStorage.setItem('favoriteList',this.optionSurvey);//create list
+      localStorage.setItem('createList',_date);//date
+    }
   }
 }
