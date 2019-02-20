@@ -13,6 +13,7 @@ import { WishesListComponent } from './components/wishes-list/wishes-list.compon
 import { ShoppingHistoryComponent } from './components/shopping-history/shopping-history.component';
 import { ShoppingHistoryDetailComponent } from './components/shopping-history-detail/shopping-history-detail.component';
 import { ReferencePersonComponent } from './components/reference-person/reference-person.component';
+import { CellarComponent } from './components/cellar/cellar.component';
 
 const routes: Routes = [
   {path:'home', component:HomeComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path:'historial', component:ShoppingHistoryComponent},
   {path:'orderDetail', component:ShoppingHistoryDetailComponent},
   {path:'references', component:ReferencePersonComponent},
+  {path:'cellar', component:CellarComponent},
   {path:'**', pathMatch:'full', redirectTo:'home'},
 ];
 

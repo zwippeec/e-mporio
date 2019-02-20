@@ -32,6 +32,7 @@ import { WishesListComponent } from './components/wishes-list/wishes-list.compon
 import { ShoppingHistoryComponent } from './components/shopping-history/shopping-history.component';
 import { ShoppingHistoryDetailComponent } from './components/shopping-history-detail/shopping-history-detail.component';
 import { ReferencePersonComponent } from './components/reference-person/reference-person.component';
+import { CellarComponent } from './components/cellar/cellar.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ReferencePersonComponent } from './components/reference-person/referenc
     WishesListComponent,
     ShoppingHistoryComponent,
     ShoppingHistoryDetailComponent,
-    ReferencePersonComponent
+    ReferencePersonComponent,
+    CellarComponent
   ],
   imports: [
     BrowserModule,
