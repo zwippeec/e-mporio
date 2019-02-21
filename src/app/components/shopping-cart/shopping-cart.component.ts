@@ -19,7 +19,8 @@ export class ShoppingCartComponent implements OnInit {
   paymentSelect:any=null;
   saveCellar:boolean=false;
   isAuth:boolean=false;
-
+  //Cellar wind
+  myCellarWinds:any=[];
   //suggestion
   suggestionList:any;
   //login 
@@ -65,7 +66,7 @@ export class ShoppingCartComponent implements OnInit {
     }
   ];
 
-  constructor( public fireSrv:FirebaseService,private cookieService:CookieService) {  }
+  constructor( public fireSrv:FirebaseService,private cookieService:CookieService) { }
 
   ngOnInit() {
     this.getSuggestion();
@@ -101,34 +102,32 @@ export class ShoppingCartComponent implements OnInit {
     this.totalPay=0;
     this.saveCellar=false;
     this.paymentSelect=null;
+    window.location.reload();
   }
 
   goToPay(){
-    
-      if(this.itemsCart.length>0){
-        if(this.paymentSelect!=null){
-          let _uid=this.cookieService.get('userLogged');
-          let _data={};
-          _data={
-            date:database.ServerValue.TIMESTAMP,
-            itemsData:this.itemsCart,
-            itemsProd:this.listCart,
-            subtotal:this.subtotalPay,
-            payment:this.paymentSelect,
-            statusPayment:'pending'
-          }
-          console.log(_data)
-          this.fireSrv.payOrder(_uid,_data);
-          if(this.saveCellar){
-            this.fireSrv.saveOnMyCellar(_uid,this.itemsCart);
-          }
-          this.clearData();
-        }else{
-          alert('No se a seleccionado un método de pago.');
+    if(this.itemsCart.length>0){
+      if(this.paymentSelect!=null){
+        let _uid=this.cookieService.get('userLogged');
+        let _data={};
+        _data={
+          date:database.ServerValue.TIMESTAMP,
+          itemsData:this.itemsCart,
+          itemsProd:this.listCart,
+          subtotal:this.subtotalPay,
+          payment:this.paymentSelect,
+          statusPayment:'pending'
+        }
+        this.fireSrv.payOrder(_uid,_data);
+        if(this.saveCellar){
+          this.cellar();
         }
       }else{
-        alert('carrito vacio')
+        alert('No se a seleccionado un método de pago.');
       }
+    }else{
+      alert('carrito vacio')
+    }
   }
 
   saveOnCellar(e){
@@ -188,7 +187,6 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   addCart(Pid,typeData,quantity){
-    //this.showInfoCart=false;
     let items:any=[];//array to first object
     let _tmpList:any=[];//temporal array to list cart
 
@@ -226,12 +224,10 @@ export class ShoppingCartComponent implements OnInit {
         this.mail=null;
         this.password=null;
         this.cookieService.set( 'userLogged', ''+ok.user.uid );
-        console.log(this.cookieService.get('userLogged'))
         this.reloadPage()
       })
       .catch(e=>{
           this.errorAlert(e.code);
-          console.log('2 Error: ',e)
         })
     }else{
       this.message="Los campos no deben estar vacíos.";
@@ -302,5 +298,73 @@ export class ShoppingCartComponent implements OnInit {
     localStorage.setItem('listCart',JSON.stringify(_tmpList))//create new list
     
     this.ngOnInit();
+  }
+
+  cellar(){
+    this.myCellarWinds=[];//clean array
+    if(this.isAuth){
+      //function to get cellar by user
+      this.fireSrv.getCellarByUserId(this.cookieService.get('userLogged')).subscribe(cellarData=>{
+        //If data is null or user have item on cellar
+        if(cellarData!=null){
+          //array user cellar
+          for(let i = 0; i < Object.values(cellarData).length; i++){
+            this.myCellarWinds.push({id:Object.values(cellarData)[i].id,quantity:Object.values(cellarData)[i].quantity})//Add items on array
+          }
+          this.orderCellar();//Order items
+          this.clearData();
+        }else{
+          this.myCellarWinds=[];//clean array
+          this.orderCellar();//Order items
+          this.clearData();
+        }
+      })
+    }else{
+      alert('Debe tener cuenta e iniciar sesión para guardar en su cava.')
+    }
+  }
+
+  orderCellar(){
+    this.itemsCart=[];
+    this.itemsCart=JSON.parse(localStorage.getItem('listCart'));
+    //Array to order before save on cellar
+    for(let i=0; i<this.itemsCart.length;i++){
+      if(this.listCart[i].type=="promotion"){
+        //Array to get products of promotions 
+        for(let j=0; j<Object.keys(this.listCart[i].data.product).length;j++){
+          if(this.myCellarWinds.length>0){//if array no have element
+            if(this.myCellarWinds.findIndex(data=>data.id==JSON.parse(Object.keys(this.listCart[i].data.product)[j]))==-1){
+              let _quantity:number=Number(Object.values(this.listCart[i].data.product)[j])*this.listCart[i].quantity;//temporal variable
+              this.myCellarWinds.push({id:JSON.parse(Object.keys(this.listCart[i].data.product)[j]),quantity:_quantity})//Add item on array 
+            }else{
+              let _quantity:number=Number(Object.values(this.listCart[i].data.product)[j])*this.listCart[i].quantity;//temporal variable
+              this.myCellarWinds[this.myCellarWinds.findIndex(data=>data.id==JSON.parse(Object.keys(this.listCart[i].data.product)[j]))].quantity+=_quantity;//Sum quantity
+            }
+          }else{
+            let _quantity:number=Number(Object.values(this.listCart[i].data.product)[j])*this.listCart[i].quantity;//temporal variable
+            this.myCellarWinds.push({id:JSON.parse(Object.keys(this.listCart[i].data.product)[j]),quantity:_quantity})//Add item on array
+          }
+        }
+      }else if(this.listCart[i].type=="products"){
+        if(this.myCellarWinds.length>0){
+          if(this.myCellarWinds.findIndex(data=>data.id==this.listCart[i].id)==-1){
+            this.myCellarWinds.push({id:this.listCart[i].id,quantity:this.listCart[i].quantity})//Add item on array
+          }else{
+            this.myCellarWinds[this.myCellarWinds.findIndex(data=>data.id==this.listCart[i].id)].quantity+=this.listCart[i].quantity;//Sum quantity
+          }
+        }else{
+          this.myCellarWinds.push({id:this.listCart[i].id,quantity:this.listCart[i].quantity})//Add item on array
+        }
+      }
+    }
+
+    if(this.isAuth){
+      //Save on celler if user is auth
+      for(let i = 0; i < this.myCellarWinds.length; i++){
+        this.fireSrv.saveOnMyCellar(this.cookieService.get('userLogged'),this.myCellarWinds[i].id,this.myCellarWinds[i])
+      }
+    }else{
+      alert('Debe tener cuenta e iniciar sesión para guardar en su cava.')
+    }
   }
 }
