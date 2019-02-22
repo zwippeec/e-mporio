@@ -72,8 +72,8 @@
               </div>
               <div class="col text-left">
                 <p class="title-text font-weight-bold">{{itemPromo.name}}</p>
-                <p class="subtitle-text space">{{itemPromo.region}}</p>
-                <hr>
+                <img src="../../../assets/blank.gif" class="flag flag-{{itemPromo.countryCode}}" alt="{{itemPromo.country}}" />
+                <hr class="mt-1">
                 <p class="title-text1 font-weight-bold">Bodega:</p>
                 <p class="subtitle-text space">{{itemPromo.cellar}}</p>
                 <p class="title-text1 font-weight-bold">Región:</p>
@@ -134,7 +134,7 @@
                   <p class="subtitle-text space">{{itemPromo.endDate}}</p>
                 </div>
             </div>
-            <div *ngIf="itemPromo.time!=null && itemPromo.time!='00:00:00'" class="row mb-2 text-right pt-2">
+            <div *ngIf="itemPromo.time!=null && itemPromo.time!='00:00:00'; else expired" class="row mb-2 text-right pt-2">
               <div class="col-md-7 col-sm-4"></div>
               <div class="col-md-2 col-sm-4">
                 <input type="number" class="input-quantity mr-1" min="1" max="999" [(ngModel)]="itemPromo.quantityProd">
@@ -143,6 +143,11 @@
                 <a (click)="addCart(itemPromo.promoid,'promotion',itemPromo.quantityProd)"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
               </div>
             </div>
+            <ng-template #expired>
+              <div class="row mb-3">
+                <div class="col"></div>
+              </div>
+            </ng-template>
             <!--End Card promotion-->
           </div>
           <div class="col-1"></div>

@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-cellar',
   templateUrl: './cellar.component.html',
-  styleUrls: ['./cellar.component.css']
+  styleUrls: ['./cellar.component.css','../../../flags.css','../../../flags.min.css']
 })
 export class CellarComponent implements OnInit {
   isAuth:boolean=false;

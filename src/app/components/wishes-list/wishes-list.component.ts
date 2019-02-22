@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-wishes-list',
   templateUrl: './wishes-list.component.html',
-  styleUrls: ['./wishes-list.component.css']
+  styleUrls: ['./wishes-list.component.css','../../../flags.css','../../../flags.min.css']
 })
 export class WishesListComponent implements OnInit {
   isUserAuth:boolean=false;//is logged

@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-shopping-history-detail',
   templateUrl: './shopping-history-detail.component.html',
-  styleUrls: ['./shopping-history-detail.component.css']
+  styleUrls: ['./shopping-history-detail.component.css','../../../flags.css','../../../flags.min.css']
 })
 export class ShoppingHistoryDetailComponent implements OnInit {
   orderId:any=null;
