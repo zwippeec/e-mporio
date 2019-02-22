@@ -10,16 +10,68 @@
         <div class="bg-black text-red-wind text-center border-title">
           <p class="p-2 mb-0">VINOS</p>
         </div>
-        <div class="bg-white border p-3">
-          
+        <div class="bg-white border p-3" >
+          <ng-container *ngIf="cellarWind.length>0; else noneWinds">
+            <div class="row" *ngFor="let item of cellarWind">
+              <div class="col-2 pr-1 ml-0 text-wrap item-text">
+                {{item.quantity}} x
+              </div>
+              <div class="col-8 pr-1 ml-0 text-wrap item-text">
+                {{item.data.name}}
+              </div>
+              <div class="col-2 pr-1 ml-0 text-wrap item-text">
+                <input type="checkbox" value="{{item.id}}" (change)="selectProduct($event)">
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #noneWinds>
+            <div class="row">
+              <div class="col pr-1 ml-0 text-wrap text-center">
+                <p class="item-text mt-3 pt-5 pb-5">¿Necesitas sugerencias con Vinos?</p>
+                <div class="mt-5 mb-5 pt-3 pb-5">
+                  <button class="btn btn-suggestion item-text pl-4 pr-4 pt-2 pb-2">
+                    <span class="pl-2 pr-2">
+                      Quiero Sugerencias
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
         </div>
       </div><!--END FIRST-->
       <div class="col-4"><!--SECOND-->
         <div class="bg-black text-red-wind text-center border-title">
           <p class="p-2 mb-0">ESPIRITUOSOS</p>
         </div>
-        <div class="bg-white border pt-2 pb-3">
-          
+        <div class="bg-white border p-3" >
+          <ng-container *ngIf="cellarLiquors.length>0; else noneLiquors">
+            <div class="row" *ngFor="let item of cellarLiquors">
+              <div class="col-2 pr-1 ml-0 text-wrap item-text">
+                {{item.quantity}} x
+              </div>
+              <div class="col-8 pr-1 ml-0 text-wrap item-text">
+                {{item.data.name}}
+              </div>
+              <div class="col-2 pr-1 ml-0 text-wrap item-text">
+                <input type="checkbox" value="{{item.id}}" (change)="selectProduct($event)">
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #noneLiquors>
+            <div class="row">
+              <div class="col pr-1 ml-0 text-wrap text-center">
+                <p class="item-text mt-3 pt-5 pb-5">¿Necesitas sugerencias con espirituosos?</p>
+                <div class="mt-5 mb-5 pt-3 pb-5">
+                  <button class="btn btn-suggestion item-text pl-4 pr-4 pt-2 pb-2">
+                    <span class="pl-2 pr-2">
+                      Quiero Sugerencias
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </ng-template>
         </div>
       </div><!--END SECOND-->
       <div class="col-4"><!--THIRD-->
@@ -27,13 +79,40 @@
           <p class="p-2 mb-0">ENVÍO</p>
         </div>
         <div class="bg-white border pt-2 pb-3">
+          <div class="border-bottom" id="cartSection" style="height: 149px;" *ngIf="listCellarSelect.length>0;else noneElements">
+            <div  *ngFor="let item of listCellarSelect; let i = index">
+              <hr *ngIf="i!=0" class="mt-1 mb-1">
+              <div class="row m-0">
+                <div class="col-9 pr-1 ml-0 text-wrap item-text">
+                  {{item.data.name}}
+                </div>
+                <div class="col-1 pl-1 pr-1 ml-0 text-wrap item-text text-right">
+                  <img (click)="remove(item.id)" class="img-cart-AR" src="../../../assets/minor.png" alt="" width="6">
+                </div>
+                <div class="col-1 pl-1 pr-1 ml-0 text-wrap item-text text-center ">
+                  x{{item.quantity}}
+                </div>
+                <div class="col-1 pl-1 pr-1 ml-0 text-wrap item-text text-left">
+                  <img (click)="add(item.id)" class="img-cart-AR" src="../../../assets/plus.png" alt="" width="8">
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #noneElements>
+            <div style="height: 149px;">
+              <p class="item-text text-center pt-5">No se ha seleccionado ningún elemento.</p>
+            </div>
+            <hr>
+          </ng-template>
           <div class="p-1" *ngFor="let shipping of shippingList; let i = index">
             <hr *ngIf="i!=0" class="mt-2">
-            <input type="radio" class="ml-4" [(ngModel)]="shippingSelect"  value="{{shipping.name}}"> 
+            <input type="radio" class="ml-4" [(ngModel)]="shippingSelect"  value="{{shipping.id}}"> 
             <span class="pl-3">{{shipping.name}}</span>
           </div>
-          <div class="text-right mt-5 pt-3 pb-4 pr-4">
-            <button class="btn btn-ship" (click)="goToShip()"><span class="pl-4 pr-4">Enviar</span></button>
+          <div class="text-right mt-3 pt-1 pb-1 pr-4">
+            <button type="button" class="btn btn-ship" data-toggle="modal" data-target="#ShipModal">
+              <span class="pl-4 pr-4">Confirmar</span>
+            </button>
           </div>
         </div>
       </div><!--END THIRD-->
@@ -91,3 +170,36 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="ShipModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-wind">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Mi Dirección</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="text-white">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" [(ngModel)]="address" name="address" placeholder="Ej. Francisco Salazar y Andalucia">
+          <div class="row" *ngIf="addressShipping!=null;else newAddress">
+            <div class="col-12">
+              Mi dirección guardada
+            </div>
+            <div class="col">
+              {{addressShipping}}
+            </div>
+          </div>
+          <ng-template #newAddress>
+            <p class="item-text text-center subtitle-text mb-0">No se ha registrado una dirección princial de envío.</p>
+            <p class="item-text text-center subtitle-text mb-0" *ngIf="shippingSelect==1">La dirección que establezca se guardara y se mostrara como principal</p>
+          </ng-template>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-close" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn bg-yellow " data-dismiss="modal" (click)="goToShip()">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>

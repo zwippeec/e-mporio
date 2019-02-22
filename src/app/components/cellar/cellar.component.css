@@ -1,6 +1,9 @@
 .bg-body{
     background: linear-gradient(to bottom, #C1272D 18%, white 18%);
 }
+.bg-wind{
+    background-color: #C1272D;
+}
 .first-element{
     margin-top: 4.75%!important;
 }
@@ -20,13 +23,18 @@
 .bg-white{
     background-color: #fff;
 }
-
+.bg-yellow{
+    background-color: #fbd12c;
+}
 .btn-ship{
     background-color: #C1272D;
     color: #fff;
 }
 .bg-gray{
     background-color: #333333;
+}
+.text-gray{
+    color: #333333 !important;
 }
 ul.promotion {
     position: relative;
@@ -69,7 +77,7 @@ p.item{
     font-size: 12px;
 }
 .subtitle-text{
-    color: #999999;
+    color: #999999 !important;
     font-size: 12px;
 }
 .input-quantity{
@@ -82,4 +90,30 @@ p.item{
 
 .img-add-cart{
     border-radius: 7px;
+}
+.item-text{
+    color: #000;
+    font-size: 12px;
+}
+#cartSection{
+    height: 149px;
+    width: auto;
+    overflow: auto;;
+    background: #fff;
+}
+
+.btn-suggestion{
+    background-color: #C1272D;
+    color: #fff;
+}
+.img-cart-AR{
+    cursor: pointer;
+}
+.btn-close{
+    background-color: #C1272D;
+    color: #fff;
+}
+.modal-header{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
 }

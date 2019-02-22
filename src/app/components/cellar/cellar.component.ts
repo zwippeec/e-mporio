@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../service/firebase.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-cellar',
@@ -7,10 +8,20 @@ import { FirebaseService } from '../../service/firebase.service';
   styleUrls: ['./cellar.component.css']
 })
 export class CellarComponent implements OnInit {
+  isAuth:boolean=false;
+  uid:any=null;
   //suggestion
   suggestionList:any;
+  //cellar
+  listCellarSelect:any=[];
+  allCellar:any=[];
+  cellarWind:any=[];
+  cellarLiquors:any=[];
   //shipping
   shippingSelect:any=null;
+  address:any=null;
+  addressShipping:any=null;
+  allAddressShipping:any=[];
   shippingList:any=[
     {
       id:1,
@@ -22,14 +33,55 @@ export class CellarComponent implements OnInit {
     },
   ];
   
-  constructor(public fireSrv:FirebaseService) { }
+  constructor(public fireSrv:FirebaseService,private cookieService: CookieService) { }
 
   ngOnInit() {
     this.getSuggestion();
+    if(this.cookieService.check('userLogged')){
+      this.isAuth=true;
+      this.uid=this.cookieService.get('userLogged');
+      this.fireSrv.getAddressUser(this.uid).subscribe(addressData=>{
+        if(addressData!=null){
+          this.addressShipping=addressData
+        }
+      });
+    }else{
+      this.isAuth=false;
+    }
+    this.getCellar();
   }
 
   goToShip(){
-    console.log(this.shippingSelect)
+    if(this.isAuth){
+      if(this.listCellarSelect.length>0){
+        if(this.shippingSelect!=undefined){
+          console.log('autenticado', this.shippingSelect, this.addressShipping);
+          if(this.shippingSelect==1){
+            if(this.address!=null){
+              console.log('autenticado', this.shippingSelect, this.addressShipping);
+              if(this.addressShipping==null){
+                this.fireSrv.setUserAddress(this.uid,this.address);
+              }
+            }else{
+              alert('No ha ingresado una dirección de envio.')  
+            }
+          }else if(this.shippingSelect==2){
+            if(this.address!=null){
+              console.log('autenticado', this.shippingSelect, this.addressShipping);
+              if(this.addressShipping==null){
+                this.fireSrv.setUserFriendsAddress(this.uid,this.address);
+              }
+            }else{
+              alert('No ha ingresado una dirección de envio.')  
+            }
+          }
+        }else{
+          alert('Debe indicar a donde enviaremos los productos.')
+        }
+      }else{
+        alert('No hay productos para enviar.')
+      }
+    }
   }
 
   getSuggestion(){
@@ -109,5 +161,67 @@ export class CellarComponent implements OnInit {
       localStorage.setItem('listCart',JSON.stringify(items))//create list
     }
     this.ngOnInit();
+  }
+
+  getCellar(){
+    this.fireSrv.getCellarByUserId(this.uid).subscribe(cellarData=>{
+      this.cellarLiquors=[];
+      this.cellarWind=[];
+      this.allCellar=[];
+      //Search item by item to get data
+      for(let i = 0; i < Object.keys(cellarData).length; i++){
+        this.fireSrv.getProducById(Object.values(cellarData)[i].id).subscribe(productData=>{//Get product data
+          if(productData['productTypeId']==1){//Winds on cellar 
+            this.cellarWind.push({id:Object.values(cellarData)[i].id,data:productData,quantity:Object.values(cellarData)[i].quantity});//Add on array winds
+          }else if(productData['productTypeId']==2){//Liquors on cellar 
+            this.cellarLiquors.push({id:Object.values(cellarData)[i].id,data:productData,quantity:Object.values(cellarData)[i].quantity});//Add on array liquors
+          }
+          this.allCellar.push({id:Object.values(cellarData)[i].id,data:productData,quantity:Object.values(cellarData)[i].quantity});//Add on array liquors
+        });
+      }
+    });
+  }
+
+  selectProduct(events){
+    if(events.target.checked){
+      for(let i = 0; i < this.allCellar.length; i++){
+        if(this.allCellar[i].id==events.target.defaultValue){
+          this.allCellar[i].quantity=1
+          this.listCellarSelect.push(this.allCellar[i]);
+        }
+      }
+    }else{
+      if(this.listCellarSelect.length>0){
+        for(let i = 0; i < this.listCellarSelect.length; i++){
+          if(this.listCellarSelect[i].id==events.target.defaultValue){
+            this.listCellarSelect.splice(this.listCellarSelect.findIndex(data=>data.id==events.target.defaultValue),1);
+          }
+        }
+      }
+    }
+  }
+
+  remove(id){
+    //Compare min quantity 
+    if(this.listCellarSelect[this.listCellarSelect.findIndex(data=>data.id==id)].quantity==1){
+      this.listCellarSelect[this.listCellarSelect.findIndex(data=>data.id==id)].quantity=1;//Min quantity
+    }else{
+      this.listCellarSelect[this.listCellarSelect.findIndex(data=>data.id==id)].quantity-=1;//dismiss 1 on quantity
+    }
+  }
+
+  add(id){
+    let _quantity;//temporal variable
+    if(this.cellarLiquors.findIndex(data => data.id==id)!=-1){//search element on array liquors
+      _quantity=this.cellarLiquors[this.cellarLiquors.findIndex(data => data.id==id)].quantity;//Get maximiun quantity
+    }else if(this.cellarWind.findIndex(data => data.id==id)!=-1){//search element on array winds
+      _quantity=this.cellarWind[this.cellarWind.findIndex(data => data.id==id)].quantity//Get maximiun quantity
+    }
+    //Compare max quantity 
+    if(this.listCellarSelect[this.listCellarSelect.findIndex(data=>data.id==id)].quantity==_quantity){
+      this.listCellarSelect[this.listCellarSelect.findIndex(data=>data.id==id)].quantity=_quantity;//max quantity
+    }else{
+      this.listCellarSelect[this.listCellarSelect.findIndex(data=>data.id==id)].quantity+=1;//add 1 on quantity
+    }
   }
 }
