@@ -63,48 +63,50 @@ export class HomeComponent implements OnInit {
                 let clock = new Date(this.timerPromotion[i].endDate); // Obtener la fecha y almacenar en clock  
                 let day=clock.getUTCDate()-now.getUTCDate();//Get day
                 let cont=false;
-                if(day>=0){
-                  this.horas=day*24;//cuando dia sea mayor a 0
-                  this.horas+=clock.getHours() - now.getHours();//Sum hours with days
-                  if(this.horas>=0){
-                    if(clock.getMinutes() >= now.getMinutes()){
-                      this.minuto = clock.getMinutes()-1 - now.getMinutes();//Get minutos
-                      if(clock.getSeconds() >= now.getSeconds()){
-                        this.segundos = clock.getSeconds() - now.getSeconds();//Get seconds
-                      } else if(clock.getSeconds() < now.getSeconds()){ 
-                        this.segundos = clock.getSeconds()+60 - now.getSeconds();//Get seconds
+                if(now < clock){
+                  if(day>=0){
+                    this.horas=day*24;//cuando dia sea mayor a 0
+                    this.horas+=clock.getHours() - now.getHours();//Sum hours with days
+                    if(this.horas>=0){
+                      if(clock.getMinutes() >= now.getMinutes()){
+                        this.minuto = clock.getMinutes()-1 - now.getMinutes();//Get minutos
+                        if(clock.getSeconds() >= now.getSeconds()){
+                          this.segundos = clock.getSeconds() - now.getSeconds();//Get seconds
+                        } else if(clock.getSeconds() < now.getSeconds()){ 
+                          this.segundos = clock.getSeconds()+60 - now.getSeconds();//Get seconds
+                        }
+                      } else if(clock.getMinutes() < now.getMinutes()){
+                        this.minuto = clock.getMinutes()+60 - now.getMinutes();//Get minutos
+                        if(clock.getSeconds() >= now.getSeconds()){
+                          this.segundos = clock.getSeconds() - now.getSeconds();//Get   seconds
+                        } else if(clock.getSeconds() < now.getSeconds()){ 
+                          this.segundos = clock.getSeconds()+60 - now.getSeconds();//Get seconds
+                        }
                       }
-                    } else if(clock.getMinutes() < now.getMinutes()){
-                      this.minuto = clock.getMinutes()+60 - now.getMinutes();//Get minutos
-                      if(clock.getSeconds() >= now.getSeconds()){
-                        this.segundos = clock.getSeconds() - now.getSeconds();//Get   seconds
-                      } else if(clock.getSeconds() < now.getSeconds()){ 
-                        this.segundos = clock.getSeconds()+60 - now.getSeconds();//Get seconds
+                      if(this.horas==1){
+                        this.horas=0;
                       }
-                    }
-                    if(this.horas==1){
-                      this.horas=0;
-                    }
-                    if(this.minuto<0){
-                      this.minuto="0"+0;
-                      cont=true;
-                    }
-                    if(this.horas == "0" && this.minuto <= "00" && cont){
-                      this.promotionList[i].time="00:00:00";
-                      cont=false
-                      this.timerPromotion.splice(i,1)
+                      if(this.minuto<0){
+                        this.minuto="0"+0;
+                        cont=true;
+                      }
+                      if(this.horas == "0" && this.minuto <= "00" && cont){
+                        this.promotionList[i].time="00:00:00";
+                        cont=false
+                        this.timerPromotion.splice(i,1)
+                      }else{
+                        this.promotionList[i].time=this.horas+":"+this.minuto+":"+this.segundos;
+                      }
                     }else{
-                      this.promotionList[i].time=this.horas+":"+this.minuto+":"+this.segundos;
+                      this.horas=0;
+                      this.minuto=0;
+                      this.segundos=0;
                     }
                   }else{
-                    this.horas=0;
-                    this.minuto=0;
-                    this.segundos=0;
+                    clearTimeout(this.intervalo);
+                    this.timerPromotion.splice(i,1)
                   }
-                }else{
-                  clearTimeout(this.intervalo);
-                  this.timerPromotion.splice(i,1)
-                }
+                }               
               }
             }, 1000);// Frecuencia de actualización;
             //endTimer

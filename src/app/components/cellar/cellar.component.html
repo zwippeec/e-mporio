@@ -10,7 +10,7 @@
         <div class="bg-black text-red-wind text-center border-title">
           <p class="p-2 mb-0">VINOS</p>
         </div>
-        <div class="bg-white border p-3" >
+        <div class="bg-white border p-3" style="max-height: 350px; height: 350px;">
           <ng-container *ngIf="cellarWind.length>0; else noneWinds">
             <div class="row" *ngFor="let item of cellarWind">
               <div class="col-2 pr-1 ml-0 text-wrap item-text">
@@ -44,7 +44,7 @@
         <div class="bg-black text-red-wind text-center border-title">
           <p class="p-2 mb-0">ESPIRITUOSOS</p>
         </div>
-        <div class="bg-white border p-3" >
+        <div class="bg-white border p-3" style="max-height: 350px;">
           <ng-container *ngIf="cellarLiquors.length>0; else noneLiquors">
             <div class="row" *ngFor="let item of cellarLiquors">
               <div class="col-2 pr-1 ml-0 text-wrap item-text">
@@ -78,7 +78,7 @@
         <div class="bg-black text-red-wind text-center border-title">
           <p class="p-2 mb-0">ENVÍO</p>
         </div>
-        <div class="bg-white border pt-2 pb-3">
+        <div class="bg-white border pt-2 pb-3" style="max-height: 350px;">
           <div class="border-bottom" id="cartSection" style="height: 149px;" *ngIf="listCellarSelect.length>0;else noneElements">
             <div  *ngFor="let item of listCellarSelect; let i = index">
               <hr *ngIf="i!=0" class="mt-1 mb-1">
