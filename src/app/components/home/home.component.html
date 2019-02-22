@@ -134,15 +134,15 @@
                   <p class="subtitle-text space">{{itemPromo.endDate}}</p>
                 </div>
             </div>
-            <div *ngIf="itemPromo.time!='00:00:00'" class="row mb-2 text-right pt-2">
-                <div class="col-md-7 col-sm-4"></div>
-                <div class="col-md-2 col-sm-4">
-                  <input type="number" class="input-quantity mr-1" min="1" max="999" [(ngModel)]="itemPromo.quantityProd">
-                </div>
-                <div class="col-md-1 col-sm-4">
-                  <a (click)="addCart(itemPromo.promoid,'promotion',itemPromo.quantityProd)"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
-                </div>
+            <div *ngIf="itemPromo.time!=null && itemPromo.time!='00:00:00'" class="row mb-2 text-right pt-2">
+              <div class="col-md-7 col-sm-4"></div>
+              <div class="col-md-2 col-sm-4">
+                <input type="number" class="input-quantity mr-1" min="1" max="999" [(ngModel)]="itemPromo.quantityProd">
               </div>
+              <div class="col-md-1 col-sm-4">
+                <a (click)="addCart(itemPromo.promoid,'promotion',itemPromo.quantityProd)"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
+              </div>
+            </div>
             <!--End Card promotion-->
           </div>
           <div class="col-1"></div>
