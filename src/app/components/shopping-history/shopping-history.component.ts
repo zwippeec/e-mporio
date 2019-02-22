@@ -6,7 +6,7 @@ import { Router,NavigationExtras } from '@angular/router';
 @Component({
   selector: 'app-shopping-history',
   templateUrl: './shopping-history.component.html',
-  styleUrls: ['./shopping-history.component.css']
+  styleUrls: ['./shopping-history.component.css','../../../flags.css','../../../flags.min.css']
 })
 export class ShoppingHistoryComponent implements OnInit {
 

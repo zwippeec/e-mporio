@@ -6,7 +6,7 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css'],
+  styleUrls: ['./product-detail.component.css','../../../flags.css','../../../flags.min.css'],
 })
 export class ProductDetailComponent implements OnInit {
 

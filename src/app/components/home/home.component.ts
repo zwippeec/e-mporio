@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css','../../../flags.css','../../../flags.min.css']
 })
 export class HomeComponent implements OnInit {
   @ViewChild("openModalBtn") openModalBtn:ElementRef;
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
                 let clock = new Date(this.timerPromotion[i].endDate); // Obtener la fecha y almacenar en clock  
                 let day=clock.getUTCDate()-now.getUTCDate();//Get day
                 let cont=false;
-                if(now < clock){
+                if(now <= clock){
                   if(day>=0){
                     this.horas=day*24;//cuando dia sea mayor a 0
                     this.horas+=clock.getHours() - now.getHours();//Sum hours with days
@@ -106,7 +106,12 @@ export class HomeComponent implements OnInit {
                     clearTimeout(this.intervalo);
                     this.timerPromotion.splice(i,1)
                   }
-                }               
+                }else{
+                  this.horas=0;
+                  this.minuto=0;
+                  this.segundos=0;
+                  this.promotionList[i].time="00:00:00";
+                }            
               }
             }, 1000);// Frecuencia de actualización;
             //endTimer
@@ -119,16 +124,22 @@ export class HomeComponent implements OnInit {
                 this.favorites.push(userData[i]);
               }
             })
-            this.fireSrv.getAllProducts().subscribe(productsData=>{
-              //user log and survey
-              for(let i = 0; i < productsData.length; i++){
-                for(let j = 0; j < this.favorites.length; j++){
-                  if(productsData[i]['windKind']==this.favorites[j] && this.suggestionList.length<3){
-                    this.suggestionList.push(productsData[i]);
+            if(this.favorites.length>0){
+              this.fireSrv.getAllProducts().subscribe(productsData=>{
+                //user log and survey
+                for(let i = 0; i < productsData.length; i++){
+                  for(let j = 0; j < this.favorites.length; j++){
+                    if(productsData[i]['windKind']==this.favorites[j] && this.suggestionList.length<3){
+                      this.suggestionList.push(productsData[i]);
+                    }
                   }
                 }
-              }
-            });
+              });
+            }else{
+              this.fireSrv.getSuggestion(resp[i]['numsElements']).subscribe(dataSuggestion=>{
+                this.suggestionList=dataSuggestion;
+              })
+            }
           }else{
             if(localStorage.getItem('favoriteList')){
               let _tmpList=localStorage.getItem('favoriteList').split(',');

@@ -45,7 +45,9 @@
         </div>
         <div class="col-5 text-left pt-4 mr-1"  [ngClass]="i%2==0 ? 'bg-gray1':'bg-gray2'">
           <p class="text-gray p-0 m-0 "> 
-            <img src="../../../assets/star.png" alt="" height="15" width="15" style="margin-top: -3px"> <span class="pl-2">{{item.data.name}}</span>
+            <img src="../../../assets/star.png" alt="" height="15" width="15" style="margin-top: -3px">
+            <!--img src="../../../assets/blank.gif" class="flag flag-{{item.data.countryCode}}" alt="{{item.data.country}}" /-->
+            <span class="pl-2">{{item.data.name}}</span>
           </p>
           <p class="text-gray p-0 m-0 pl-4">{{item.data.windKind}}</p>
           <p class="text-gray p-0 m-0 pl-4">{{item.data.variety}}</p>

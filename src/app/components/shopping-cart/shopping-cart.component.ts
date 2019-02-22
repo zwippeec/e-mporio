@@ -6,7 +6,7 @@ import { database } from "firebase";
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.css']
+  styleUrls: ['./shopping-cart.component.css','../../../flags.css','../../../flags.min.css']
 })
 export class ShoppingCartComponent implements OnInit {
 
