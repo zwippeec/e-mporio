@@ -63,6 +63,18 @@ export class FirebaseService {
     //return this.afDb.object('user').snapshotChanges();
     return database.database().ref('user').orderByChild("code").equalTo(code).once('value');
   }
+  getAddressUser(uid){
+    return this.afDb.object('user/'+uid+'/address').valueChanges();
+  }
+  getAllAddressUser(uid){
+    return this.afDb.list('user/'+uid+'/address').valueChanges();
+  }
+  setUserAddress(uid,address){
+    return this.afDb.object('user/'+uid+'/address').set(address)
+  }
+  setUserFriendsAddress(uid,address){
+    return this.afDb.list('user/'+uid+'/friendsAddress').push(address)
+  }
   //Products
   getAllProducts(){
     return this.afDb.list('products').valueChanges();
