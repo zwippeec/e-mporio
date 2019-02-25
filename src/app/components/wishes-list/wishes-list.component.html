@@ -63,8 +63,8 @@
   <!--Sugerencias-->
   <div class="row bg-gray mt-1 mb-2">
     <div class="col p-0">
-      <ul id="promotion" class="promotion ml-2 mr-1 mb-1 mt-3"> 
-        <li class="promotion-Item bg-white pl-1 pr-1" *ngFor="let itemPromo of suggestionList">
+      <ul id="promotion" class="promotion ml-2 mr-1 mb-1 mt-2"> 
+        <li class="promotion-Item bg-white pl-1 pr-1 pb-2" *ngFor="let itemPromo of suggestionList">
           <!--Card promotion-->
           <!--div class="row " >
             <div class="col text-right pt-2">
@@ -93,7 +93,7 @@
           </div>
           <div class="row mb-0 pt-2">
             <div class="col text-right">
-              <input type="number" class="input-quantity mr-1" min="0" max="999" [(ngModel)]="itemPromo.quantityProd">
+              <input type="number" class="input-quantity mr-1" min="1" max="999" [(ngModel)]="itemPromo.quantityProd">
             </div>
             <div class="col text-left pl-0">
               <a (click)="addCart(itemPromo.idP,'products',itemPromo.quantityProd)"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>

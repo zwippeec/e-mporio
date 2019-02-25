@@ -69,10 +69,10 @@
   <div class="row pb-0 mt-2">
     <div class="col-8 bg-gray p-0">
       <ul id="promotion" class="bg-gray promotion p-0 m-0"> 
-        <li class="promotion-Item" *ngFor="let itemPromo of suggestionList">
+        <li class="promotion-Item bg-white pb-2 ml-1 mt-1" *ngFor="let itemPromo of suggestionList">
           <!--Card promotion-->
           <div class="row " >
-            <div class="col text-right pt-2">
+            <div class="col text-right pt-2 mr-2">
               <button class="btn btn-warning">Timer</button>
             </div>
           </div>
@@ -81,7 +81,7 @@
               <img src="{{itemPromo.imageUrl}}" alt="{{itemPromo.name}}" height="180" width="100">
             </div>
             <div class="col-7 text-left ml-1 pr-0">
-              <p class="title-text1 font-weight-bold item">{{itemPromo.name}}</p>
+              <!--p class="title-text1 font-weight-bold item">{{itemPromo.name}}</p>
               <img src="../../../assets/blank.gif" class="flag flag-{{itemPromo.countryCode}}" alt="{{itemPromo.country}}" />
               <hr class="item mt-1">
               <p class="title-text1 font-weight-bold m-0">Bodega:</p>
@@ -93,14 +93,37 @@
               <p class="title-text1 font-weight-bold m-0">Etiqueta:</p>
               <p class="subtitle-text item">{{itemPromo.label}}</p>
               <p class="title-text1 font-weight-bold m-0">Color:</p>
-              <p class="subtitle-text item">{{itemPromo.windKind}}</p>
+              <p class="subtitle-text item">{{itemPromo.windKind}}</p-->
+              <div class="row">
+                <div class="col">
+                  <p class="title-text font-weight-bold item">{{itemPromo.name}}</p>
+                  <img src="../../../assets/blank.gif" class="flag flag-{{itemPromo.countryCode}}" alt="{{itemPromo.country}}" />
+                </div>
+              </div>
+              <hr class="item mt-1">
+              <div class="row">
+                <div class="col-4">
+                  <p class="title-text1 font-weight-bold m-0">Bodega:</p>
+                  <p class="title-text1 font-weight-bold m-0">Región:</p>
+                  <p class="title-text1 font-weight-bold m-0">Año:</p>
+                  <p class="title-text1 font-weight-bold m-0">Etiqueta:</p>
+                  <p class="title-text1 font-weight-bold m-0">Color:</p>
+                </div>
+                <div class="col">
+                  <p class="subtitle-text item">{{itemPromo.cellar}}</p>
+                  <p class="subtitle-text item">{{itemPromo.region}}</p>
+                  <p class="subtitle-text item">{{itemPromo.year}}</p>
+                  <p class="subtitle-text item">{{itemPromo.label}}</p>
+                  <p class="subtitle-text item">{{itemPromo.windKind}}</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row mb-0 text-right pt-2">
-            <div class="col-6 col-sm-4 ml-4">
-              <input type="number" class="input-quantity mr-1" min="1" max="999" [(ngModel)]="itemPromo.quantityProd">
+          <div class="row mb-0 pt-2">
+            <div class="col text-right mr-1 pr-0">
+              <input type="number" class="input-quantity" min="1" max="999" [(ngModel)]="itemPromo.quantityProd">
             </div>
-            <div class="col-6 col-sm-4">
+            <div class="col text-left ml-1 pl-0">
               <a (click)="addCart(itemPromo.idP,'products',itemPromo.quantityProd)"><img src="../../../assets/btn-cart.png" class="img-add-cart" alt="buttom-cart" width="40" height="38" ></a>
             </div>
           </div>
@@ -109,7 +132,7 @@
       </ul>
     </div> 
     <div class="col-4">
-      <img src="https://firebasestorage.googleapis.com/v0/b/e-mporio593.appspot.com/o/others%2Fpayment_winds.jpg?alt=media&token=3d134eaf-12d9-461a-b65d-13fc76ddf672" height="350" width="100%" alt="">
+      <img src="https://firebasestorage.googleapis.com/v0/b/e-mporio593.appspot.com/o/others%2Fpayment_winds.jpg?alt=media&token=3d134eaf-12d9-461a-b65d-13fc76ddf672" height="330" width="100%" alt="">
       <button class="btn btn-moreInfo">Conocer más</button>
     </div>  
   </div>
