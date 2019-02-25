@@ -146,3 +146,35 @@ p{
 .btn-explorer{
     background-color: #000;
 }
+.my-pagination /deep/ .ngx-pagination .disabled {
+    background:#fbd12c;
+    color: #3d3d3d;
+}
+.my-pagination /deep/ .ngx-pagination .disabled:hover {
+    background: #fbd12c; 
+    color: #3d3d3d;
+}
+.my-pagination /deep/ .ngx-pagination .current {
+    background: #fbd12c; 
+    color: #3d3d3d;
+}
+.my-pagination /deep/ .ngx-pagination a,.ngx-pagination button {
+    color: #fbd12c;
+    border: 0.2px solid #fbd12c; 
+}
+.my-pagination /deep/ .ngx-pagination a {
+    text-decoration: none;
+}
+.my-pagination /deep/ .ngx-pagination a:hover, .ngx-pagination button:hover {
+    background: #fbd12c; 
+    color: #000
+  }
+.my-pagination /deep/ .ngx-pagination .disabled {
+  padding: 0.1875rem 0.625rem;
+  color: #3d3d3d !important;
+  cursor: default; 
+} 
+.my-pagination /deep/ .ngx-pagination .disabled:hover {
+    background: #fbd12c; 
+    color: #000
+}

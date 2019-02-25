@@ -9,6 +9,8 @@ import {NgAutoCompleteModule} from "ng-auto-complete";
 import { FilterPipeModule } from 'ngx-filter-pipe';
 //Bootstrap
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+//Pagination
+import {NgxPaginationModule} from 'ngx-pagination';
 //Firebase
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -60,7 +62,8 @@ import { CellarComponent } from './components/cellar/cellar.component';
     FormsModule,
     NgbModule,
     NgAutoCompleteModule,
-    FilterPipeModule
+    FilterPipeModule,
+    NgxPaginationModule
   ],
   providers: [
     FirebaseService,
