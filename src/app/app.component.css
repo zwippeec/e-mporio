@@ -56,12 +56,16 @@
     font-size: 12px;
 }
 .dropdown-item:hover{
-    background-color: transparent;
-    font-size: 15px;
+    background-color: rgba(255,255,255,0.2);
+    font-size: 12px;
 }
 .dropdown-item-title{
     font-size: 14px;
 }
+.dropdown-item-title:hover{
+    font-size: 14px;
+}
+
 
 .btn-suscription{
     background-color: #3c3c3c;

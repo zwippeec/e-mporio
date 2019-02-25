@@ -22,6 +22,10 @@ export class ShoppingHistoryComponent implements OnInit {
   itemsCart:any=[];
   subtotalPay:any=0.00;
   showInfoCart:boolean=true;//show or hide info
+  //paginacion
+  pageNumber: number = 1;
+  itemPage:number=5;
+  numPagesView:number=5;
 
   constructor(public fireSrv:FirebaseService,private cookieService:CookieService,private _router: Router) { 
     if(this.cookieService.check('userLogged')){

@@ -225,7 +225,7 @@
     <!--end Submenu-->
     <div class="row pt-4 ">
       <!--begin div-->
-      <div *ngFor="let product of productsData | filterBy: filters" class="pt-2 pb-3 text-left col-4 pl-0 pr-2" style="width: 101%;">
+      <div *ngFor="let product of productsData | filterBy: filters | paginate: { itemsPerPage: itemPage, currentPage: pageNumber }" class="pt-2 pb-3 text-left col-4 pl-0 pr-2" style="width: 101%;">
         <div class=" bg-item " >
           <!--Card Product-->
           <div [routerLink]="['/products',product.code]"  class="row pt-3">
@@ -264,9 +264,22 @@
         </div>
       </div>
       <!--end div section-->
-      <div class="col text-center pb-2" *ngIf="(productsData | filterBy: filters).length === 0">
+      <div class="col text-center pb-2" *ngIf="productsData.length == undefined && productsData.length == 0">
         <p class="text-center no-element-show"> No hay elementos con los parámetros de búsqueda seleccionados. </p>
       </div>
+    </div>
+    <div class="row text-center mt-3">
+      <div class="col-4"></div>
+      <div class="col">
+        <pagination-controls class="my-pagination" (pageChange)="pageNumber = $event" 
+          autoHide="true" 
+          responsive="true" 
+          previousLabel="Atrás" 
+          nextLabel="Siguiente" 
+          maxSize="{{numPagesView}}">
+        </pagination-controls>
+      </div>
+      <div class="col-4"></div>
     </div>
   </div>
 

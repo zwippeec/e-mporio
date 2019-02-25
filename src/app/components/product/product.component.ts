@@ -11,7 +11,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 })
 export class ProductComponent implements OnInit {
 
-  productsData:any;
+  productsData:any=[];
   isUserAuth:boolean=false;
   nameList:any=null;
   wishesDataList:any=[];
@@ -32,6 +32,10 @@ export class ProductComponent implements OnInit {
   itemsCart:any=[];
   subtotalPay:any=0.00;
   showInfoCart:boolean=true;//show or hide info
+  //paginacion
+  pageNumber: number = 1;
+  itemPage:number=12;
+  numPagesView:number=4;
 
   //filters
   //filters:any={windKind:'',cost:'',foodFilter:'',moodFilter:'',styleFilter:'',cellerFilter:'',grapeFilter:'',regionFilter:'',countryFilter:''};
